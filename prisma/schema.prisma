@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// Literature Models
+model Work {
+  id            Int      @id @default(autoincrement())
+  title         String
+  author        String
+  yearPublished Int
+  language      String
+  region        String
+  country       String
+  genre         String
+  era           String
+  description   String
+  significance  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  accessLinks AccessLink[]
+  collections CollectionWork[]
+}
+
+model AccessLink {
+  id     Int    @id @default(autoincrement())
+  url    String
+  type   String @default("web") // web, pdf, archive
+  workId Int
+  work   Work   @relation(fields: [workId], references: [id], onDelete: Cascade)
+}
+
+// Authentication Models (for magic link)
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions    Session[]
+  collections Collection[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model MagicLink {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+// User Collections
+model Collection {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  works CollectionWork[]
+}
+
+model CollectionWork {
+  id           String     @id @default(cuid())
+  collectionId String
+  workId       Int
+  addedAt      DateTime   @default(now())
+  collection   Collection @relation(fields: [collectionId], references: [id], onDelete: Cascade)
+  work         Work       @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@unique([collectionId, workId])
+}
