@@ -9,14 +9,27 @@ export default function AuthCallbackPage() {
 
   useEffect(() => {
     const handleCallback = async () => {
-      const { error } = await supabase.auth.getSession()
+      const { data: { session }, error } = await supabase.auth.getSession()
 
-      if (error) {
+      if (error || !session) {
         console.error("Auth callback error:", error)
         router.push("/login?error=auth-callback-error")
-      } else {
-        router.push("/browse")
+        return
       }
+
+      // Sync user to Prisma database for Basedash analytics
+      try {
+        await fetch("/api/auth/sync-user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ access_token: session.access_token }),
+        })
+      } catch (syncError) {
+        console.error("Failed to sync user:", syncError)
+        // Continue anyway - user is authenticated
+      }
+
+      router.push("/browse")
     }
 
     handleCallback()
