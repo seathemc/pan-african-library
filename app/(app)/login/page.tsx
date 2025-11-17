@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useSearchParams } from "next/navigation"
 import { Mail, Sparkles, ArrowRight } from "lucide-react"
+import { supabase } from "@/lib/supabase"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
@@ -22,18 +23,17 @@ export default function LoginPage() {
     setError("")
 
     try {
-      const response = await fetch("/api/auth/request", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+      const { error: authError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
       })
 
-      const data = await response.json()
-
-      if (response.ok) {
-        setSent(true)
+      if (authError) {
+        setError(authError.message)
       } else {
-        setError(data.error || "Something went wrong")
+        setSent(true)
       }
     } catch {
       setError("Failed to send magic link")

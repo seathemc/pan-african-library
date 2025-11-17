@@ -4,19 +4,49 @@ import { Button } from "@/components/ui/button"
 import { User, LogOut } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { supabase } from "@/lib/supabase"
+import { useEffect, useState } from "react"
 
 interface UserMenuProps {
-  user: {
+  user?: {
     email: string
     name?: string | null
   } | null
 }
 
-export function UserMenu({ user }: UserMenuProps) {
+export function UserMenu({ user: initialUser }: UserMenuProps) {
   const router = useRouter()
+  const [user, setUser] = useState(initialUser)
+
+  useEffect(() => {
+    // Check for Supabase user
+    supabase.auth.getUser().then(({ data: { user: supabaseUser } }) => {
+      if (supabaseUser) {
+        setUser({
+          email: supabaseUser.email || "",
+          name: supabaseUser.user_metadata?.name || null,
+        })
+      }
+    })
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session?.user) {
+        setUser({
+          email: session.user.email || "",
+          name: session.user.user_metadata?.name || null,
+        })
+      } else {
+        setUser(null)
+      }
+    })
+
+    return () => subscription.unsubscribe()
+  }, [])
 
   const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" })
+    await supabase.auth.signOut()
+    setUser(null)
     router.refresh()
   }
 
