@@ -1,5 +1,7 @@
 # Alexandria — Pan-African Library
 
+**[pan-african-library.vercel.app](https://pan-african-library.vercel.app)**
+
 A digital archive of pan-African thought, paired with a live data dashboard for Africa's future.
 
 56 works. 116 metrics. One open-source project.
