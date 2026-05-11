@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Signatory {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  role         String   // founder | investor | counsel | policymaker | other
+  organization String?
+  country      String   // ISO-3166 alpha-2
+  message      String?
+  showPublicly Boolean  @default(true)
+  verified     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([country])
+  @@index([role])
+  @@index([createdAt])
+}

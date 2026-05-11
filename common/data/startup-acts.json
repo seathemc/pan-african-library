@@ -1,0 +1,280 @@
+[
+  {
+    "country": "Tunisia",
+    "iso": "TN",
+    "region": "North Africa",
+    "rec": "AMU",
+    "status": "enacted",
+    "year": 2018,
+    "actName": "Startup Act (Loi n° 2018-20)",
+    "ageLimit": 8,
+    "labelingBody": "College of Startups",
+    "labelName": "Startup Label",
+    "taxHoliday": "8 years",
+    "taxAutoApplied": false,
+    "knownGaps": [
+      "Article 17 grants forex accounts, but Foreign Exchange Code Article 6 still requires Central Bank authorization",
+      "Capital Market Decree (Décret 2018-1037) does not recognize SAFEs; Central Bank memo (Feb-2020) classifies them as debt",
+      "Commercial Code Article 154 enforces one-share-one-vote, blocking multi-class share structures",
+      "30% foreign-worker cap conflicts with talent strategy"
+    ],
+    "notable": "First African startup act; industry-led implementation model (Tunisian Startups association) outperformed pure government-led approaches."
+  },
+  {
+    "country": "Senegal",
+    "iso": "SN",
+    "region": "West Africa",
+    "rec": "ECOWAS / OHADA / UEMOA",
+    "status": "enacted",
+    "year": 2020,
+    "actName": "Loi n° 2020-01 sur les Startups",
+    "ageLimit": 8,
+    "labelingBody": "DER/FJ",
+    "labelName": "Startup label",
+    "taxHoliday": "5-8 years",
+    "taxAutoApplied": false,
+    "knownGaps": [
+      "Tax benefits require separate DGID verification (typically 45-60 days vs 30-day statutory limit)",
+      "Article 12 mentions 'titres convertibles' but lacks OHADA integration for SAFEs/convertible notes",
+      "BCEAO Instruction 2012-09 only recognises traditional debt and equity",
+      "20% foreign-worker quota constrains hiring",
+      "No mutual recognition with neighbouring Ivory Coast despite identical ECOWAS membership"
+    ],
+    "notable": "DER/FJ acts as both labeling authority and seed funder — unique single-window model."
+  },
+  {
+    "country": "Nigeria",
+    "iso": "NG",
+    "region": "West Africa",
+    "rec": "ECOWAS",
+    "status": "enacted",
+    "year": 2022,
+    "actName": "Nigeria Startup Act 2022",
+    "ageLimit": 10,
+    "labelingBody": "National Council for Digital Innovation & Entrepreneurship (NCDIE)",
+    "labelName": "Startup labelling",
+    "taxHoliday": "5 years (Schedule 3)",
+    "taxAutoApplied": false,
+    "knownGaps": [
+      "Schedule 3 tax incentives not integrated into federal tax system; FIRS coordination ongoing",
+      "SEC Rules 2013 classify SAFEs as debt instruments; many founders use Cayman/Delaware parents to issue SAFEs",
+      "CAMA Section 124 enforces one-share-one-vote, blocking multi-class share structures",
+      "Pension fund rules (PenCom) restrict institutional capital from flowing to startups"
+    ],
+    "notable": "Largest GDP among enacted-act countries; CBN regulatory sandbox is most mature on the continent."
+  },
+  {
+    "country": "Democratic Republic of Congo",
+    "iso": "CD",
+    "region": "Central Africa",
+    "rec": "OHADA / SADC",
+    "status": "enacted",
+    "year": 2022,
+    "actName": "Loi sur les startups",
+    "ageLimit": 7,
+    "labelingBody": "Ministry of Digital Economy",
+    "labelName": "Statut de Startup",
+    "taxHoliday": "5 years",
+    "taxAutoApplied": false,
+    "knownGaps": [
+      "OHADA Uniform Act (2014) lacks provisions for complex cap tables and modern instruments",
+      "No legal recognition for SAFEs or convertible notes",
+      "Limited interface with banking and forex regulations"
+    ],
+    "notable": "Could harmonise immediately with Senegal and Ivory Coast under shared OHADA commercial code."
+  },
+  {
+    "country": "Ivory Coast",
+    "iso": "CI",
+    "region": "West Africa",
+    "rec": "ECOWAS / OHADA / UEMOA",
+    "status": "enacted",
+    "year": 2024,
+    "actName": "Loi sur les startups",
+    "ageLimit": 8,
+    "labelingBody": "Ministry of Digital Transition",
+    "labelName": "Label Startup",
+    "taxHoliday": "5-8 years",
+    "taxAutoApplied": false,
+    "knownGaps": [
+      "No automatic recognition of Senegal's startup label despite shared ECOWAS/OHADA/UEMOA membership",
+      "OHADA constraints on multi-class shares carry over",
+      "SAFE/convertible-note recognition unresolved"
+    ],
+    "notable": "Most recent enactment in francophone West Africa; strong candidate for OHADA-wide harmonisation pilot."
+  },
+  {
+    "country": "Ethiopia",
+    "iso": "ET",
+    "region": "East Africa",
+    "rec": "COMESA / IGAD",
+    "status": "enacted",
+    "year": 2025,
+    "actName": "Startup Proclamation",
+    "ageLimit": 5,
+    "labelingBody": "Ministry of Innovation and Technology",
+    "labelName": "Startup designation",
+    "taxHoliday": "Not yet specified in regulations",
+    "taxAutoApplied": false,
+    "knownGaps": [
+      "Proclamation does not authorize SAFEs or convertible notes",
+      "Implementation regulations still pending across most articles",
+      "Forex regime largely unchanged for labeled startups"
+    ],
+    "notable": "Tightest age limit (5 years) of any enacted act; broadest reform opportunity since regulations are still being drafted."
+  },
+  {
+    "country": "Algeria",
+    "iso": "DZ",
+    "region": "North Africa",
+    "rec": "AMU",
+    "status": "in-development",
+    "year": null,
+    "actName": "Draft Startup Act",
+    "ageLimit": null,
+    "labelingBody": "Ministry of Knowledge Economy & Startups",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "Foreign exchange controls remain a binding constraint",
+      "No public draft of securities provisions"
+    ],
+    "notable": "Already operating an Algerian Startup Fund; act would formalise the existing labelling already in use."
+  },
+  {
+    "country": "Kenya",
+    "iso": "KE",
+    "region": "East Africa",
+    "rec": "EAC / COMESA",
+    "status": "in-development",
+    "year": null,
+    "actName": "Startup Bill 2022",
+    "ageLimit": null,
+    "labelingBody": "Kenya National Innovation Agency (KENIA)",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "Significant Economic Presence Tax (SEPT) creates cross-border friction with Uganda/Tanzania",
+      "No mutual recognition with EAC partners despite Common Market Protocol Articles 13-14"
+    ],
+    "notable": "Largest startup ecosystem in EAC; passing this act would unlock EAC-wide passport pilot."
+  },
+  {
+    "country": "Ghana",
+    "iso": "GH",
+    "region": "West Africa",
+    "rec": "ECOWAS",
+    "status": "in-development",
+    "year": null,
+    "actName": "Draft Startup Act",
+    "ageLimit": null,
+    "labelingBody": "TBD",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "Securities Industry Act limits convertible instruments",
+      "Mandates pension fund 5% allocation to startups by 2026 — outpacing the act itself"
+    ],
+    "notable": "Already operates the Ghana–Rwanda Fintech Passport (Feb 2025), Africa's first cross-border mutual recognition system."
+  },
+  {
+    "country": "Morocco",
+    "iso": "MA",
+    "region": "North Africa",
+    "rec": "AMU",
+    "status": "in-development",
+    "year": null,
+    "actName": "Draft Startup Act",
+    "ageLimit": null,
+    "labelingBody": "TBD",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "Forex restrictions on outbound capital",
+      "No SAFE/convertible-note recognition"
+    ],
+    "notable": "Strong fintech and B2B SaaS pipeline; potential anchor for Maghreb passport with Tunisia."
+  },
+  {
+    "country": "Rwanda",
+    "iso": "RW",
+    "region": "East Africa",
+    "rec": "EAC / COMESA",
+    "status": "in-development",
+    "year": null,
+    "actName": "Draft Startup Law",
+    "ageLimit": null,
+    "labelingBody": "Rwanda Development Board",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "Mature regulatory sandbox not yet linked to a national startup act",
+      "Cap table and equity-compensation rules under company law remain rigid"
+    ],
+    "notable": "Counterpart to the Ghana–Rwanda Fintech Passport; widely seen as Africa's most agile regulator."
+  },
+  {
+    "country": "South Africa",
+    "iso": "ZA",
+    "region": "Southern Africa",
+    "rec": "SADC",
+    "status": "in-development",
+    "year": null,
+    "actName": "Startup Act campaign (industry-led)",
+    "ageLimit": null,
+    "labelingBody": "TBD",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "Section 12J expired (2021); no replacement vehicle for venture investing",
+      "Exchange control still requires SARB approval for offshore IP",
+      "Companies Act allows multi-class shares but practice is conservative"
+    ],
+    "notable": "Largest VC market in Africa by absolute deal volume; biggest single-country impact if the bill lands."
+  },
+  {
+    "country": "Uganda",
+    "iso": "UG",
+    "region": "East Africa",
+    "rec": "EAC / COMESA",
+    "status": "in-development",
+    "year": null,
+    "actName": "Draft Startup Bill",
+    "ageLimit": null,
+    "labelingBody": "TBD",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "No mechanism to recognise Kenyan startup labelling under the Common Market Protocol",
+      "Capital Markets Authority does not register convertible instruments"
+    ],
+    "notable": "Could pioneer a Kenya–Uganda EAC passport pilot mirroring the Ghana–Rwanda model."
+  },
+  {
+    "country": "Egypt",
+    "iso": "EG",
+    "region": "North Africa",
+    "rec": "AMU / COMESA",
+    "status": "in-development",
+    "year": null,
+    "actName": "Draft Startup Act",
+    "ageLimit": null,
+    "labelingBody": "TBD",
+    "labelName": null,
+    "taxHoliday": null,
+    "taxAutoApplied": null,
+    "knownGaps": [
+      "FRA does not recognise SAFEs/convertibles",
+      "Forex repatriation rules constrain dollar-denominated revenues",
+      "Companies Law caps non-voting shares"
+    ],
+    "notable": "Largest North African startup ecosystem by funding; strong fintech and logistics density."
+  }
+]

@@ -1,0 +1,33 @@
+[
+  {
+    "slug": "multi-class-shares",
+    "title": "Multi-class share structure",
+    "category": "Governance",
+    "summary": "Enables founders to issue voting and non-voting share classes with liquidation preferences, replacing the rigid one-share-one-vote rule that forces African startups to incorporate offshore.",
+    "addresses": [
+      "Tunisia Commercial Code Article 154 (one-share-one-vote)",
+      "Nigeria CAMA Section 124 (one-share-one-vote)",
+      "OHADA Uniform Act (2014) — no provisions for multi-class structures"
+    ],
+    "versions": [
+      { "tradition": "common-law", "file": "multi-class-shares.common-law.md", "label": "Common-law (Nigeria, Kenya, Ghana, South Africa)" },
+      { "tradition": "ohada", "file": "multi-class-shares.ohada.md", "label": "OHADA / civil-law (Senegal, Ivory Coast, DRC, Tunisia)" }
+    ]
+  },
+  {
+    "slug": "safe",
+    "title": "Simple Agreement for Future Equity (SAFE)",
+    "category": "Financing",
+    "summary": "A standardised early-stage financing instrument adapted from the Y Combinator SAFE, with explicit recognition under labelled-startup regimes and OHADA-compatible drafting.",
+    "addresses": [
+      "Tunisia Capital Market Decree 2018-1037 (no SAFE recognition)",
+      "Nigeria SEC Rules 2013 (classifies SAFEs as debt)",
+      "BCEAO Instruction 2012-09 (only recognises debt and equity)",
+      "OHADA Uniform Act on commercial companies (no recognition for hybrid instruments)"
+    ],
+    "versions": [
+      { "tradition": "common-law", "file": "safe.common-law.md", "label": "Common-law (post-money SAFE, valuation cap)" },
+      { "tradition": "ohada", "file": "safe.ohada.md", "label": "OHADA / civil-law (compatible with sociétés par actions)" }
+    ]
+  }
+]
