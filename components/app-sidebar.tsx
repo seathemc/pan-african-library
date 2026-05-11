@@ -11,6 +11,7 @@ import {
   ChevronRight,
   Landmark,
   TrendingUp,
+  MessageSquare,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -68,6 +69,11 @@ const navMain: NavItem[] = [
     url: "/africa-2050",
     icon: TrendingUp,
     badge: "New",
+  },
+  {
+    title: "Ask Alexandria",
+    url: "/ask",
+    icon: MessageSquare,
   },
 ]
 
