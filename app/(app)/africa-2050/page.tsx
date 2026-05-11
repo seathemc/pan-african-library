@@ -1,3 +1,4 @@
+import { Fragment, type FC } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -15,7 +16,6 @@ import {
 import {
   ASPIRATIONS,
   calculateProgress,
-  calculateGoalScore,
   calculateAspirationScore,
   calculateOverallScore,
   getStatus,
@@ -24,7 +24,7 @@ import {
 } from "@/lib/agenda-2063-data";
 import { AfricaCharts } from "./charts";
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
+const ICON_MAP: Record<string, FC<{ className?: string }>> = {
   TrendingUp,
   Globe,
   Scale,
@@ -253,7 +253,6 @@ export default function Africa2050Page() {
                       const indProgress = calculateProgress(indicator);
                       const indStatus = getStatus(indProgress);
                       const indColors = STATUS_COLORS[indStatus];
-                      const arrow = indicator.higherIsBetter ? "↑" : "↓";
                       const direction =
                         indicator.current > indicator.baseline2013 ? "↑" : "↓";
                       return (
@@ -351,8 +350,8 @@ export default function Africa2050Page() {
                         </thead>
                         <tbody>
                           {aspiration.goals.map((goal) => (
-                            <>
-                              <tr key={`goal-${goal.id}`} className="border-b bg-muted/10">
+                            <Fragment key={goal.id}>
+                              <tr className="border-b bg-muted/10">
                                 <td
                                   colSpan={6}
                                   className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide"
@@ -408,7 +407,7 @@ export default function Africa2050Page() {
                                   </tr>
                                 );
                               })}
-                            </>
+                            </Fragment>
                           ))}
                         </tbody>
                       </table>
