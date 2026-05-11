@@ -14,6 +14,7 @@ import {
   MessageSquare,
   Tag,
   ListOrdered,
+  Bookmark,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -76,6 +77,11 @@ const navMain: NavItem[] = [
     title: "Ask Alexandria",
     url: "/ask",
     icon: MessageSquare,
+  },
+  {
+    title: "My Collections",
+    url: "/collections",
+    icon: Bookmark,
   },
 ]
 

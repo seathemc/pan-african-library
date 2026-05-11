@@ -6,6 +6,7 @@ import { getWorkById, getAllWorks } from "@/lib/literature-data";
 import { notFound } from "next/navigation";
 import { BookOpen, ExternalLink, Calendar, Globe, Languages, Award, Tag, ListOrdered, BookMarked } from "lucide-react";
 import Link from "next/link";
+import { AddToCollection } from "@/components/add-to-collection";
 
 interface ApiTheme {
   name: string;
@@ -308,6 +309,20 @@ export default async function WorkPage({
           </CardContent>
         </Card>
       )}
+
+      {/* Save to Collection */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2 text-base">
+            <BookMarked className="h-5 w-5 text-primary" />
+            Save to Collection
+          </CardTitle>
+          <CardDescription>Add this work to one of your personal collections.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <AddToCollection workId={work.id} />
+        </CardContent>
+      </Card>
 
       {/* Explore More */}
       <Card className="bg-muted/50">
