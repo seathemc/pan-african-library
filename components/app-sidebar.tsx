@@ -12,6 +12,8 @@ import {
   Landmark,
   TrendingUp,
   MessageSquare,
+  Tag,
+  ListOrdered,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -133,6 +135,30 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Discover</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/themes")}>
+                  <Link href="/themes">
+                    <Tag />
+                    <span>Themes</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/reading-lists")}>
+                  <Link href="/reading-lists">
+                    <ListOrdered />
+                    <span>Reading Lists</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
