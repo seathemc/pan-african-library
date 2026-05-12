@@ -235,7 +235,7 @@ export function AfricaCharts() {
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                   <XAxis dataKey="year" />
                   <YAxis label={{ value: "Billions", angle: -90, position: "insideLeft" }} />
-                  <Tooltip formatter={(value) => `${value}B`} />
+                  <Tooltip formatter={(value: number | string) => `${value}B`} />
                   <Legend />
                   <ReferenceLine x="2013" stroke={VIOLET} strokeDasharray="4 4" label={{ value: "Baseline", position: "top", fill: VIOLET, fontSize: 11 }} />
                   <ReferenceLine x="2063" stroke={TARGET_COLOR} strokeDasharray="4 4" label={{ value: "Target", position: "top", fill: TARGET_COLOR, fontSize: 11 }} />
@@ -264,7 +264,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis label={{ value: "Trillions USD", angle: -90, position: "insideLeft" }} />
-                    <Tooltip formatter={(value) => `$${value}T`} />
+                    <Tooltip formatter={(value: number | string) => `$${value}T`} />
                     <ReferenceLine x="2013" stroke={VIOLET} strokeDasharray="4 4" />
                     <Line type="monotone" dataKey="gdp" stroke={BLUE} strokeWidth={3} name="GDP" dot={<BaselineDot />} />
                   </LineChart>
@@ -286,7 +286,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis label={{ value: "% of Population", angle: -90, position: "insideLeft" }} />
-                    <Tooltip formatter={(value) => `${value}%`} />
+                    <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <Bar dataKey="middleClass" fill={BLUE} name="Middle Class %" />
                   </BarChart>
                 </ResponsiveContainer>
@@ -312,7 +312,7 @@ export function AfricaCharts() {
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                   <XAxis dataKey="year" />
                   <YAxis label={{ value: "% of Production", angle: -90, position: "insideLeft" }} />
-                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Tooltip formatter={(value: number | string) => `${value}%`} />
                   <Legend />
                   <ReferenceLine x="2013" stroke={VIOLET} strokeDasharray="4 4" label={{ value: "Baseline (35% access)", position: "insideTopRight", fill: VIOLET, fontSize: 11 }} />
                   <ReferenceLine x="2063" stroke={TARGET_COLOR} strokeDasharray="4 4" label={{ value: "Target (100% access)", position: "insideTopLeft", fill: TARGET_COLOR, fontSize: 11 }} />
@@ -341,7 +341,7 @@ export function AfricaCharts() {
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                   <XAxis dataKey="year" />
                   <YAxis label={{ value: "% Enrollment/Completion", angle: -90, position: "insideLeft" }} />
-                  <Tooltip formatter={(value) => `${value}%`} />
+                  <Tooltip formatter={(value: number | string) => `${value}%`} />
                   <Legend />
                   <ReferenceLine y={95} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 secondary target (95%)", position: "insideTopRight", fill: TARGET_COLOR, fontSize: 11 }} />
                   <ReferenceLine y={99} stroke={TARGET_COLOR} strokeDasharray="2 4" label={{ value: "2063 literacy target (99%)", position: "right", fill: TARGET_COLOR, fontSize: 10 }} />
@@ -370,7 +370,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis domain={[55, 80]} label={{ value: "Years", angle: -90, position: "insideLeft" }} />
-                    <Tooltip formatter={(value) => `${value} years`} />
+                    <Tooltip formatter={(value: number | string) => `${value} years`} />
                     <ReferenceLine y={75} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 75 yrs", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={60} stroke={VIOLET} strokeDasharray="4 4" label={{ value: "2013: 60 yrs", position: "insideBottomRight", fill: VIOLET, fontSize: 11 }} />
                     <Line type="monotone" dataKey="lifeExpectancy" stroke={BLUE} strokeWidth={3} name="Life Expectancy" dot={<TargetDot />} />
@@ -524,7 +524,7 @@ export function AfricaCharts() {
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                   <XAxis dataKey="year" />
                   <YAxis label={{ value: "Millions", angle: -90, position: "insideLeft" }} />
-                  <Tooltip formatter={(value) => `${value}M`} />
+                  <Tooltip formatter={(value: number | string) => `${value}M`} />
                   <Legend />
                   <Area type="monotone" dataKey="laborForce" stroke={BLUE} fill={BLUE} fillOpacity={0.3} name="Total Labor Force (M)" />
                   <Area type="monotone" dataKey="formalJobs" stroke={BLUE_LIGHT} fill={BLUE_LIGHT} fillOpacity={0.3} name="Formal Jobs (M)" />
@@ -548,7 +548,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis label={{ value: "%", angle: -90, position: "insideLeft" }} domain={[30, 70]} />
-                    <Tooltip formatter={(value) => `${value}%`} />
+                    <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <Line type="monotone" dataKey="youthEmployment" stroke={BLUE} strokeWidth={3} name="Youth Employment %" />
                   </LineChart>
                 </ResponsiveContainer>
@@ -569,7 +569,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis label={{ value: "%", angle: -90, position: "insideLeft" }} domain={[35, 60]} />
-                    <Tooltip formatter={(value) => `${value}%`} />
+                    <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <ReferenceLine y={50} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "Parity target: 50%", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <Line type="monotone" dataKey="femaleEmployment" stroke={BLUE} strokeWidth={3} name="Female Employment %" />
                   </LineChart>
@@ -592,7 +592,7 @@ export function AfricaCharts() {
                   <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                   <XAxis dataKey="year" />
                   <YAxis label={{ value: "Millions", angle: -90, position: "insideLeft" }} />
-                  <Tooltip formatter={(value) => `${value}M`} />
+                  <Tooltip formatter={(value: number | string) => `${value}M`} />
                   <Legend />
                   <Area type="monotone" dataKey="services" stackId="1" stroke={BLUE} fill={BLUE} fillOpacity={0.7} name="Services" />
                   <Area type="monotone" dataKey="manufacturing" stackId="1" stroke={BLUE_LIGHT} fill={BLUE_LIGHT} fillOpacity={0.7} name="Manufacturing" />
@@ -670,7 +670,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis label={{ value: "%", angle: -90, position: "insideLeft" }} domain={[50, 80]} />
-                    <Tooltip formatter={(value) => `${value}%`} />
+                    <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <Area type="monotone" dataKey="optimism" stroke={BLUE} fill={BLUE} fillOpacity={0.3} name="Optimism %" />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -691,7 +691,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
                     <XAxis dataKey="year" />
                     <YAxis label={{ value: "Global Rank", angle: -90, position: "insideLeft" }} reversed domain={[40, 120]} />
-                    <Tooltip formatter={(value) => `#${value} globally`} />
+                    <Tooltip formatter={(value: number | string) => `#${value} globally`} />
                     <Line type="monotone" dataKey="rank" stroke={BLUE} strokeWidth={3} name="Global Happiness Rank (improving)" />
                   </LineChart>
                 </ResponsiveContainer>
