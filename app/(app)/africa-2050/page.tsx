@@ -17,12 +17,12 @@ import {
   ASPIRATIONS,
   calculateProgress,
   calculateAspirationScore,
-  calculateOverallScore,
   getStatus,
   type Aspiration,
   type Indicator,
 } from "@/lib/agenda-2063-data";
 import { AfricaCharts } from "./charts";
+import { ScoreDashboard } from "./score-dashboard";
 
 const ICON_MAP: Record<string, FC<{ className?: string }>> = {
   TrendingUp,
@@ -105,16 +105,11 @@ function formatValue(indicator: Indicator, value: number): string {
 }
 
 export default function Africa2050Page() {
-  const overallScore = Math.round(calculateOverallScore(ASPIRATIONS));
-  const overallStatus = getStatus(overallScore);
-  const overallColors = STATUS_COLORS[overallStatus];
-  const expectedProgress = Math.round(((2026 - 2013) / 50) * 100); // 26%
-
   return (
     <div className="flex flex-col gap-8 max-w-6xl mx-auto">
-      {/* Hero Section */}
-      <div className="flex flex-col gap-4 py-8">
-        <div className="flex items-center gap-2 mb-2">
+      {/* Page header */}
+      <div className="flex flex-col gap-3 py-8 pb-0">
+        <div className="flex items-center gap-2">
           <Target className="h-5 w-5 text-primary" />
           <Badge variant="secondary" className="text-xs">
             African Union · Agenda 2063
@@ -126,86 +121,25 @@ export default function Africa2050Page() {
         <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
           Africa&apos;s Progress Against the African Union&apos;s 50-Year Vision
         </p>
-
-        {/* Composite Score */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mt-4">
-          <div className="flex flex-col gap-1">
-            <div className="flex items-end gap-3">
-              <span className={`text-7xl font-black tabular-nums ${overallColors.text}`}>
-                {overallScore}%
-              </span>
-              <div className="flex flex-col gap-1 pb-2">
-                <StatusBadge status={overallStatus} />
-                <span className="text-xs text-muted-foreground">overall progress</span>
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              toward 2063 targets across all 7 aspirations
-            </p>
-          </div>
-
-          {/* Gauge strip */}
-          <div className="flex-1 max-w-sm flex flex-col gap-2">
-            <div className="relative h-4 w-full overflow-hidden rounded-full bg-muted">
-              {/* Expected marker */}
-              <div
-                className="absolute top-0 bottom-0 w-0.5 bg-gray-500 z-10"
-                style={{ left: `${expectedProgress}%` }}
-              />
-              <div
-                className={`h-full rounded-full ${overallColors.bar}`}
-                style={{ width: `${overallScore}%` }}
-              />
-            </div>
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>0%</span>
-              <span className="text-gray-500">▲ {expectedProgress}% expected</span>
-              <span>100%</span>
-            </div>
-            <p className="text-xs text-muted-foreground">
-              Based on 13 years of progress (2013–2026) toward 50-year targets
-            </p>
-          </div>
-        </div>
       </div>
 
-      {/* Score Explanation */}
-      <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
+      {/* Composite score dashboard + aspiration tiles + legend */}
+      <ScoreDashboard />
+
+      {/* Score methodology note */}
+      <Card className="border-muted/60 bg-muted/10">
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-base">
             <Info className="h-4 w-4" />
             How This Score Works
           </CardTitle>
         </CardHeader>
-        <CardContent className="text-sm text-muted-foreground leading-relaxed flex flex-col gap-2">
-          <p>
-            Each indicator is scored 0–100 representing how far Africa has traveled from its 2013
-            baseline toward its 2063 target. Goal scores average their indicators; aspiration scores
-            average their goals; the overall score averages all 7 aspirations equally.
-          </p>
-          <div className="flex flex-wrap gap-4 mt-1">
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-emerald-500" />
-              <span>
-                <strong>On Track</strong> — at or above {expectedProgress}% expected progress
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-amber-500" />
-              <span>
-                <strong>At Risk</strong> — {Math.round(expectedProgress * 0.7)}–{expectedProgress - 1}% progress
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-3 w-3 rounded-full bg-red-500" />
-              <span>
-                <strong>Behind</strong> — below {Math.round(expectedProgress * 0.7)}% progress
-              </span>
-            </div>
-          </div>
-          <p className="text-xs mt-1 text-muted-foreground/70">
-            Vertical marker (▲) on progress bars indicates expected linear progress at 13/50 years elapsed (~{expectedProgress}%).
-          </p>
+        <CardContent className="text-sm text-muted-foreground leading-relaxed">
+          Each indicator is scored 0–100 representing how far Africa has traveled from its 2013
+          baseline toward its 2063 target. Goal scores average their indicators; aspiration scores
+          average their goals; the overall composite score averages all 7 aspirations equally.
+          The expected-progress benchmark assumes linear progress over 50 years (2013–2063),
+          placing the 2026 expectation at ~26% (13/50 years elapsed).
         </CardContent>
       </Card>
 
@@ -221,7 +155,7 @@ export default function Africa2050Page() {
             const highlights = getTopIndicators(aspiration);
 
             return (
-              <Card key={aspiration.id} className="flex flex-col">
+              <Card key={aspiration.id} id={`aspiration-${aspiration.id}`} className="flex flex-col scroll-mt-6">
                 <CardHeader className="pb-3">
                   <div className="flex items-start justify-between gap-2">
                     <div className="flex items-center gap-2">

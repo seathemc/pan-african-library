@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 import { BookOpen, ExternalLink, Calendar, Globe, Languages, Award, Tag, ListOrdered, BookMarked } from "lucide-react";
 import Link from "next/link";
 import { AddToCollection } from "@/components/add-to-collection";
+import { authorNameToSlug } from "@/lib/author-utils";
 
 interface ApiTheme {
   name: string;
@@ -100,7 +101,12 @@ export default async function WorkPage({
           <Badge variant="outline">{work.yearPublished}</Badge>
         </div>
         <h1 className="text-4xl font-bold tracking-tight">{work.title}</h1>
-        <p className="text-xl text-muted-foreground font-medium">{work.author}</p>
+        <Link
+          href={`/author/${authorNameToSlug(work.author)}`}
+          className="text-xl text-muted-foreground font-medium hover:text-foreground transition-colors w-fit"
+        >
+          {work.author}
+        </Link>
 
         {/* Themes section */}
         {themes.length > 0 && (

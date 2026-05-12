@@ -1,7 +1,7 @@
 {
   "name": "alexandria-mcp",
   "version": "0.1.0",
-  "description": "MCP server for Alexandria — a pan-African knowledge library. Gives AI assistants access to 300+ works of African and diaspora literature, curated reading lists, and thematic indexes.",
+  "description": "MCP server for Alexandria — a pan-African knowledge library. Gives AI assistants access to 370+ works of African and diaspora literature, curated reading lists, and thematic indexes.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -9,9 +9,29 @@
   },
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run build",
     "dev": "tsc --watch",
     "start": "node dist/index.js"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "african-literature",
+    "pan-african",
+    "alexandria",
+    "library",
+    "ai-tools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seathemc/pan-african-library"
+  },
+  "homepage": "https://pan-african-library.vercel.app",
+  "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
     "zod": "^3.25.28"
@@ -22,5 +42,8 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
