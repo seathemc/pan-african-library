@@ -303,7 +303,7 @@ export default function LandingPage() {
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <BarChart3 className="h-5 w-5" />
-                    Africa 2050 Projections
+                    Agenda 2063 Projections
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
