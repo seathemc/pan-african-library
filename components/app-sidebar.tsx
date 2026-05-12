@@ -68,10 +68,9 @@ const navMain: NavItem[] = [
     icon: Search,
   },
   {
-    title: "Africa 2050",
+    title: "Agenda 2063",
     url: "/africa-2050",
     icon: TrendingUp,
-    badge: "New",
   },
   {
     title: "Ask Alexandria",
