@@ -9,6 +9,7 @@ import {
   Globe,
   Calendar,
   ChevronRight,
+  Code2,
   Landmark,
   TrendingUp,
   MessageSquare,
@@ -268,6 +269,21 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   <Link href="/browse/genre/speech">
                     <ChevronRight className="size-4" />
                     <span>Speeches</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>Developer</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/developer")}>
+                  <Link href="/developer">
+                    <Code2 />
+                    <span>MCP Server</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

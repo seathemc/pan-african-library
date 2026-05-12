@@ -99,7 +99,7 @@ export function ScoreDashboard() {
               <div className="relative h-5 w-full rounded-full bg-muted overflow-hidden">
                 {/* Expected marker */}
                 <div
-                  className="absolute top-0 bottom-0 w-0.5 bg-gray-500 z-10"
+                  className="absolute top-0 bottom-0 w-0.5 bg-muted-foreground/60 z-10"
                   style={{ left: `${EXPECTED_PROGRESS}%` }}
                 />
                 {/* Actual fill */}
@@ -112,7 +112,7 @@ export function ScoreDashboard() {
               {/* Labels under bar */}
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>0%</span>
-                <span className="text-gray-500 font-medium">
+                <span className="text-muted-foreground font-medium">
                   ▲ {EXPECTED_PROGRESS}% expected (2026)
                 </span>
                 <span>100%</span>
@@ -199,6 +199,11 @@ export function ScoreDashboard() {
           </span>
         </div>
       </div>
+
+      {/* ── Data disclaimer ───────────────────────────────────────────── */}
+      <p className="text-xs text-muted-foreground/70 leading-relaxed border-t pt-4">
+        <strong className="text-muted-foreground">Data note:</strong> Baselines (2013) and targets (2063) are drawn from official African Union Agenda 2063 documents and World Bank/UN statistical sources. Current 2026 figures are projections interpolated from published trend data — this dashboard does not pull from live data feeds. Individual indicator sources are cited in each aspiration section below.
+      </p>
     </div>
   );
 }
