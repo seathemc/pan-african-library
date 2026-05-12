@@ -11,6 +11,10 @@ import {
   ChevronRight,
   Landmark,
   TrendingUp,
+  MessageSquare,
+  Tag,
+  ListOrdered,
+  Bookmark,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -64,10 +68,19 @@ const navMain: NavItem[] = [
     icon: Search,
   },
   {
-    title: "Africa 2050",
+    title: "Agenda 2063",
     url: "/africa-2050",
     icon: TrendingUp,
-    badge: "New",
+  },
+  {
+    title: "Ask Alexandria",
+    url: "/ask",
+    icon: MessageSquare,
+  },
+  {
+    title: "My Collections",
+    url: "/collections",
+    icon: Bookmark,
   },
 ]
 
@@ -127,6 +140,30 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>Discover</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/themes")}>
+                  <Link href="/themes">
+                    <Tag />
+                    <span>Themes</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/reading-lists")}>
+                  <Link href="/reading-lists">
+                    <ListOrdered />
+                    <span>Reading Lists</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

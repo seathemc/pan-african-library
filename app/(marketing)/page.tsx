@@ -3,14 +3,17 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getAllWorks } from "@/lib/literature-data";
-import { BookOpen, TrendingUp, Github, ArrowRight, Sparkles, Library, BarChart3 } from "lucide-react";
+import { BookOpen, TrendingUp, Github, ArrowRight, Sparkles, Library, BarChart3, MessageSquare, Tag, ListOrdered } from "lucide-react";
 
 export default function LandingPage() {
   const allWorks = getAllWorks();
   const totalWorks = allWorks.length;
 
-  // Get sample works for preview
-  const sampleWorks = allWorks.slice(0, 4);
+  // Get sample works for preview — spread across regions
+  const sampleWorks = allWorks.filter(w =>
+    ['Things Fall Apart','Season of Migration to the North','Song of Lawino','Kindred'].includes(w.title)
+  ).slice(0, 4);
+  const displayWorks = sampleWorks.length === 4 ? sampleWorks : allWorks.slice(0, 4);
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -27,11 +30,14 @@ export default function LandingPage() {
             <Link href="/browse" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Archive
             </Link>
+            <Link href="/ask" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Ask Alexandria
+            </Link>
             <Link href="/africa-2050" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Africa 2050
+              Africa 2063
             </Link>
             <a
-              href="https://github.com"
+              href="https://github.com/seathemc/pan-african-library"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -61,13 +67,13 @@ export default function LandingPage() {
               <Link href="/browse">
                 <Button size="lg" className="gap-2 text-base px-8 py-6">
                   <Library className="h-5 w-5" />
-                  Explore the Past
+                  Explore the Archive
                 </Button>
               </Link>
-              <Link href="/africa-2050">
+              <Link href="/ask">
                 <Button size="lg" variant="outline" className="gap-2 text-base px-8 py-6">
-                  <BarChart3 className="h-5 w-5" />
-                  Visualize the Future
+                  <MessageSquare className="h-5 w-5" />
+                  Ask Alexandria
                 </Button>
               </Link>
             </div>
@@ -129,7 +135,7 @@ export default function LandingPage() {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  {sampleWorks.map((work) => (
+                  {displayWorks.map((work) => (
                     <div key={work.id} className="bg-muted/50 rounded-lg p-4 space-y-2">
                       <div className="flex items-start justify-between gap-2">
                         <h4 className="font-medium text-sm leading-tight">{work.title}</h4>
@@ -155,7 +161,140 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Feature 2: The Future - Left UI, Right Text */}
+        {/* Feature 2: Ask Alexandria AI */}
+        <div className="py-20">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-2">
+                  <MessageSquare className="h-6 w-6 text-primary" />
+                  <Badge variant="outline">Ask Alexandria</Badge>
+                </div>
+                <h2 className="text-4xl font-bold">
+                  Your AI Guide to the Archive
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Ask Alexandria is an AI librarian with deep knowledge of every work in the archive.
+                  Ask it to recommend books by theme, find works from a specific era, or explain a
+                  concept in pan-African thought. It searches, retrieves, and synthesizes—in plain language.
+                </p>
+                <ul className="space-y-3 text-muted-foreground">
+                  <li className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                    &ldquo;What should I read to understand Negritude?&rdquo;
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                    &ldquo;Find African women writers from East Africa&rdquo;
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                    &ldquo;Curate a reading list on decolonization&rdquo;
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <ArrowRight className="h-4 w-4 text-primary" />
+                    &ldquo;What connects Fanon, Cabral, and Biko?&rdquo;
+                  </li>
+                </ul>
+                <Link href="/ask">
+                  <Button variant="outline" className="w-fit gap-2">
+                    Try Ask Alexandria <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Chat preview */}
+              <Card className="bg-background border-primary/20">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <MessageSquare className="h-5 w-5" />
+                    Alexandria
+                  </CardTitle>
+                  <CardDescription>Powered by Claude · Searches 368+ works</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="bg-muted/50 rounded-lg px-4 py-3 text-sm max-w-xs ml-auto text-right">
+                    Recommend a reading list on pan-African feminism
+                  </div>
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 text-sm space-y-2">
+                    <p>I&apos;d suggest starting with these essential works:</p>
+                    <p>1. <strong>Ama Ata Aidoo</strong> — <em>Changes</em> (Ghana, 1991) — love, work, and what women owe themselves</p>
+                    <p>2. <strong>Buchi Emecheta</strong> — <em>Second-Class Citizen</em> (Nigeria/UK) — immigrant life and female survival</p>
+                    <p>3. <strong>Nawal El Saadawi</strong> — <em>Woman at Point Zero</em> (Egypt) — the politics of the female body</p>
+                  </div>
+                  <div className="flex gap-2 flex-wrap pt-1">
+                    <Badge variant="secondary" className="text-xs">Themes</Badge>
+                    <Badge variant="secondary" className="text-xs">Reading Lists</Badge>
+                    <Badge variant="secondary" className="text-xs">Search</Badge>
+                    <Badge variant="secondary" className="text-xs">Work Detail</Badge>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature 3: Themes & Reading Lists */}
+        <div className="bg-muted/30 py-16">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center mb-10">
+              <h2 className="text-3xl font-bold mb-3">Explore by Theme or Curated Path</h2>
+              <p className="text-muted-foreground max-w-xl mx-auto">
+                21 thematic categories and 6 curated reading lists give you structured entry points into the archive.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="bg-background">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <Tag className="h-5 w-5 text-primary" />
+                    Thematic Index
+                  </CardTitle>
+                  <CardDescription>Browse works by cross-cutting ideas and movements</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {['Decolonization','Pan-Africanism','Afrofuturism','Feminism','Resistance','Identity','Slavery','Oral Tradition'].map(t => (
+                      <Badge key={t} variant="outline" className="text-xs">{t}</Badge>
+                    ))}
+                    <Badge variant="secondary" className="text-xs">+13 more</Badge>
+                  </div>
+                  <Link href="/themes">
+                    <Button variant="outline" size="sm" className="gap-2 w-full">
+                      Browse All Themes <ArrowRight className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+              <Card className="bg-background">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <ListOrdered className="h-5 w-5 text-primary" />
+                    Curated Reading Lists
+                  </CardTitle>
+                  <CardDescription>Structured paths through the archive</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-col gap-2 mb-4 text-sm text-muted-foreground">
+                    {['Foundations of African Literature','The Harlem Renaissance','African Feminist Voices','Pan-Africanism & Independence','Afrofuturism','Civil Rights & Black Power'].map(l => (
+                      <div key={l} className="flex items-center gap-2">
+                        <ArrowRight className="h-3 w-3 text-primary shrink-0" />
+                        {l}
+                      </div>
+                    ))}
+                  </div>
+                  <Link href="/reading-lists">
+                    <Button variant="outline" size="sm" className="gap-2 w-full">
+                      View Reading Lists <ArrowRight className="h-3 w-3" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature 4: The Future - Left UI, Right Text */}
         <div className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -164,7 +303,7 @@ export default function LandingPage() {
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <BarChart3 className="h-5 w-5" />
-                    Africa 2050 Projections
+                    Agenda 2063 Projections
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -328,10 +467,16 @@ export default function LandingPage() {
                     Enter the Archive
                   </Button>
                 </Link>
+                <Link href="/ask">
+                  <Button size="lg" variant="outline" className="gap-2 px-8">
+                    <MessageSquare className="h-5 w-5" />
+                    Ask Alexandria
+                  </Button>
+                </Link>
                 <Link href="/africa-2050">
                   <Button size="lg" variant="outline" className="gap-2 px-8">
                     <BarChart3 className="h-5 w-5" />
-                    See the Data
+                    Africa 2063
                   </Button>
                 </Link>
               </div>
@@ -352,7 +497,7 @@ export default function LandingPage() {
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <span>Open Source (MIT)</span>
               <span>•</span>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              <a href="https://github.com/seathemc/pan-african-library" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
                 GitHub
               </a>
             </div>

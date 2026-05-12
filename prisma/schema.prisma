@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,35 +8,101 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// Literature Models
-model Work {
-  id            Int      @id @default(autoincrement())
-  title         String
-  author        String
-  yearPublished Int
-  language      String
-  region        String
-  country       String
-  genre         String
-  era           String
-  description   String
-  significance  String?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+// ─── Literature ───────────────────────────────────────────────────────────────
 
-  accessLinks AccessLink[]
-  collections CollectionWork[]
+model Work {
+  id               Int      @id @default(autoincrement())
+  title            String
+  subtitle         String?
+  author           String
+  yearPublished    Int
+  language         String
+  originalLanguage String?  // populated when the work is a translation
+  translator       String?
+  region           String
+  country          String
+  genre            String
+  era              String
+  description      String
+  significance     String?
+  coverImageUrl    String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  accessLinks  AccessLink[]
+  collections  CollectionWork[]
+  themes       WorkTheme[]
+  relatedFrom  WorkRelation[]   @relation("WorkRelationFrom")
+  relatedTo    WorkRelation[]   @relation("WorkRelationTo")
+  readingLists ReadingListWork[]
 }
 
 model AccessLink {
   id     Int    @id @default(autoincrement())
   url    String
-  type   String @default("web") // web, pdf, archive
+  // web | pdf | archive | publisher | library
+  type   String @default("web")
   workId Int
   work   Work   @relation(fields: [workId], references: [id], onDelete: Cascade)
 }
 
-// Authentication Models (for magic link)
+// Themes are cross-cutting concepts (e.g. "decolonization", "feminism", "identity")
+// that cut across region, era, and genre boundaries.
+model Theme {
+  id    Int         @id @default(autoincrement())
+  name  String      @unique
+  slug  String      @unique
+  works WorkTheme[]
+}
+
+model WorkTheme {
+  workId  Int
+  themeId Int
+  work    Work  @relation(fields: [workId], references: [id], onDelete: Cascade)
+  theme   Theme @relation(fields: [themeId], references: [id], onDelete: Cascade)
+
+  @@id([workId, themeId])
+}
+
+// Directed relationships between works.
+// type values: influenced_by | responds_to | same_series | same_movement | companion
+model WorkRelation {
+  id         Int    @id @default(autoincrement())
+  fromWorkId Int
+  toWorkId   Int
+  type       String
+  fromWork   Work   @relation("WorkRelationFrom", fields: [fromWorkId], references: [id], onDelete: Cascade)
+  toWork     Work   @relation("WorkRelationTo", fields: [toWorkId], references: [id], onDelete: Cascade)
+
+  @@unique([fromWorkId, toWorkId, type])
+}
+
+// Curated reading paths (e.g. "Intro to African Feminism", "Negritude Movement")
+model ReadingList {
+  id          Int             @id @default(autoincrement())
+  title       String
+  slug        String          @unique
+  description String
+  curatedBy   String          @default("Alexandria")
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  works       ReadingListWork[]
+}
+
+model ReadingListWork {
+  readingListId Int
+  workId        Int
+  position      Int
+  note          String?       // optional context note for this work in this list
+  readingList   ReadingList   @relation(fields: [readingListId], references: [id], onDelete: Cascade)
+  work          Work          @relation(fields: [workId], references: [id], onDelete: Cascade)
+
+  @@id([readingListId, workId])
+  @@index([readingListId, position])
+}
+
+// ─── Authentication ───────────────────────────────────────────────────────────
+
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
@@ -69,7 +132,8 @@ model MagicLink {
   createdAt DateTime @default(now())
 }
 
-// User Collections
+// ─── User Collections ─────────────────────────────────────────────────────────
+
 model Collection {
   id          String   @id @default(cuid())
   name        String
