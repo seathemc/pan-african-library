@@ -105,23 +105,27 @@ export async function verifyJWT(token: string) {
 }
 
 export async function getCurrentUser() {
-  const cookieStore = await cookies()
-  const sessionToken = cookieStore.get("session")?.value
+  try {
+    const cookieStore = await cookies()
+    const sessionToken = cookieStore.get("session")?.value
 
-  if (!sessionToken) {
+    if (!sessionToken) {
+      return null
+    }
+
+    const session = await prisma.session.findUnique({
+      where: { token: sessionToken },
+      include: { user: true },
+    })
+
+    if (!session || session.expiresAt < new Date()) {
+      return null
+    }
+
+    return session.user
+  } catch {
     return null
   }
-
-  const session = await prisma.session.findUnique({
-    where: { token: sessionToken },
-    include: { user: true },
-  })
-
-  if (!session || session.expiresAt < new Date()) {
-    return null
-  }
-
-  return session.user
 }
 
 export async function signOut() {

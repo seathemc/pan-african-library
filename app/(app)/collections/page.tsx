@@ -25,13 +25,18 @@ export default async function CollectionsPage() {
     )
   }
 
-  const collections = await prisma.collection.findMany({
-    where: { userId: user.id },
-    orderBy: { createdAt: 'desc' },
-    include: {
-      _count: { select: { works: true } },
-    },
-  })
+  let collections: Awaited<ReturnType<typeof prisma.collection.findMany>> = []
+  try {
+    collections = await prisma.collection.findMany({
+      where: { userId: user.id },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        _count: { select: { works: true } },
+      },
+    })
+  } catch {
+    // DB unavailable — show empty state
+  }
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">

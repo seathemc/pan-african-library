@@ -20,27 +20,32 @@ export default async function CollectionDetailPage({
     redirect('/login')
   }
 
-  const collection = await prisma.collection.findUnique({
-    where: { id },
-    include: {
-      works: {
-        orderBy: { addedAt: 'desc' },
-        include: {
-          work: {
-            select: {
-              id: true,
-              title: true,
-              author: true,
-              yearPublished: true,
-              region: true,
-              genre: true,
-              era: true,
+  let collection = null
+  try {
+    collection = await prisma.collection.findUnique({
+      where: { id },
+      include: {
+        works: {
+          orderBy: { addedAt: 'desc' },
+          include: {
+            work: {
+              select: {
+                id: true,
+                title: true,
+                author: true,
+                yearPublished: true,
+                region: true,
+                genre: true,
+                era: true,
+              },
             },
           },
         },
       },
-    },
-  })
+    })
+  } catch {
+    // DB unavailable
+  }
 
   if (!collection) {
     notFound()
