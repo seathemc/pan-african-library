@@ -3,8 +3,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getAllWorks } from "@/lib/literature-data";
-import { BookOpen, Github, ArrowRight, Library, MessageSquare, Code2 } from "lucide-react";
+import { Github, ArrowRight, Library, MessageSquare, Code2 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { WisdomLogo } from "@/components/wisdom-logo";
 
 export default function LandingPage() {
   const allWorks = getAllWorks();
@@ -21,7 +22,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <BookOpen className="size-4" />
+              <WisdomLogo size={18} />
             </div>
             <span className="font-semibold text-lg">Wisdom</span>
           </div>
@@ -309,7 +310,7 @@ export default function LandingPage() {
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="h-5 w-5 text-primary" />
+              <WisdomLogo size={20} className="text-primary" />
               <span className="font-semibold">Wisdom</span>
               <span className="text-sm text-muted-foreground">· Pan-African Library · Open Source (MIT)</span>
             </div>

@@ -16,9 +16,12 @@ import {
   ListOrdered,
   TrendingUp,
   Telescope,
+  Zap,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+
+import { WisdomLogo } from "./wisdom-logo"
 
 import {
   Sidebar,
@@ -68,7 +71,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                  <BookOpen className="size-4" />
+                  <WisdomLogo size={18} />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">Wisdom</span>
@@ -99,6 +102,25 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   <Link href="/">
                     <Home />
                     <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <Separator className="mx-2" />
+
+        {/* MCP Server — moved to top of feature sections */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Developer</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/developer")}>
+                  <Link href="/developer">
+                    <Code2 />
+                    <span>MCP Server</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -283,22 +305,6 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Developer */}
-        <SidebarGroup>
-          <SidebarGroupLabel>Developer</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/developer")}>
-                  <Link href="/developer">
-                    <Code2 />
-                    <span>MCP Server</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
 
       </SidebarContent>
 

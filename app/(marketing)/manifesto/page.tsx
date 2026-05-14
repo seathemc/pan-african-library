@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, FileText, BookOpen } from "lucide-react"
+import { ArrowRight, FileText } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { WisdomLogo } from "@/components/wisdom-logo"
 
 export const metadata = {
   title: "Manifesto · Wisdom",
@@ -17,7 +18,7 @@ export default function ManifestoPage() {
         <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <BookOpen className="size-4" />
+              <WisdomLogo size={18} />
             </div>
             <span className="font-semibold text-lg">Wisdom</span>
           </Link>

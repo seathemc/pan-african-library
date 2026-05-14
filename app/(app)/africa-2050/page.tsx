@@ -1,4 +1,4 @@
-import { Fragment, type FC } from "react";
+import { Fragment, type FC, Suspense } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,6 +23,8 @@ import {
 } from "@/lib/agenda-2063-data";
 import { AfricaCharts } from "./charts";
 import { ScoreDashboard } from "./score-dashboard";
+import { ViewSwitcher } from "./view-switcher";
+import { ForecastView } from "./forecast-view";
 
 const ICON_MAP: Record<string, FC<{ className?: string }>> = {
   TrendingUp,
@@ -104,24 +106,43 @@ function formatValue(indicator: Indicator, value: number): string {
   return `${value} ${unit}`;
 }
 
-export default function Africa2050Page() {
+export default async function Africa2050Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ view?: string }>
+}) {
+  const { view } = await searchParams
+  const isForecast = view === "forecast"
+
   return (
     <div className="flex flex-col gap-8 max-w-6xl mx-auto">
       {/* Page header */}
       <div className="flex flex-col gap-3 py-8 pb-0">
-        <div className="flex items-center gap-2">
-          <Target className="h-5 w-5 text-primary" />
-          <Badge variant="secondary" className="text-xs">
-            African Union · Agenda 2063
-          </Badge>
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-2">
+            <Target className="h-5 w-5 text-primary" />
+            <Badge variant="secondary" className="text-xs">
+              African Union · Agenda 2063
+            </Badge>
+          </div>
+          <Suspense>
+            <ViewSwitcher />
+          </Suspense>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-          Agenda 2063 Tracker
+          {isForecast ? "Agenda 2063 Forecast" : "Agenda 2063 Dashboard"}
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
-          Africa&apos;s Progress Against the African Union&apos;s 50-Year Vision
+          {isForecast
+            ? "At the current rate of progress, when will Africa reach its 2063 targets?"
+            : "Africa's progress against the African Union's 50-year vision"}
         </p>
       </div>
+
+      {isForecast ? (
+        <ForecastView />
+      ) : (
+      <>
 
       {/* Composite score dashboard + aspiration tiles + legend */}
       <ScoreDashboard />
@@ -357,6 +378,7 @@ export default function Africa2050Page() {
       {/* Historical Charts with 2063 Context */}
       <AfricaCharts />
 
+
       {/* Data Sources */}
       <Card className="border-muted">
         <CardHeader>
@@ -376,6 +398,9 @@ export default function Africa2050Page() {
           </CardDescription>
         </CardHeader>
       </Card>
+
+      </> /* end dashboard view */
+      )}
     </div>
   );
 }
