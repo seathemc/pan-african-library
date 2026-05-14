@@ -28,10 +28,10 @@ function trajectoryLabel(completionYear: number | null): {
   color: string
   badge: string
 } {
-  if (completionYear === null) return { label: "No progress", color: "text-red-500", badge: "bg-red-100 text-red-800 border-red-200" }
-  if (completionYear <= TARGET_YEAR) return { label: `On track · ${completionYear}`, color: "text-emerald-600", badge: "bg-emerald-100 text-emerald-800 border-emerald-200" }
-  if (completionYear <= TARGET_YEAR + 20) return { label: `Late · ${completionYear}`, color: "text-amber-600", badge: "bg-amber-100 text-amber-800 border-amber-200" }
-  return { label: `Far behind · ${completionYear}`, color: "text-red-500", badge: "bg-red-100 text-red-800 border-red-200" }
+  if (completionYear === null) return { label: "No progress", color: "text-red-500 dark:text-red-400", badge: "bg-red-500/10 text-red-600 border-red-500/20 dark:text-red-400" }
+  if (completionYear <= TARGET_YEAR) return { label: `On track · ${completionYear}`, color: "text-emerald-600 dark:text-emerald-400", badge: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20 dark:text-emerald-400" }
+  if (completionYear <= TARGET_YEAR + 20) return { label: `Late · ${completionYear}`, color: "text-amber-600 dark:text-amber-400", badge: "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:text-amber-400" }
+  return { label: `Far behind · ${completionYear}`, color: "text-red-500 dark:text-red-400", badge: "bg-red-500/10 text-red-600 border-red-500/20 dark:text-red-400" }
 }
 
 export function ForecastView() {

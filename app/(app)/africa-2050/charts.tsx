@@ -23,11 +23,15 @@ import {
   ReferenceLine,
 } from "recharts";
 
-// Color scheme
-const BLUE = "#3b82f6";
-const VIOLET = "#8b5cf6";
-const BLUE_LIGHT = "#93c5fd";
-const TARGET_COLOR = "#10b981"; // emerald for 2063 targets
+// Color scheme — all chosen to be visible on both white and pitch-black backgrounds
+const BLUE = "#60a5fa";       // blue-400 — bright enough for dark mode, clear on light
+const VIOLET = "#a78bfa";     // violet-400
+const BLUE_LIGHT = "#bfdbfe"; // blue-200
+const TARGET_COLOR = "#34d399"; // emerald-400 — target/goal color
+
+// Grid and axis colors adapt to dark mode via CSS variable
+const GRID_COLOR = "rgba(128,128,128,0.15)";
+const AXIS_COLOR = "rgba(128,128,128,0.6)";
 
 // Population Data (historical + projections to 2063)
 const populationData = [
@@ -232,9 +236,9 @@ export function AfricaCharts() {
             <CardContent>
               <ResponsiveContainer width="100%" height={320}>
                 <AreaChart data={populationData}>
-                  <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis dataKey="year" />
-                  <YAxis label={{ value: "Billions", angle: -90, position: "insideLeft" }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                  <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                  <YAxis label={{ value: "Billions", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                   <Tooltip formatter={(value: number | string) => `${value}B`} />
                   <Legend />
                   <ReferenceLine x="2013" stroke={VIOLET} strokeDasharray="4 4" label={{ value: "Baseline", position: "top", fill: VIOLET, fontSize: 11 }} />
@@ -261,9 +265,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <LineChart data={economicData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "Trillions USD", angle: -90, position: "insideLeft" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "Trillions USD", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                     <Tooltip formatter={(value: number | string) => `$${value}T`} />
                     <ReferenceLine x="2013" stroke={VIOLET} strokeDasharray="4 4" />
                     <Line type="monotone" dataKey="gdp" stroke={BLUE} strokeWidth={3} name="GDP" dot={<BaselineDot />} />
@@ -283,9 +287,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <BarChart data={economicData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "% of Population", angle: -90, position: "insideLeft" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "% of Population", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                     <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <Bar dataKey="middleClass" fill={BLUE} name="Middle Class %" />
                   </BarChart>
@@ -309,9 +313,9 @@ export function AfricaCharts() {
             <CardContent>
               <ResponsiveContainer width="100%" height={320}>
                 <AreaChart data={energyData}>
-                  <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis dataKey="year" />
-                  <YAxis label={{ value: "% of Production", angle: -90, position: "insideLeft" }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                  <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                  <YAxis label={{ value: "% of Production", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                   <Tooltip formatter={(value: number | string) => `${value}%`} />
                   <Legend />
                   <ReferenceLine x="2013" stroke={VIOLET} strokeDasharray="4 4" label={{ value: "Baseline (35% access)", position: "insideTopRight", fill: VIOLET, fontSize: 11 }} />
@@ -338,9 +342,9 @@ export function AfricaCharts() {
             <CardContent>
               <ResponsiveContainer width="100%" height={320}>
                 <BarChart data={educationData}>
-                  <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis dataKey="year" />
-                  <YAxis label={{ value: "% Enrollment/Completion", angle: -90, position: "insideLeft" }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                  <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                  <YAxis label={{ value: "% Enrollment/Completion", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                   <Tooltip formatter={(value: number | string) => `${value}%`} />
                   <Legend />
                   <ReferenceLine y={95} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 secondary target (95%)", position: "insideTopRight", fill: TARGET_COLOR, fontSize: 11 }} />
@@ -367,9 +371,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <LineChart data={healthData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis domain={[55, 80]} label={{ value: "Years", angle: -90, position: "insideLeft" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis domain={[55, 80]} label={{ value: "Years", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                     <Tooltip formatter={(value: number | string) => `${value} years`} />
                     <ReferenceLine y={75} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 75 yrs", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={60} stroke={VIOLET} strokeDasharray="4 4" label={{ value: "2013: 60 yrs", position: "insideBottomRight", fill: VIOLET, fontSize: 11 }} />
@@ -390,9 +394,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <LineChart data={healthData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "Per 1,000 births", angle: -90, position: "insideLeft" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "Per 1,000 births", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                     <Tooltip />
                     <ReferenceLine y={25} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 25", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={92} stroke={VIOLET} strokeDasharray="4 4" label={{ value: "2013: 92", position: "insideTopRight", fill: VIOLET, fontSize: 11 }} />
@@ -413,8 +417,8 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
                   <LineChart data={healthData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis />
                     <Tooltip />
                     <Legend />
@@ -443,9 +447,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <LineChart data={governanceData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis domain={[30, 75]} label={{ value: "Score (0-100)", angle: -90, position: "insideLeft" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis domain={[30, 75]} label={{ value: "Score (0-100)", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                     <Tooltip />
                     <Legend />
                     <ReferenceLine y={65} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 65", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
@@ -468,9 +472,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={260}>
                   <LineChart data={governanceData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis domain={[0, 25]} label={{ value: "Countries in conflict", angle: -90, position: "insideLeft" }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis domain={[0, 25]} label={{ value: "Countries in conflict", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                     <Tooltip />
                     <ReferenceLine y={0} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 0", position: "insideTopRight", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={14} stroke={VIOLET} strokeDasharray="4 4" label={{ value: "2013 baseline: 14", position: "insideBottomRight", fill: VIOLET, fontSize: 11 }} />
@@ -491,8 +495,8 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={280}>
                   <LineChart data={tradeData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis />
                     <Tooltip />
                     <Legend />
@@ -521,9 +525,9 @@ export function AfricaCharts() {
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <AreaChart data={employmentData}>
-                  <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis dataKey="year" />
-                  <YAxis label={{ value: "Millions", angle: -90, position: "insideLeft" }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                  <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                  <YAxis label={{ value: "Millions", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                   <Tooltip formatter={(value: number | string) => `${value}M`} />
                   <Legend />
                   <Area type="monotone" dataKey="laborForce" stroke={BLUE} fill={BLUE} fillOpacity={0.3} name="Total Labor Force (M)" />
@@ -545,9 +549,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={250}>
                   <LineChart data={employmentData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "%", angle: -90, position: "insideLeft" }} domain={[30, 70]} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "%", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} domain={[30, 70]} />
                     <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <Line type="monotone" dataKey="youthEmployment" stroke={BLUE} strokeWidth={3} name="Youth Employment %" />
                   </LineChart>
@@ -566,9 +570,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={250}>
                   <LineChart data={employmentData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "%", angle: -90, position: "insideLeft" }} domain={[35, 60]} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "%", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} domain={[35, 60]} />
                     <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <ReferenceLine y={50} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "Parity target: 50%", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <Line type="monotone" dataKey="femaleEmployment" stroke={BLUE} strokeWidth={3} name="Female Employment %" />
@@ -589,9 +593,9 @@ export function AfricaCharts() {
             <CardContent>
               <ResponsiveContainer width="100%" height={350}>
                 <AreaChart data={sectorJobsData}>
-                  <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis dataKey="year" />
-                  <YAxis label={{ value: "Millions", angle: -90, position: "insideLeft" }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                  <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                  <YAxis label={{ value: "Millions", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
                   <Tooltip formatter={(value: number | string) => `${value}M`} />
                   <Legend />
                   <Area type="monotone" dataKey="services" stackId="1" stroke={BLUE} fill={BLUE} fillOpacity={0.7} name="Services" />
@@ -642,9 +646,9 @@ export function AfricaCharts() {
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={happinessData}>
-                  <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                  <XAxis dataKey="year" />
-                  <YAxis label={{ value: "Score (0-10)", angle: -90, position: "insideLeft" }} domain={[4, 9]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                  <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                  <YAxis label={{ value: "Score (0-10)", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} domain={[4, 9]} />
                   <Tooltip />
                   <Legend />
                   <Line type="monotone" dataKey="happiness" stroke={BLUE} strokeWidth={2} name="Happiness Score" />
@@ -667,9 +671,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={250}>
                   <AreaChart data={happinessData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "%", angle: -90, position: "insideLeft" }} domain={[50, 80]} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "%", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} domain={[50, 80]} />
                     <Tooltip formatter={(value: number | string) => `${value}%`} />
                     <Area type="monotone" dataKey="optimism" stroke={BLUE} fill={BLUE} fillOpacity={0.3} name="Optimism %" />
                   </AreaChart>
@@ -688,9 +692,9 @@ export function AfricaCharts() {
               <CardContent>
                 <ResponsiveContainer width="100%" height={250}>
                   <LineChart data={happinessData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.3} />
-                    <XAxis dataKey="year" />
-                    <YAxis label={{ value: "Global Rank", angle: -90, position: "insideLeft" }} reversed domain={[40, 120]} />
+                    <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
+                    <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
+                    <YAxis label={{ value: "Global Rank", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} reversed domain={[40, 120]} />
                     <Tooltip formatter={(value: number | string) => `#${value} globally`} />
                     <Line type="monotone" dataKey="rank" stroke={BLUE} strokeWidth={3} name="Global Happiness Rank (improving)" />
                   </LineChart>

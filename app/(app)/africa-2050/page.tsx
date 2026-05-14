@@ -39,20 +39,20 @@ const ICON_MAP: Record<string, FC<{ className?: string }>> = {
 const STATUS_COLORS = {
   "on-track": {
     bar: "bg-emerald-500",
-    badge: "bg-emerald-100 text-emerald-800 border-emerald-200",
-    text: "text-emerald-700",
+    badge: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20 dark:text-emerald-400",
+    text: "text-emerald-600 dark:text-emerald-400",
     label: "On Track",
   },
   "at-risk": {
     bar: "bg-amber-500",
-    badge: "bg-amber-100 text-amber-800 border-amber-200",
-    text: "text-amber-700",
+    badge: "bg-amber-500/10 text-amber-600 border-amber-500/20 dark:text-amber-400",
+    text: "text-amber-600 dark:text-amber-400",
     label: "At Risk",
   },
   behind: {
     bar: "bg-red-500",
-    badge: "bg-red-100 text-red-800 border-red-200",
-    text: "text-red-700",
+    badge: "bg-red-500/10 text-red-600 border-red-500/20 dark:text-red-400",
+    text: "text-red-600 dark:text-red-400",
     label: "Behind",
   },
 };
