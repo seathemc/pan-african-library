@@ -45,43 +45,54 @@ export default function ManifestoPage() {
 
         {/* Lede */}
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-12">
-          AI has an Africa problem.
+          Africa knows.
           <br />
-          <span className="text-muted-foreground">We are the answer that ships.</span>
+          <span className="text-muted-foreground">It has always known.</span>
         </h1>
 
         {/* Body — manifesto stanzas */}
         <div className="text-lg md:text-xl leading-relaxed space-y-10 font-light">
           <section className="space-y-2">
-            <p>You ask the machine a question about Africa.</p>
+            <p>Before the printing press, the griot.</p>
+            <p>Before the algorithm, the elder.</p>
+            <p>Before the archive, the memory carried in the body and passed in the voice.</p>
+            <p className="pt-1">Carthage knew. Kush knew. Mali knew. Axum knew.</p>
+            <p>Great Zimbabwe knew. Timbuktu knew. The Nile Valley knew.</p>
+            <p className="pt-1 font-normal">
+              Five thousand years of mathematics, philosophy, astronomy, navigation, law, literature, and prayer.
+            </p>
+            <p className="font-normal">This is the inheritance.</p>
+          </section>
+
+          <section className="space-y-3">
+            <p>Imagine a child in Lagos asking her tablet a question about her people, and getting back her people.</p>
+            <p>Imagine a researcher in Dakar opening her laptop and finding the archive she would have spent a decade building, already there.</p>
+            <p>Imagine a developer in Nairobi shipping an education tool on Tuesday because the knowledge layer was a one-line install on Monday.</p>
+            <p>Imagine a lab in San Francisco that cannot release a frontier model without first passing an African benchmark.</p>
+            <p className="font-normal">Imagine a century in which Africa is not the footnote. Africa is the source.</p>
+            <p className="font-normal">That is what we are building toward.</p>
+          </section>
+
+          <section className="space-y-2">
+            <p className="font-normal">Now, the truth.</p>
+            <p className="pt-1">You ask the machine a question about Africa.</p>
             <p>It gives you back a Wikipedia paragraph.</p>
             <p>It gives you a paywall.</p>
             <p>It gives you a guess.</p>
-            <p className="font-normal">That is not knowledge. That is absence with confidence.</p>
-          </section>
-
-          <section className="space-y-2">
-            <p>The knowledge is not missing.</p>
-            <p>The knowledge has been here for five thousand years.</p>
-            <p>Carthage knew. Kush knew. Mali knew. Axum knew.</p>
-            <p>Great Zimbabwe knew. The Nile Valley knew.</p>
-            <p>The griot knew. The elder knew. The scholar in Timbuktu knew.</p>
+            <p className="pt-1 font-normal">That is not knowledge. That is absence with confidence.</p>
+            <p className="font-normal">The knowledge is not missing.</p>
             <p className="font-normal">The machine does not know because the machine was not built to know.</p>
+            <p className="pt-1">The tools that will define this century are being built right now.</p>
+            <p>They are being built with what is easy to scrape.</p>
+            <p className="font-normal">What is easy to scrape is not what is true.</p>
           </section>
 
           <section className="space-y-2">
-            <p>Let us be clear about what this means.</p>
-            <p>It means your child is being taught by a system that cannot teach her about herself.</p>
-            <p>It means your students are being researched on by labs that do not read their work.</p>
-            <p>It means your continent is being modeled by people who do not have the data.</p>
-            <p className="font-normal">It means the next century is being written without you.</p>
-          </section>
-
-          <section className="space-y-2">
-            <p>We are not waiting.</p>
+            <p className="font-normal">So.</p>
+            <p className="pt-1">We are not waiting.</p>
             <p>We are not asking.</p>
             <p>We are not petitioning.</p>
-            <p className="font-normal">We are building.</p>
+            <p className="font-normal pt-1">We are building.</p>
           </section>
 
           <section className="space-y-4">
@@ -90,16 +101,11 @@ export default function ManifestoPage() {
               One server. One command. Five thousand years of African thought made readable to every machine
               that will shape the next hundred.
             </p>
-            <p>
-              Past — the archive. 368 works to start. The first deposit, not the archive.
-            </p>
-            <p>
-              Present — the dashboard. Real African development data, the Agenda 2063 indicators, queryable
-              by anyone who asks.
-            </p>
-            <p>
-              Future — the forecast. Where the continent is going, said in the language the new tools speak.
-            </p>
+            <ul className="space-y-2 pt-1">
+              <li><span className="font-normal">Past</span> — the archive. 368 works to start. The first deposit, not the archive.</li>
+              <li><span className="font-normal">Present</span> — the dashboard. Real African development data, the Agenda 2063 indicators, queryable by anyone who asks.</li>
+              <li><span className="font-normal">Future</span> — the forecast. Where the continent is going, said in the language the new tools speak.</li>
+            </ul>
           </section>
 
           <section className="space-y-2">
@@ -112,20 +118,13 @@ export default function ManifestoPage() {
           </section>
 
           <section className="space-y-2">
-            <p>The tools that will define this century are being built right now.</p>
-            <p>They are being built with what is easy to scrape.</p>
-            <p>What is easy to scrape is not what is true.</p>
-            <p className="font-normal">We are going to make the truth easy to scrape.</p>
-          </section>
-
-          <section className="space-y-2">
             <p>This is not a database.</p>
             <p>This is not a chatbot.</p>
             <p>This is not a search engine.</p>
             <p className="font-normal">
-              This is infrastructure for a continent that should never have had to ask permission to be
-              indexed.
+              This is infrastructure for a continent that should never have had to ask permission to be indexed.
             </p>
+            <p className="font-normal">We are going to make the truth easy to scrape.</p>
           </section>
 
           <section className="pt-2">
