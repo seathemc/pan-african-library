@@ -74,7 +74,7 @@ const navMain: NavItem[] = [
     icon: TrendingUp,
   },
   {
-    title: "Ask Alexandria",
+    title: "Get Wisdom",
     url: "/ask",
     icon: MessageSquare,
   },
@@ -111,7 +111,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   <BookOpen className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Alexandria</span>
+                  <span className="font-semibold">Wisdom</span>
                   <span className="text-xs text-muted-foreground">
                     Pan-African Library
                   </span>

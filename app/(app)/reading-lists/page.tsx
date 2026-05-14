@@ -19,7 +19,7 @@ const FALLBACK_LISTS: ReadingListSummary[] = [
     title: "Foundations of African Literature",
     slug: "foundations-african-literature",
     description: "Essential texts that established the canon of African literary tradition.",
-    curatedBy: "Alexandria",
+    curatedBy: "Wisdom",
     workCount: 0,
   },
   {
@@ -27,7 +27,7 @@ const FALLBACK_LISTS: ReadingListSummary[] = [
     title: "The Harlem Renaissance",
     slug: "harlem-renaissance",
     description: "Voices from the flowering of Black American art and thought in the 1920s.",
-    curatedBy: "Alexandria",
+    curatedBy: "Wisdom",
     workCount: 0,
   },
   {
@@ -35,7 +35,7 @@ const FALLBACK_LISTS: ReadingListSummary[] = [
     title: "African Feminist Voices",
     slug: "african-feminist-voices",
     description: "Writing by African and diasporic women on gender, power, and liberation.",
-    curatedBy: "Alexandria",
+    curatedBy: "Wisdom",
     workCount: 0,
   },
   {
@@ -43,7 +43,7 @@ const FALLBACK_LISTS: ReadingListSummary[] = [
     title: "Pan-Africanism & Independence",
     slug: "pan-africanism-independence",
     description: "Texts that shaped the independence movements and Pan-African thought.",
-    curatedBy: "Alexandria",
+    curatedBy: "Wisdom",
     workCount: 0,
   },
   {
@@ -51,7 +51,7 @@ const FALLBACK_LISTS: ReadingListSummary[] = [
     title: "Afrofuturism",
     slug: "afrofuturism",
     description: "Speculative and visionary works imagining African and Black futures.",
-    curatedBy: "Alexandria",
+    curatedBy: "Wisdom",
     workCount: 0,
   },
   {
@@ -59,7 +59,7 @@ const FALLBACK_LISTS: ReadingListSummary[] = [
     title: "Civil Rights & Black Power",
     slug: "civil-rights-black-power",
     description: "Speeches, essays, and manifestos from the American freedom struggle.",
-    curatedBy: "Alexandria",
+    curatedBy: "Wisdom",
     workCount: 0,
   },
 ];

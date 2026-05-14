@@ -5,9 +5,9 @@ import { Code2 } from "lucide-react";
 
 const CLAUDE_DESKTOP_CONFIG = `{
   "mcpServers": {
-    "alexandria": {
+    "wisdom": {
       "command": "npx",
-      "args": ["alexandria-mcp"],
+      "args": ["wisdom-mcp"],
       "env": {
         "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
       }
@@ -15,13 +15,13 @@ const CLAUDE_DESKTOP_CONFIG = `{
   }
 }`;
 
-const CLAUDE_CODE_CMD = `claude mcp add alexandria -- npx alexandria-mcp`;
+const CLAUDE_CODE_CMD = `claude mcp add wisdom -- npx wisdom-mcp`;
 
 const CURSOR_VSCODE_CONFIG = `{
   "servers": {
-    "alexandria": {
+    "wisdom": {
       "command": "npx",
-      "args": ["alexandria-mcp"],
+      "args": ["wisdom-mcp"],
       "env": {
         "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
       }
@@ -65,14 +65,14 @@ export default function DeveloperPage() {
           <Code2 className="h-5 w-5 text-primary" />
           <Badge variant="secondary" className="text-xs">Developer</Badge>
         </div>
-        <h1 className="text-3xl font-bold">Alexandria MCP Server</h1>
+        <h1 className="text-3xl font-bold">Wisdom MCP Server</h1>
       </div>
 
       {/* Intro */}
       <Card>
         <CardContent className="pt-6">
           <p className="text-muted-foreground leading-relaxed">
-            Alexandria is available as an MCP (Model Context Protocol) server. Add it to any AI
+            Wisdom is available as an MCP (Model Context Protocol) server. Add it to any AI
             assistant that supports MCP — Claude Desktop, Claude Code, Cursor, VS Code — to give
             it instant access to 370+ pan-African works, themes, and reading lists.
           </p>
@@ -181,7 +181,7 @@ export default function DeveloperPage() {
       <div className="flex flex-col gap-4">
         <h2 className="text-xl font-semibold">REST API</h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          The MCP server talks to Alexandria&apos;s public REST API. You can also query it directly —
+          The MCP server talks to Wisdom&apos;s public REST API. You can also query it directly —
           all endpoints are open, no auth required.
         </p>
         <Card>

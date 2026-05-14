@@ -1,6 +1,6 @@
-# Alexandria MCP Server
+# Wisdom MCP Server
 
-An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives any AI assistant access to the Alexandria pan-African literature library — 370+ curated works spanning African literature, the diaspora, the Harlem Renaissance, Caribbean thought, Black feminist theory, Arabic and Swahili literature, and more.
+An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives any AI assistant access to the Wisdom pan-African literature library — 370+ curated works spanning African literature, the diaspora, the Harlem Renaissance, Caribbean thought, Black feminist theory, Arabic and Swahili literature, and more.
 
 ## Tools
 
@@ -32,9 +32,9 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 ```json
 {
   "mcpServers": {
-    "alexandria": {
+    "wisdom": {
       "command": "npx",
-      "args": ["alexandria-mcp"],
+      "args": ["wisdom-mcp"],
       "env": {
         "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
       }
@@ -46,7 +46,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS)
 ### Claude Code (CLI)
 
 ```bash
-claude mcp add alexandria -- npx alexandria-mcp
+claude mcp add wisdom -- npx wisdom-mcp
 ```
 
 Or add to your project's `.claude/settings.json`:
@@ -54,9 +54,9 @@ Or add to your project's `.claude/settings.json`:
 ```json
 {
   "mcpServers": {
-    "alexandria": {
+    "wisdom": {
       "command": "npx",
-      "args": ["alexandria-mcp"],
+      "args": ["wisdom-mcp"],
       "env": {
         "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
       }
@@ -72,9 +72,9 @@ Add to your MCP settings file (`.cursor/mcp.json` or `.vscode/mcp.json`):
 ```json
 {
   "servers": {
-    "alexandria": {
+    "wisdom": {
       "command": "npx",
-      "args": ["alexandria-mcp"],
+      "args": ["wisdom-mcp"],
       "env": {
         "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
       }
@@ -96,7 +96,7 @@ ALEXANDRIA_API_URL=http://localhost:3000 node dist/index.js
 
 | Variable | Default | Description |
 |---|---|---|
-| `ALEXANDRIA_API_URL` | `https://pan-african-library.vercel.app` | Base URL of the Alexandria API |
+| `ALEXANDRIA_API_URL` | `https://pan-african-library.vercel.app` | Base URL of the Wisdom API |
 
 ## Example prompts
 
@@ -113,6 +113,6 @@ Once installed, you can ask your AI assistant:
 
 ## Self-hosting
 
-The MCP server talks to the Alexandria REST API. If you're running your own Alexandria instance, set `ALEXANDRIA_API_URL` to your deployment URL.
+The MCP server talks to the Wisdom REST API. If you're running your own Wisdom instance, set `ALEXANDRIA_API_URL` to your deployment URL.
 
 The API is open — no authentication required for read operations.

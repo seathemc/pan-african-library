@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 /**
- * Alexandria MCP Server
+ * Wisdom MCP Server
  *
  * Exposes pan-African literature knowledge as MCP tools so any AI assistant
- * can access curated works, themes, and reading lists from the Alexandria library.
+ * can access curated works, themes, and reading lists from the Wisdom library.
  *
  * Usage with Claude Desktop:
  *   {
  *     "mcpServers": {
- *       "alexandria": {
+ *       "wisdom": {
  *         "command": "npx",
- *         "args": ["alexandria-mcp"],
+ *         "args": ["wisdom-mcp"],
  *         "env": {
  *           "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
  *         }
@@ -26,7 +26,7 @@ import { z } from 'zod'
 import { api } from './client.js'
 
 const server = new McpServer({
-  name:    'alexandria',
+  name:    'wisdom',
   version: '0.1.0',
 })
 
@@ -153,7 +153,7 @@ server.registerTool(
   async () => {
     const themes = await api.listThemes()
     const text = themes.map(t => `- **${t.name}** (${t.workCount} works) — slug: \`${t.slug}\``).join('\n')
-    return { content: [{ type: 'text', text: `Alexandria themes:\n\n${text}` }] }
+    return { content: [{ type: 'text', text: `Wisdom themes:\n\n${text}` }] }
   }
 )
 
@@ -189,7 +189,7 @@ server.registerTool(
   'list_reading_lists',
   {
     title:       'List Reading Lists',
-    description: 'List all curated reading paths in Alexandria — structured starting points for exploring the library by topic.',
+    description: 'List all curated reading paths in Wisdom — structured starting points for exploring the library by topic.',
     inputSchema: {},
   },
   async () => {
@@ -197,7 +197,7 @@ server.registerTool(
     const text = lists.map(rl =>
       `- **${rl.title}** (${rl.workCount} works) — slug: \`${rl.slug}\`\n  ${rl.description}`
     ).join('\n\n')
-    return { content: [{ type: 'text', text: `Alexandria reading lists:\n\n${text}` }] }
+    return { content: [{ type: 'text', text: `Wisdom reading lists:\n\n${text}` }] }
   }
 )
 

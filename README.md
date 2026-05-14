@@ -1,4 +1,4 @@
-# Alexandria — Pan-African Library
+# Wisdom — Pan-African Library
 
 **[pan-african-library.vercel.app](https://pan-african-library.vercel.app)**
 
@@ -10,13 +10,13 @@ A digital archive of pan-African thought, paired with a live data dashboard for 
 
 ## What This Is
 
-**Alexandria** has two parts:
+**Wisdom** has two parts:
 
 **The Archive** — A searchable library of 56 significant works of pan-African literature and thought. From Frederick Douglass and Aimé Césaire to Chimamanda Ngozi Adichie and Teju Cole. Organised by region, era, language, and genre — with direct links to freely accessible copies where they exist.
 
 **Africa 2050** — A data dashboard built from projections sourced from the UN, World Bank, IMF, WHO, and IEA. 116 metrics covering population, GDP, electricity access, internet penetration, and life satisfaction. Pan-African optimism, grounded in data.
 
-The name is deliberate. The Library of Alexandria was lost. Timbuktu's manuscripts were scattered. This is a small attempt in the other direction.
+The name is deliberate. The Library of Wisdom was lost. Timbuktu's manuscripts were scattered. This is a small attempt in the other direction.
 
 ---
 

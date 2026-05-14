@@ -1,4 +1,4 @@
-// Thin HTTP client for the Alexandria API.
+// Thin HTTP client for the Wisdom API.
 // Configure ALEXANDRIA_API_URL in the environment (defaults to production).
 
 const BASE_URL = (process.env.ALEXANDRIA_API_URL ?? 'https://pan-african-library.vercel.app').replace(/\/$/, '')
@@ -13,7 +13,7 @@ async function get<T>(path: string, params?: Record<string, string | number | un
   const res = await fetch(url.toString())
   if (!res.ok) {
     const body = await res.text()
-    throw new Error(`Alexandria API error ${res.status}: ${body}`)
+    throw new Error(`Wisdom API error ${res.status}: ${body}`)
   }
   return res.json() as Promise<T>
 }

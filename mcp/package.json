@@ -1,11 +1,11 @@
 {
-  "name": "alexandria-mcp",
+  "name": "wisdom-mcp",
   "version": "0.1.0",
-  "description": "MCP server for Alexandria — a pan-African knowledge library. Gives AI assistants access to 370+ works of African and diaspora literature, curated reading lists, and thematic indexes.",
+  "description": "MCP server for Wisdom — a pan-African knowledge library. Gives AI assistants access to 370+ works of African and diaspora literature, curated reading lists, and thematic indexes.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "alexandria-mcp": "dist/index.js"
+    "wisdom-mcp": "dist/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -22,7 +22,7 @@
     "model-context-protocol",
     "african-literature",
     "pan-african",
-    "alexandria",
+    "wisdom",
     "library",
     "ai-tools"
   ],

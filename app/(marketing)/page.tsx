@@ -24,14 +24,14 @@ export default function LandingPage() {
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <BookOpen className="size-4" />
             </div>
-            <span className="font-semibold text-lg">Alexandria</span>
+            <span className="font-semibold text-lg">Wisdom</span>
           </div>
           <div className="flex items-center gap-4">
             <Link href="/browse" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Archive
             </Link>
             <Link href="/ask" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Ask Alexandria
+              Get Wisdom
             </Link>
             <Link href="/africa-2050" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Agenda 2063
@@ -59,13 +59,15 @@ export default function LandingPage() {
               Pan-African Knowledge, Open to All
             </Badge>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
-              Alexandria
+              Wisdom
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-4xl leading-relaxed">
-              {totalWorks}+ works of African and diaspora literature. An AI librarian. Progress tracking toward
-              Africa&apos;s 2063 goals. Open source, free, and now available as an MCP server for any AI app.
+              Africa&apos;s greatest thinkers, writers, and fighters. One library.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+            <p className="text-base text-muted-foreground max-w-2xl">
+              {totalWorks}+ works spanning every region, era, and language — available as an API, an MCP server, or a conversation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mt-4">
               <Link href="/browse">
                 <Button size="lg" className="gap-2 text-base px-8 py-6">
                   <Library className="h-5 w-5" />
@@ -75,7 +77,7 @@ export default function LandingPage() {
               <Link href="/ask">
                 <Button size="lg" variant="outline" className="gap-2 text-base px-8 py-6">
                   <MessageSquare className="h-5 w-5" />
-                  Ask Alexandria
+                  Get Wisdom
                 </Button>
               </Link>
             </div>
@@ -150,17 +152,17 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Feature 2: Ask Alexandria */}
+        {/* Feature 2: Get Wisdom */}
         <div className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-2">
                   <MessageSquare className="h-6 w-6 text-primary" />
-                  <Badge variant="outline">Ask Alexandria</Badge>
+                  <Badge variant="outline">Get Wisdom</Badge>
                 </div>
                 <h2 className="text-4xl font-bold">
-                  Ask Alexandria
+                  Get Wisdom
                 </h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
                   An AI librarian trained on the archive. Ask for reading recommendations, explore themes,
@@ -178,7 +180,7 @@ export default function LandingPage() {
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
                     <MessageSquare className="h-5 w-5" />
-                    Alexandria
+                    Wisdom
                   </CardTitle>
                   <CardDescription>Powered by Claude · Searches {totalWorks}+ works</CardDescription>
                 </CardHeader>
@@ -259,7 +261,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Feature 4 (full width): Alexandria MCP */}
+        {/* Feature 4 (full width): Wisdom MCP */}
         <div className="py-20">
           <div className="max-w-7xl mx-auto px-6">
             <Card className="bg-background border-primary/20">
@@ -268,13 +270,13 @@ export default function LandingPage() {
                   <div className="flex flex-col gap-6">
                     <div className="flex items-center gap-2">
                       <Code2 className="h-6 w-6 text-primary" />
-                      <Badge variant="outline">Alexandria MCP</Badge>
+                      <Badge variant="outline">Wisdom MCP</Badge>
                     </div>
                     <h2 className="text-4xl font-bold">
-                      Plug Alexandria into Any AI App
+                      Plug Wisdom into Any AI App
                     </h2>
                     <p className="text-lg text-muted-foreground leading-relaxed">
-                      Alexandria is available as an MCP server. Add it to Claude Desktop, Claude Code, or
+                      Wisdom is available as an MCP server. Add it to Claude Desktop, Claude Code, or
                       Cursor and your AI assistant gets instant access to the full library.
                     </p>
                     <Link href="/developer">
@@ -289,11 +291,11 @@ export default function LandingPage() {
                     <p className="text-sm text-muted-foreground font-medium">claude_desktop_config.json</p>
                     <pre className="bg-muted rounded-lg p-4 text-sm font-mono overflow-x-auto text-xs">{`{
   "mcpServers": {
-    "alexandria": {
+    "wisdom": {
       "command": "npx",
       "args": [
         "-y",
-        "@alexandria/mcp-server"
+        "wisdom-mcp"
       ]
     }
   }
@@ -335,12 +337,12 @@ export default function LandingPage() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-2">
               <BookOpen className="h-5 w-5 text-primary" />
-              <span className="font-semibold">Alexandria</span>
+              <span className="font-semibold">Wisdom</span>
               <span className="text-sm text-muted-foreground">· Pan-African Library · Open Source (MIT)</span>
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <Link href="/browse" className="hover:text-foreground transition-colors">Archive</Link>
-              <Link href="/ask" className="hover:text-foreground transition-colors">Ask Alexandria</Link>
+              <Link href="/ask" className="hover:text-foreground transition-colors">Get Wisdom</Link>
               <Link href="/africa-2050" className="hover:text-foreground transition-colors">Agenda 2063</Link>
               <a
                 href="https://github.com/seathemc/pan-african-library"

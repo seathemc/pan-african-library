@@ -144,7 +144,7 @@ const READING_LISTS: Array<{
 // ─── Seed ─────────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log('Seeding Alexandria database...\n')
+  console.log('Seeding Wisdom database...\n')
 
   // 1. Upsert all themes
   console.log('Creating themes...')
@@ -314,7 +314,7 @@ async function main() {
     console.log(`  ✓ "${list.title}"`)
   }
 
-  console.log('\nAlexandria seed complete.')
+  console.log('\nWisdom seed complete.')
 }
 
 main()

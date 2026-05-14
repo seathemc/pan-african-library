@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alexandria - The Pan-African Library",
+  title: "Wisdom — Africa's greatest thinkers, writers, and fighters. One library.",
   description: "Building pan-African optimism through knowledge. The most comprehensive archive of African and diaspora thought—reviving the past, visualizing the future, building in the present.",
 };
 
