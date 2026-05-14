@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getAllWorks } from "@/lib/literature-data";
-import { BookOpen, TrendingUp, Github, ArrowRight, Library, MessageSquare, Code2 } from "lucide-react";
+import { BookOpen, Github, ArrowRight, Library, MessageSquare, Code2 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function LandingPage() {
   const allWorks = getAllWorks();
-  const totalWorks = allWorks.length;
 
   const sampleWorks = allWorks.filter(w =>
     ['Things Fall Apart', 'Season of Migration to the North', 'Song of Lawino', 'Breath, Eyes, Memory'].includes(w.title)
@@ -17,7 +17,7 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -25,7 +25,7 @@ export default function LandingPage() {
             </div>
             <span className="font-semibold text-lg">Wisdom</span>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <nav className="hidden md:inline-flex items-center rounded-lg bg-muted p-1 gap-0.5">
               <Link href="/browse" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Archive</Link>
               <Link href="/africa-2050" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Agenda 2063</Link>
@@ -33,11 +33,12 @@ export default function LandingPage() {
               <Link href="/developer" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Developer</Link>
               <Link href="/manifesto" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Manifesto</Link>
             </nav>
+            <ThemeToggle />
             <a
               href="https://github.com/seathemc/pan-african-library"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               <Github className="h-4 w-4" />
             </a>
@@ -80,7 +81,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* MCP code block — x402 style */}
+        {/* MCP code block */}
         <div className="max-w-5xl mx-auto px-6 pb-20">
           <div className="border rounded-xl bg-muted/30 p-6 space-y-4">
             <p className="text-sm font-medium flex items-center gap-2">
@@ -96,7 +97,6 @@ export default function LandingPage() {
   }
 }`}</pre>
             <p className="text-sm text-muted-foreground">
-              That&apos;s it. Your AI assistant now has access to thousands of African works, authors, themes, and reading lists.
               Works with Claude Desktop, Claude Code, Cursor, and any MCP-compatible tool.
             </p>
             <Link href="/developer">
@@ -107,12 +107,18 @@ export default function LandingPage() {
           </div>
         </div>
 
-
-        {/* Three features */}
+        {/* Three features — the Wisdom story */}
         <div className="max-w-5xl mx-auto px-6 py-24">
-          <div className="flex flex-col gap-4 mb-14">
-            <p className="text-sm text-muted-foreground uppercase tracking-widest font-medium">Three features</p>
-            <h2 className="text-3xl font-bold">We built three features. Each one looks at Africa differently.</h2>
+          <div className="flex flex-col gap-5 mb-14 max-w-2xl">
+            <p className="text-sm text-muted-foreground uppercase tracking-widest font-medium">Past · Present · Future</p>
+            <h2 className="text-3xl md:text-4xl font-bold leading-snug">
+              Intelligence without time is just data.<br />Wisdom knows where something came from, where it stands, and where it's going.
+            </h2>
+            <p className="text-muted-foreground leading-relaxed text-lg">
+              The three tools aren't separate features — they're a single temporal system.
+              The past gives you the foundation. The present gives you the reality. The future gives you the direction.
+              Put them together, and you don't have information about Africa. You have wisdom about it.
+            </p>
           </div>
 
           <div className="flex flex-col gap-0 divide-y border rounded-xl overflow-hidden">
@@ -124,11 +130,12 @@ export default function LandingPage() {
                   <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Past</span>
                   <Badge variant="secondary">The Archive</Badge>
                 </div>
-                <h3 className="text-2xl font-bold">Thousands of pieces of African literature</h3>
+                <h3 className="text-2xl font-bold">The intellectual and cultural foundation</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Novels, poems, essays, manifestos, speeches, oral traditions, theory, memoir — spanning
-                  every region, era, and language. West Africa, East Africa, North Africa, the Caribbean,
-                  and the diaspora. Arabic, Swahili, Portuguese, French, and English.
+                  Novels, poems, essays, manifestos, speeches, oral traditions, theory, memoir —
+                  spanning every region and era, from pre-colonial oral tradition to contemporary Afrofuturism.
+                  The written record of how Africa has understood itself over centuries.
+                  This is where wisdom begins: in knowing what was thought before.
                 </p>
                 <Link href="/browse">
                   <Button variant="outline" className="w-fit gap-2 mt-2">
@@ -185,9 +192,11 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-2xl font-bold">Where Africa stands today</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  A live dashboard tracking Africa&apos;s progress against the African Union&apos;s Agenda 2063
-                  goals — poverty, education, governance, health, trade, and gender equality. Real 2013
-                  baselines, real 2063 targets.
+                  The African Union's Agenda 2063 is a fifty-year development blueprint tracking
+                  prosperity, governance, peace, and identity across all 55 member states. Wisdom
+                  surfaces that data as a live, queryable layer — not a PDF report. Because
+                  understanding the present is what connects the intellectual inheritance of the
+                  past to a credible vision of the future.
                 </p>
                 <Link href="/africa-2050">
                   <Button variant="outline" className="w-fit gap-2 mt-2">
@@ -206,8 +215,10 @@ export default function LandingPage() {
                 </div>
                 <h3 className="text-2xl font-bold">Where Africa is headed</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  Projections and trajectories toward 2063. Where Africa is headed on each of the 7
-                  Agenda 2063 aspirations, and what the data says about the path there.
+                  Trend projections on the same Agenda 2063 indicators — infrastructure, economic
+                  convergence, education, health — so that questions about Africa's direction are
+                  answered with data, not opinion. The thinkers in the archive imagined this future.
+                  The dashboard shows where it stands. The forecast shows whether the trajectory matches the vision.
                 </p>
                 <Link href="/africa-2050">
                   <Button variant="outline" className="w-fit gap-2 mt-2">
@@ -218,7 +229,7 @@ export default function LandingPage() {
               <div className="p-8 bg-muted/20 flex flex-col justify-center gap-4">
                 <Card className="border-primary/20">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">Overall Progress vs. 2063 Target</CardTitle>
+                    <CardTitle className="text-sm font-medium text-muted-foreground">Progress toward 2063 targets</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {[
@@ -249,7 +260,7 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Get Wisdom — AI layer */}
+        {/* Get Wisdom */}
         <div className="border-t bg-muted/10 py-20">
           <div className="max-w-5xl mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -257,8 +268,9 @@ export default function LandingPage() {
                 <Badge variant="outline" className="w-fit">Get Wisdom</Badge>
                 <h2 className="text-3xl font-bold">One conversation across all three</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Ask the AI librarian anything — reading recommendations, context on an author, connections
-                  across works and data, or what the archive says about any theme or moment in African history.
+                  Ask the AI librarian anything — reading recommendations, context on an author,
+                  what the archive says about a moment in African history, or how a literary theme
+                  connects to what the development data shows today.
                 </p>
                 <Link href="/ask">
                   <Button className="w-fit gap-2">
@@ -292,7 +304,6 @@ export default function LandingPage() {
 
       </main>
 
-      {/* Footer */}
       <footer className="border-t py-8">
         <div className="max-w-5xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">

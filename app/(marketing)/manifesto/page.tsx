@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, FileText, BookOpen } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export const metadata = {
   title: "Manifesto · Wisdom",
@@ -11,8 +12,8 @@ export const metadata = {
 export default function ManifestoPage() {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* Minimal header */}
-      <header className="border-b">
+      {/* Header */}
+      <header className="border-b sticky top-0 z-50 bg-background/95 backdrop-blur">
         <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
@@ -20,10 +21,11 @@ export default function ManifestoPage() {
             </div>
             <span className="font-semibold text-lg">Wisdom</span>
           </Link>
-          <div className="flex items-center gap-3 text-sm">
-            <Link href="/developer" className="text-muted-foreground hover:text-foreground transition-colors">
+          <div className="flex items-center gap-2">
+            <Link href="/developer" className="text-sm text-muted-foreground hover:text-foreground transition-colors hidden sm:block">
               Developer
             </Link>
+            <ThemeToggle />
             <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" size="sm" className="gap-1.5">
                 <FileText className="h-3.5 w-3.5" />
@@ -34,18 +36,34 @@ export default function ManifestoPage() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+      <main className="max-w-3xl mx-auto px-6 py-16 md:py-24">
         {/* Marker */}
-        <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-10">
+        <p className="text-xs tracking-[0.2em] uppercase text-muted-foreground mb-8">
           Manifesto · v0.1
         </p>
 
         {/* Lede */}
-        <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-12">
+        <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-[1.05] mb-8">
           Africa knows.
           <br />
           <span className="text-muted-foreground">It has always known.</span>
         </h1>
+
+        {/* Prominent CTA — above the fold */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-16 pb-12 border-b">
+          <Link href="/developer">
+            <Button size="lg" className="gap-2">
+              Get the MCP
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+          <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" variant="outline" className="gap-2">
+              <FileText className="h-4 w-4" />
+              Read the whitepaper
+            </Button>
+          </a>
+        </div>
 
         {/* Body */}
         <div className="text-lg md:text-xl leading-relaxed space-y-10 font-light">
@@ -89,46 +107,59 @@ export default function ManifestoPage() {
             <p className="font-normal pt-1">We are building.</p>
           </section>
 
-          <section className="space-y-5">
+          <section className="space-y-6">
             <p className="font-normal">Wisdom is what we built.</p>
+
             <p>
-              One server. One command. Five thousand years of African thought made readable to every
-              machine that will shape the next hundred.
+              In most African traditions, wisdom is not the same as knowledge.
+              Knowledge is accumulated. Wisdom is synthesized — it's what you arrive at when you
+              understand where something came from, where it stands, and where it is going.
+              That is what Wisdom the tool is designed to give you, in three connected parts.
             </p>
 
-            <div className="space-y-5 pt-1">
+            <div className="space-y-6 pl-4 border-l border-border">
               <div>
-                <p className="font-normal mb-1">Past — The Archive.</p>
+                <p className="font-normal mb-2">Past — The Archive.</p>
                 <p>
-                  368 works from 168 African and diaspora authors spanning 1773 to 2023. Fiction, poetry,
-                  political philosophy, speeches, oral traditions rendered to text, science fiction. Everything
-                  from Phillis Wheatley to Chimamanda Ngozi Adichie. Full-text searchable, filterable by
-                  region, genre, era, and theme. The first structured African literature dataset built for
-                  AI consumption. The first deposit — not the archive.
+                  The written and oral record of African thought across centuries. Novels, poems,
+                  political philosophy, speeches, manifestos, science fiction — from every region,
+                  era, and language. Pre-colonial oral tradition through contemporary theory.
+                  Full-text searchable, filterable, structured for AI consumption. This is where
+                  wisdom starts: in knowing what was thought, written, imagined, and believed
+                  before you arrived.
                 </p>
               </div>
 
               <div>
-                <p className="font-normal mb-1">Present — The Dashboard.</p>
+                <p className="font-normal mb-2">Present — The Dashboard.</p>
                 <p>
-                  Real Agenda 2063 data from the African Union, tracked across all 55 member states.
-                  Infrastructure completion rates, economic growth trajectories, education enrollment,
-                  health benchmarks — not sitting in a 200-page PDF, but surfaced as a queryable data
-                  layer that any AI can reason over. African development data has always existed.
-                  Now it answers questions.
+                  The African Union's Agenda 2063 is the continent's fifty-year development
+                  blueprint — seven aspirations covering prosperity, governance, peace, and
+                  cultural identity, tracked across all 55 member states. Wisdom surfaces that
+                  data as a live, queryable layer. Not a PDF. A structured surface any AI can
+                  reason over. Because before you can chart a course forward, you need an honest
+                  reading of where you actually are.
                 </p>
               </div>
 
               <div>
-                <p className="font-normal mb-1">Future — The Forecast.</p>
+                <p className="font-normal mb-2">Future — The Forecast.</p>
                 <p>
-                  Trend projections built on those same AU indicators. When someone asks where Africa
-                  is going — on infrastructure, on economic convergence, on social development — the
-                  answer comes from the continent's own numbers, not from outside opinion. African futures
-                  become computable. Which means they become arguable on the same terms as everyone else's.
+                  Trend projections built on those same indicators. Where is Africa heading on
+                  infrastructure, on economic convergence, on education, on governance? The
+                  thinkers in the archive imagined a future. The dashboard shows whether the
+                  present is tracking toward it. The forecast shows what the data actually
+                  suggests — not what anyone wishes it would say.
                 </p>
               </div>
             </div>
+
+            <p>
+              Three tools, one server, one command. But more than that: a single temporal system.
+              The past gives you the foundation. The present gives you the reality. The future gives
+              you the direction. Taken together, you don't just have information about Africa.
+              You have wisdom about it.
+            </p>
           </section>
 
           <section className="space-y-2">
@@ -157,29 +188,6 @@ export default function ManifestoPage() {
           </section>
         </div>
 
-        {/* CTA */}
-        <div className="mt-16 pt-10 border-t flex flex-col gap-4">
-          <div className="flex flex-col sm:flex-row gap-3">
-            <Link href="/developer">
-              <Button size="lg" className="gap-2 text-base">
-                Get the MCP
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-            <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="outline" className="gap-2 text-base">
-                <FileText className="h-4 w-4" />
-                Read the whitepaper (PDF)
-              </Button>
-            </a>
-          </div>
-          <p className="text-sm text-muted-foreground">
-            The whitepaper is a 3-page deeper read: what this unlocks, why the knowledge exists, what
-            Wisdom ships in v0.1, and the roadmap to v0.3.
-          </p>
-        </div>
-
-        {/* Footer */}
         <footer className="mt-20 pt-8 border-t text-sm text-muted-foreground flex flex-col sm:flex-row gap-2 sm:justify-between">
           <p>Wisdom · pan-african-library</p>
           <a

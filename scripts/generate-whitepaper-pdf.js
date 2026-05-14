@@ -10,7 +10,7 @@ const OUT = path.join(__dirname, '..', 'public', 'whitepaper.pdf')
 
 const doc = new PDFDocument({
   size: 'LETTER',
-  margins: { top: 80, bottom: 80, left: 80, right: 80 },
+  margins: { top: 82, bottom: 72, left: 82, right: 82 },
   info: {
     Title: 'Wisdom: One MCP. 5,000 Years.',
     Author: 'Wisdom',
@@ -20,347 +20,328 @@ const doc = new PDFDocument({
 
 doc.pipe(fs.createWriteStream(OUT))
 
-const W = doc.page.width - 160   // content width
-const ML = 80                     // left margin
+const ML = 82
+const MR = 82
+const W = doc.page.width - ML - MR
 
 const C = {
-  black: '#000000',
-  gray: '#444444',
+  black: '#0a0a0a',
+  mid: '#333333',
+  gray: '#555555',
   light: '#888888',
   rule: '#cccccc',
 }
 
-// ─── helpers ────────────────────────────────────────────────
+// ─── low-level helpers ─────────────────────────────────────
 
-function rule(thin) {
-  const y = doc.y + (thin ? 4 : 6)
+function currentY() { return doc.y }
+
+function moveDown(n) { doc.moveDown(n) }
+
+function hr(thick) {
+  doc.moveDown(0.5)
   doc
-    .strokeColor(thin ? C.rule : C.black)
-    .lineWidth(thin ? 0.4 : 0.8)
-    .moveTo(ML, y).lineTo(ML + W, y)
+    .strokeColor(thick ? C.mid : C.rule)
+    .lineWidth(thick ? 0.75 : 0.35)
+    .moveTo(ML, doc.y)
+    .lineTo(ML + W, doc.y)
     .stroke()
-  doc.y = y + (thin ? 8 : 10)
-}
-
-function cover() {
-  // Title block
-  doc
-    .fillColor(C.black)
-    .font('Times-Bold')
-    .fontSize(24)
-    .text('Wisdom: One MCP. 5,000 Years.', ML, doc.y, { width: W, align: 'center' })
-
-  doc.moveDown(0.4)
-  doc
-    .fillColor(C.gray)
-    .font('Times-Italic')
-    .fontSize(11)
-    .text('Whitepaper v0.1', { width: W, align: 'center' })
-
-  doc.moveDown(0.25)
-  doc
-    .font('Times-Roman')
-    .fontSize(10)
-    .text('Pan-African Knowledge Infrastructure · May 2025', { width: W, align: 'center' })
-
-  doc.moveDown(1.2)
-  rule()
-
-  // Abstract label
-  doc
-    .fillColor(C.black)
-    .font('Times-Bold')
-    .fontSize(10)
-    .text('Abstract', ML, doc.y, { width: W, align: 'center' })
-
-  doc.moveDown(0.5)
-
-  // Abstract box — indented
-  const ax = ML + 30
-  const aw = W - 60
-  doc
-    .fillColor(C.black)
-    .font('Times-Roman')
-    .fontSize(10)
-    .text(
-      'AI has an Africa problem, and the problem is not the volume of data — it is structural. The knowledge exists, in abundance, and has existed for millennia, but it sits in formats machines cannot read, in languages scrapers do not crawl, and in institutions that were never funded to digitize. Wisdom is an MCP (Model Context Protocol) server that makes 5,000 years of African thought, literature, and data machine-readable and embeddable in any AI workflow.',
-      ax, doc.y, { width: aw, align: 'justify', lineGap: 2.5 }
-    )
-
-  doc.moveDown(0.7)
-
-  doc
-    .font('Times-Roman')
-    .fontSize(10)
-    .text('v0.1 ships three tools:', ax, doc.y, { width: aw, lineGap: 2.5 })
-
-  doc.moveDown(0.45)
-  abstractBullet('Past.', '368 works from 168 African and diaspora authors spanning 1773–2023, full-text searchable and filterable by region, genre, era, theme, and language. What it unlocks: any builder, researcher, or student can route African literary and philosophical knowledge directly into the tools they already use.', ax, aw)
-  abstractBullet('Present.', 'Live Agenda 2063 indicators across 55 AU member states — economic trajectories, infrastructure rates, education and health benchmarks — as a queryable data layer, not a PDF. What it unlocks: African development data stops decaying inside reports and starts powering analysis that affects decisions.', ax, aw)
-  abstractBullet('Future.', 'Trend projection on the same AU indicators. What it unlocks: African futures become computable, arguable on the same terms as everyone else\'s.', ax, aw)
-
-  doc.moveDown(0.8)
-  rule()
-}
-
-function abstractBullet(label, body, x, w) {
-  const startY = doc.y
-  doc.font('Times-Bold').fontSize(10).fillColor(C.black)
-     .text(label + ' ', x, startY, { continued: true, width: w, lineGap: 2.5 })
-  doc.font('Times-Roman').fillColor(C.black)
-     .text(body, { width: w - 2, lineGap: 2.5 })
-  doc.moveDown(0.4)
-}
-
-function h2(num, title) {
-  doc.moveDown(1)
-  doc
-    .fillColor(C.black)
-    .font('Times-Bold')
-    .fontSize(12)
-    .text(`${num}. ${title}`, ML, doc.y, { width: W })
-  doc.moveDown(0.5)
-  rule(true)
-}
-
-function h3(title) {
-  doc.moveDown(0.7)
-  doc
-    .fillColor(C.black)
-    .font('Times-Bold')
-    .fontSize(10.5)
-    .text(title, ML, doc.y, { width: W })
-  doc.moveDown(0.35)
-}
-
-function p(text, opts) {
-  doc
-    .fillColor(C.black)
-    .font('Times-Roman')
-    .fontSize(10)
-    .text(text, ML, doc.y, { width: W, align: 'justify', lineGap: 2.5, ...opts })
-  doc.moveDown(0.55)
-}
-
-function bullet(label, body) {
-  const x = ML + 12
-  const w = W - 12
-  doc.font('Times-Bold').fontSize(10).fillColor(C.black)
-     .text('• ' + label + '  ', x, doc.y, { continued: true, width: w, lineGap: 2.5 })
-  doc.font('Times-Roman')
-     .text(body, { width: w, align: 'justify', lineGap: 2.5 })
-  doc.moveDown(0.4)
-}
-
-function twoColTable(rows) {
-  const col1 = W * 0.35
-  const col2 = W * 0.65
-  const rowH = 16
-
-  // Header
-  doc.font('Times-Bold').fontSize(9).fillColor(C.black)
-  doc.text(rows[0][0], ML, doc.y, { width: col1 - 4 })
-  doc.text(rows[0][1], ML + col1, doc.y - rowH, { width: col2 - 4 })
-  const headerY = doc.y
-  rule(true)
-
-  rows.slice(1).forEach(([a, b]) => {
-    const y = doc.y
-    doc.font('Times-Roman').fontSize(9).fillColor(C.black)
-    doc.text(a, ML, y, { width: col1 - 4 })
-    doc.text(b, ML + col1, y, { width: col2 - 4 })
-    doc.y = doc.y + 4
-  })
-  doc.moveDown(0.4)
-}
-
-function threeColTable(rows) {
-  const col1 = W * 0.2
-  const col2 = W * 0.2
-  const col3 = W * 0.6
-
-  doc.font('Times-Bold').fontSize(9).fillColor(C.black)
-  const hy = doc.y
-  doc.text(rows[0][0], ML, hy, { width: col1 - 4 })
-  doc.text(rows[0][1], ML + col1, hy, { width: col2 - 4 })
-  doc.text(rows[0][2], ML + col1 + col2, hy, { width: col3 - 4 })
-  doc.y = hy + 14
-  rule(true)
-
-  rows.slice(1).forEach(([a, b, c]) => {
-    const y = doc.y
-    doc.font('Times-Roman').fontSize(9).fillColor(C.black)
-    const beforeY = y
-    doc.text(a, ML, y, { width: col1 - 4 })
-    doc.text(b, ML + col1, y, { width: col2 - 4 })
-    doc.text(c, ML + col1 + col2, y, { width: col3 - 4 })
-    doc.y = doc.y + 4
-  })
-  doc.moveDown(0.4)
-}
-
-function pageFooter(n) {
-  const y = doc.page.height - 50
-  doc
-    .fillColor(C.light)
-    .font('Times-Italic')
-    .fontSize(8.5)
-    .text(`Wisdom Whitepaper v0.1 · May 2025`, ML, y, { width: W, align: 'left' })
-    .text(`${n}`, ML, y, { width: W, align: 'right' })
-}
-
-// ─── COVER / ABSTRACT ──────────────────────────────────────
-cover()
-pageFooter(1)
-
-// ─── PAGE 1 ────────────────────────────────────────────────
-doc.addPage()
-
-h2('1', 'What This Unlocks')
-
-p('The AI tools that now mediate research, education, and decision-making across the planet were built on what was easy to scrape — Wikipedia, Reddit, Common Crawl, the broad and shallow archive of the English-language internet — and what was easy to scrape was, by definition, what had already been digitized, indexed, and translated into the languages of the institutions that did the scraping. African knowledge was not. The oral histories, the indigenous-language texts, the AU policy archives, the unpublished manuscripts, the academic output of universities from Cape Town to Cairo — none of it was on the path of least resistance, so none of it was on the path at all.')
-
-p('This is not a grievance. It is a condition, and conditions are the only honest starting point for serious work. The question is not who is to blame; the question is what to build.')
-
-p('Here is what changes when African knowledge becomes machine-readable:')
-
-bullet('Students stop hitting walls.', 'A student at the University of Lagos researching Achebe\'s influence on Ngugi no longer encounters a stub and a paywall and gives up; she encounters 368 structured works, filterable, searchable, cross-referenced, available inside the same chat window where she does the rest of her research.')
-
-bullet('Researchers stop rebuilding the same corpus.', 'A PhD candidate in Dakar does not spend six months digitizing what already exists somewhere on a hard drive in someone\'s office; she begins with a structured dataset and spends those six months on the research itself.')
-
-bullet('Builders stop ignoring Africa by default.', 'A developer building an education platform for Nigerian schools can pull Wisdom into the pipeline in a single command, which means African content stops being a feature that ships in version four and starts being present in version one.')
-
-bullet('Labs stop training on data that erases the continent.', 'Any lab serious about frontier models can route training and evaluation through Wisdom, which improves coverage and reduces bias as a measurable outcome — and v0.3, the Africa Eval Suite, will provide the measurement so the improvement is provable rather than asserted.')
-
-bullet('Institutions stop waiting for the right moment.', 'Libraries, universities, and national archives can plug into Wisdom\'s ingestion pipeline directly, which means their collections compound instead of decay, and the work of preservation becomes the work of distribution at the same time.')
-
-p('None of this is hypothetical, and none of it requires permission from anyone. All of it is unblocked by the same thing: structured access to African knowledge, in the formats the new tools actually consume.')
-
-pageFooter(2)
-
-// ─── PAGE 2 ────────────────────────────────────────────────
-doc.addPage()
-
-h2('2', 'The Knowledge Exists')
-
-p('The premise of Wisdom is not that African knowledge must be created, recovered, or invented. It exists, in such quantity and over such a span of time that the more honest difficulty is deciding where to begin.')
-
-p('Five thousand years of recorded civilization — Carthage and Kush, Mali and Axum, Great Zimbabwe and the Nile Valley, oral traditions older than the alphabet, legal codes older than the Magna Carta, mathematics and astronomy and navigation worked out on the continent before they were worked out anywhere else. This is the substrate, and the current AI stack treats it as an edge case because the current AI stack inherited the indexing priorities of the institutions that built it.')
-
-p('v0.1 of Wisdom indexes 368 works published between 1773 and 2023 — 250 years of documented African and diaspora thought, from Phillis Wheatley writing in bondage to contemporary Afrofuturists writing toward something else. This is the first deposit, not the archive. The archive, in its full form, is oral histories, indigenous-language manuscripts, institutional records, academic output from African universities, and the national archives of 55 countries.')
-
-h3('v0.1 corpus at a glance')
-
-twoColTable([
-  ['Dimension', 'Value'],
-  ['Works indexed', '368'],
-  ['Authors', '168'],
-  ['Countries represented', '60'],
-  ['Regions', '11'],
-  ['Languages', '9'],
-  ['Year range', '1773 – 2023'],
-  ['AU member states tracked (Present)', '55'],
-])
-
-h3('Genre distribution (top)')
-
-twoColTable([
-  ['Genre', 'Works'],
-  ['Fiction', '160'],
-  ['Poetry', '31'],
-  ['Essay', '23'],
-  ['Political Philosophy', '18'],
-  ['Drama', '18'],
-  ['Science Fiction', '12'],
-  ['Speech', '10'],
-])
-
-p('Alongside the literary archive, the Present tool surfaces Agenda 2063 data — the African Union\'s fifty-year development blueprint tracked across all 55 member states with real indicators on infrastructure investment, economic convergence, social development, and public health. African development data has existed for decades, but it has lived in PDFs that almost nobody queries; in Wisdom it becomes a structured surface that any model can reason over.')
-
-h3('Roadmap')
-
-threeColTable([
-  ['Version', 'Status', 'Capability'],
-  ['v0.1', 'Shipped', 'Archive (368 works) + Dashboard (Agenda 2063) + Forecast'],
-  ['v0.2', 'Planned', 'Vector embeddings + semantic retrieval'],
-  ['v0.2', 'Planned', 'Institutional ingestion pipeline'],
-  ['v0.3', 'Planned', 'Africa Eval Suite — public benchmark for frontier model coverage'],
-])
-
-pageFooter(3)
-
-// ─── PAGE 3 ────────────────────────────────────────────────
-doc.addPage()
-
-h2('3', 'Wisdom')
-
-p('Wisdom is an MCP server. MCP — the Model Context Protocol — is an open standard, backed by Anthropic and adopted across the major AI platforms, for giving AI assistants access to external tools and structured data. Any MCP-compatible host connects to Wisdom with a single command, and from that moment forward every conversation in that host has access to everything Wisdom contains.')
-
-h3('Installation')
-
-doc
-  .font('Courier')
-  .fontSize(9.5)
-  .fillColor(C.black)
-  .rect(ML, doc.y, W, 22)
-  .fillAndStroke('#f5f5f5', C.rule)
-doc.font('Courier').fontSize(9.5).fillColor(C.black)
-   .text('npx wisdom-mcp', ML + 8, doc.y - 17, { width: W - 16 })
-doc.moveDown(0.5)
-
-p('Add to Claude Desktop, Cursor, or any MCP-compatible host. Connection takes under a minute.')
-
-h3('Example queries')
-
-const examples = [
-  ['"Find works on African political philosophy from West Africa, post-1960."', 'Structured results: title, author, year, region, genre, description, source link.'],
-  ['"What does Agenda 2063 show about education enrollment in East Africa?"', 'AU indicator data, filterable by region and aspiration.'],
-  ['"Which writers tackled Afrofuturism and technology before 2000?"', 'Curated reading list with full metadata.'],
-  ['"Infrastructure trajectory for AU landlocked member states by 2035?"', 'Projection from the Forecast tool, grounded in AU data.'],
-]
-
-examples.forEach(([q, a]) => {
-  const x = ML + 8
-  const w = W - 16
-  doc.font('Courier').fontSize(8.5).fillColor(C.gray).text(q, x, doc.y, { width: w, lineGap: 1.5 })
-  doc.font('Times-Italic').fontSize(9.5).fillColor(C.black).text('→ ' + a, x, doc.y + 1, { width: w, lineGap: 1.5 })
   doc.moveDown(0.6)
-})
+}
 
-h3('Use cases')
+// ─── typography helpers ────────────────────────────────────
 
-const useCases = [
-  ['Who', 'What Wisdom provides'],
-  ['EdTech developers', 'African literary corpus searchable by theme, era, and region'],
-  ['Research institutions', 'Structured metadata + FTS across 368 canonical works'],
-  ['AI labs', 'Training data + Africa Eval Suite benchmark (v0.3)'],
-  ['Policy researchers', 'Agenda 2063 indicators, queryable and trend-projected'],
-  ['Students', 'AI-assisted navigation of pan-African literature'],
-]
-twoColTable(useCases)
+function meta(text) {
+  doc.font('Times-Roman').fontSize(9).fillColor(C.light)
+     .text(text, ML, doc.y, { width: W })
+  moveDown(0.3)
+}
 
-h3('Position')
+function titleBlock(main, sub) {
+  doc.font('Times-Bold').fontSize(22).fillColor(C.black)
+     .text(main, ML, doc.y, { width: W, align: 'center' })
+  moveDown(0.3)
+  doc.font('Times-Italic').fontSize(12).fillColor(C.gray)
+     .text(sub, ML, doc.y, { width: W, align: 'center' })
+  moveDown(0.2)
+}
 
-p('Wisdom is not a search engine, because a search engine returns links and Wisdom returns structured knowledge other systems can act on. It is not a database, because a database is a passive store and Wisdom is an active tool surface. It is not a chatbot, because a chatbot is a conversation and Wisdom is infrastructure underneath every conversation that calls it.')
+function byline(text) {
+  doc.font('Times-Roman').fontSize(10).fillColor(C.gray)
+     .text(text, ML, doc.y, { width: W, align: 'center' })
+  moveDown(1.2)
+}
 
-p('The goal is that building anything serious about Africa without Wisdom becomes the unusual choice — and that the wider AI ecosystem stops treating African knowledge as the thing it gets to after everything else.')
+function sectionTitle(num, title) {
+  moveDown(1.0)
+  doc.font('Times-Bold').fontSize(13).fillColor(C.black)
+     .text(`${num}.  ${title}`, ML, doc.y, { width: W })
+  moveDown(0.15)
+  hr(false)
+}
 
-doc.moveDown(0.5)
-rule()
-doc
-  .fillColor(C.black)
-  .font('Times-Bold')
-  .fontSize(11)
-  .text('5,000 years of African wisdom. One MCP. Plug in.', ML, doc.y, { width: W, align: 'center' })
+function subhead(title) {
+  moveDown(0.6)
+  doc.font('Times-Bold').fontSize(10.5).fillColor(C.black)
+     .text(title, ML, doc.y, { width: W })
+  moveDown(0.3)
+}
 
-doc.moveDown(0.6)
-doc
-  .fillColor(C.light)
-  .font('Times-Italic')
-  .fontSize(9)
-  .text('github.com/seathemc/pan-african-library  ·  MIT License  ·  pan-african-library.vercel.app', ML, doc.y, { width: W, align: 'center' })
+function body(text) {
+  doc.font('Times-Roman').fontSize(10.5).fillColor(C.black)
+     .text(text, ML, doc.y, { width: W, align: 'justify', lineGap: 2.8 })
+  moveDown(0.55)
+}
 
-pageFooter(4)
+function indented(text, indent) {
+  const x = ML + (indent || 20)
+  const w = W - (indent || 20)
+  doc.font('Times-Roman').fontSize(10.5).fillColor(C.black)
+     .text(text, x, doc.y, { width: w, align: 'justify', lineGap: 2.8 })
+  moveDown(0.5)
+}
+
+function labeledPara(label, text) {
+  moveDown(0.2)
+  // label on its own line
+  doc.font('Times-Bold').fontSize(10.5).fillColor(C.black)
+     .text(label, ML + 20, doc.y, { width: W - 20 })
+  moveDown(0.1)
+  doc.font('Times-Roman').fontSize(10.5).fillColor(C.black)
+     .text(text, ML + 20, doc.y, { width: W - 20, align: 'justify', lineGap: 2.8 })
+  moveDown(0.55)
+}
+
+function bullet(label, text) {
+  const x = ML + 14
+  const w = W - 14
+  const startY = doc.y
+  doc.font('Times-Bold').fontSize(10.5).fillColor(C.black)
+     .text('• ', ML, startY, { continued: true, width: 12 })
+  doc.font('Times-Bold').fontSize(10.5).fillColor(C.black)
+     .text(label + '  ', { continued: true })
+  doc.font('Times-Roman').fillColor(C.black)
+     .text(text, { width: w, align: 'justify', lineGap: 2.8 })
+  moveDown(0.45)
+}
+
+function codeBlock(text) {
+  moveDown(0.2)
+  const x = ML + 10
+  const w = W - 20
+  doc.font('Courier').fontSize(9.5).fillColor(C.mid)
+     .text(text, x, doc.y, { width: w, lineGap: 1.5 })
+  moveDown(0.5)
+}
+
+function statsRow(label, value) {
+  const x2 = ML + W * 0.55
+  const y = doc.y
+  doc.font('Times-Roman').fontSize(10).fillColor(C.gray)
+     .text(label, ML + 20, y, { width: W * 0.5 })
+  doc.font('Times-Bold').fontSize(10).fillColor(C.black)
+     .text(value, x2, y, { width: W * 0.45 })
+  doc.y = doc.y + 4
+}
+
+function roadmapRow(ver, status, cap) {
+  const c1 = ML + 20
+  const c2 = ML + 20 + W * 0.15
+  const c3 = ML + 20 + W * 0.32
+  const w3 = W - 20 - W * 0.32
+  const y = doc.y
+  doc.font('Times-Bold').fontSize(9.5).fillColor(C.black).text(ver, c1, y, { width: W * 0.13 })
+  doc.font('Times-Italic').fontSize(9.5).fillColor(C.gray).text(status, c2, y, { width: W * 0.15 })
+  doc.font('Times-Roman').fontSize(9.5).fillColor(C.black).text(cap, c3, y, { width: w3, lineGap: 1.5 })
+  doc.y = doc.y + 4
+}
+
+function footerLine(page) {
+  const fy = doc.page.height - 46
+  doc.font('Times-Italic').fontSize(8).fillColor(C.light)
+     .text('Wisdom Whitepaper  ·  v0.1  ·  May 2025', ML, fy, { width: W, align: 'left' })
+     .text(String(page), ML, fy, { width: W, align: 'right' })
+}
+
+// ═══════════════════════════════════════════════════════════
+// PAGE 1 — COVER + ABSTRACT
+// ═══════════════════════════════════════════════════════════
+
+meta('WHITEPAPER  ·  v0.1  ·  PAN-AFRICAN KNOWLEDGE INFRASTRUCTURE')
+moveDown(0.5)
+titleBlock('Wisdom: One MCP. 5,000 Years.', 'An Open Standard for African Knowledge in AI Systems')
+byline('May 2025  ·  pan-african-library.vercel.app  ·  MIT License')
+
+hr(true)
+
+// Abstract label centred
+doc.font('Times-Bold').fontSize(10.5).fillColor(C.black)
+   .text('Abstract', ML, doc.y, { width: W, align: 'center' })
+moveDown(0.5)
+
+body(
+  'AI has an Africa problem, and the problem is not the volume of data — it is structural. The knowledge exists, in abundance, and has existed for millennia, but it sits in formats machines cannot read, in languages scrapers do not crawl, and in institutions that were never funded to digitize. Wisdom is an MCP (Model Context Protocol) server designed to close that gap by making African thought, literature, and development data machine-readable and embeddable in any AI workflow.'
+)
+
+body(
+  'In most African traditions, wisdom is not the same as knowledge. Knowledge is accumulated; wisdom is synthesized. You arrive at wisdom when you understand where something came from, where it stands right now, and where it is going. Wisdom the tool is structured the same way — as three connected layers across time.'
+)
+
+body('v0.1 ships three tools:')
+
+labeledPara(
+  'Past — The Archive.',
+  'The written and oral record of African thought across centuries. Novels, poetry, political philosophy, speeches, science fiction, oral traditions — spanning every region and era, from pre-colonial tradition to contemporary Afrofuturism. Full-text searchable, filterable by region, genre, era, theme, and language. The first structured African literature dataset built for AI consumption. This is where wisdom begins: in knowing what was thought before.'
+)
+
+labeledPara(
+  'Present — The Dashboard.',
+  "The African Union's Agenda 2063 is a fifty-year development blueprint tracking prosperity, governance, peace, and cultural identity across all 55 member states. Wisdom surfaces that data as a live, queryable layer — not a PDF report, but a structured data surface any model can reason over. Understanding where Africa stands today is what connects the intellectual inheritance of the past to a credible vision of the future."
+)
+
+labeledPara(
+  'Future — The Forecast.',
+  "Trend projections built on those same Agenda 2063 indicators — infrastructure, economic convergence, education, governance. The archive shows what African thinkers imagined. The dashboard shows whether the present is tracking toward it. The forecast shows what the data actually suggests. Taken together, the three tools give you not just information about Africa, but wisdom about it."
+)
+
+footerLine(1)
+
+// ═══════════════════════════════════════════════════════════
+// PAGE 2 — WHAT THIS UNLOCKS
+// ═══════════════════════════════════════════════════════════
+
+doc.addPage()
+
+sectionTitle('1', 'What This Unlocks')
+
+body(
+  'The AI tools that now mediate research, education, and decision-making across the planet were built on what was easy to scrape — Wikipedia, Reddit, Common Crawl, the broad archive of the English-language internet — and what was easy to scrape was, by definition, what had already been digitized, indexed, and translated into the languages of the institutions that did the scraping. African knowledge was not. The oral histories, the indigenous-language texts, the AU policy archives, the unpublished manuscripts, the academic output of universities from Cape Town to Cairo — none of it was on the path of least resistance, so none of it was on the path at all.'
+)
+
+body(
+  'This is not a grievance. It is a condition, and conditions are the only honest starting point for serious work. Here is what changes when African knowledge becomes machine-readable:'
+)
+
+bullet('Students stop hitting walls.', "A student researching African political philosophy no longer hits a Wikipedia stub and gives up. She finds the archive — filterable, searchable, cross-referenced — available inside the same chat window where she does the rest of her research.")
+
+bullet('Researchers stop rebuilding the same corpus.', "A PhD candidate in Dakar does not spend six months digitizing what already exists somewhere on a hard drive in someone's office. She begins with a structured dataset and spends those six months on the research itself.")
+
+bullet('Builders stop ignoring Africa by default.', 'A developer building an education tool for Nigerian schools can pull the Wisdom MCP into their pipeline in a single command. African content stops being a feature that ships in version four and starts being present in version one.')
+
+bullet('Labs stop training on data that erases the continent.', 'Any lab serious about frontier models can route training and evaluation through Wisdom. The coverage improves. The bias decreases. The Africa Eval Suite (v0.3) will make that improvement measurable and provable.')
+
+bullet('Institutions stop waiting for the right moment.', "Libraries, universities, and national archives can contribute directly to Wisdom's ingestion pipeline, which means their collections compound instead of decay, and the work of preservation becomes the work of distribution at the same time.")
+
+body(
+  'None of this requires permission. All of it is unblocked by the same thing: structured access to African knowledge, in the formats the new tools actually consume.'
+)
+
+footerLine(2)
+
+// ═══════════════════════════════════════════════════════════
+// PAGE 3 — THE KNOWLEDGE EXISTS
+// ═══════════════════════════════════════════════════════════
+
+doc.addPage()
+
+sectionTitle('2', 'The Knowledge Exists')
+
+body(
+  'The premise of Wisdom is not that African knowledge must be created, recovered, or invented. It exists, in such quantity and over such a span of time that the more honest difficulty is deciding where to begin.'
+)
+
+body(
+  'Five thousand years of recorded civilization — Carthage and Kush, Mali and Axum, Great Zimbabwe and the Nile Valley, oral traditions older than the alphabet, legal codes older than the Magna Carta, mathematics and astronomy and navigation worked out on the continent before they were worked out anywhere else. This is the substrate, and the current AI stack treats it as an edge case because the current AI stack inherited the indexing priorities of the institutions that built it.'
+)
+
+body(
+  "v0.1 of Wisdom begins with the documented record: African and diaspora works spanning 1773 to 2023 — 250 years of thought, from Phillis Wheatley writing in bondage to contemporary Afrofuturists writing toward something else. Authors from across the continent and its diaspora. Fiction, poetry, political philosophy, drama, essay, speech, science fiction. This is the first deposit, not the archive. The archive, in its full form, is oral histories, indigenous-language manuscripts, institutional records, and the academic output of African universities. That is what five thousand years actually means in practice, and v0.1 is where the work toward it begins."
+)
+
+subhead('The Present Layer — Agenda 2063 Data')
+
+body(
+  "Alongside the literary archive, Wisdom's Present tool surfaces real African Union development data — the Agenda 2063 indicators tracking infrastructure investment, economic growth, education enrollment, and health outcomes across all 55 member states. This data has always existed. It has lived in PDFs that almost nobody queries. In Wisdom, it becomes a structured surface any model can reason over, which means a question like 'which AU member states are ahead of schedule on Aspiration 1 targets, and what is the trajectory by 2035?' can be answered in seconds rather than weeks."
+)
+
+subhead('Roadmap')
+
+body('The roadmap from v0.1 advances on three fronts:')
+
+moveDown(0.2)
+roadmapRow('v0.1', 'Shipped', 'Archive + Dashboard (Agenda 2063 indicators) + Forecast')
+moveDown(0.1)
+roadmapRow('v0.2', 'Planned', 'Vector embeddings and semantic retrieval — conceptual queries, not just keyword search')
+moveDown(0.1)
+roadmapRow('v0.2', 'Planned', 'Institutional ingestion pipeline — direct contribution from archives and universities')
+moveDown(0.1)
+roadmapRow('v0.3', 'Planned', 'Africa Eval Suite — public benchmark measuring frontier model coverage of African knowledge')
+moveDown(0.6)
+
+body(
+  "The benchmark matters. You cannot fix what you cannot measure. Right now there is no standard test for African knowledge coverage in AI models. There will be. The Africa Eval Suite will make it possible to compare frontier models on their knowledge of African history, philosophy, economics, and culture — which means labs will have an incentive to improve, and improvement will be verifiable."
+)
+
+footerLine(3)
+
+// ═══════════════════════════════════════════════════════════
+// PAGE 4 — WISDOM: THE SERVER
+// ═══════════════════════════════════════════════════════════
+
+doc.addPage()
+
+sectionTitle('3', 'Wisdom')
+
+body(
+  'Wisdom is an MCP server. MCP — the Model Context Protocol — is an open standard, backed by Anthropic and adopted across the major AI platforms, for giving AI assistants access to external tools and structured data. Any MCP-compatible host connects to Wisdom with a single command, and from that moment forward every conversation in that host has access to everything Wisdom contains.'
+)
+
+subhead('Installation')
+
+codeBlock('npx wisdom-mcp')
+
+body('Add the server to Claude Desktop, Cursor, or any MCP-compatible host. The integration takes under a minute.')
+
+subhead('What you can do with it')
+
+codeBlock(
+  '"Find works on African political philosophy from West Africa, post-1960."\n' +
+  '  → Structured results: title, author, year, region, genre, description, source link.\n\n' +
+  '"What does Agenda 2063 show about education enrollment in East Africa?"\n' +
+  '  → AU indicator data, filterable by region and aspiration.\n\n' +
+  '"Which African writers tackled Afrofuturism before 2000?"\n' +
+  '  → Curated reading list with full metadata.\n\n' +
+  '"Infrastructure trajectory for landlocked AU member states by 2035?"\n' +
+  '  → Projection from the Forecast tool, grounded in published AU trend data.'
+)
+
+subhead('Who uses it')
+
+bullet('EdTech developers', 'African literary corpus, searchable by theme, era, and region — integrated in one command.')
+bullet('Research institutions', 'Structured metadata and full-text search across a canonical African literature dataset.')
+bullet('AI labs', 'Training data pipeline and, in v0.3, a public benchmark for measuring African knowledge coverage.')
+bullet('Policy researchers', 'Agenda 2063 indicators, queryable and trend-projected across all 55 member states.')
+bullet('Students', 'AI-assisted navigation of pan-African literature inside the tools they already use.')
+
+subhead('License and access')
+
+body('Wisdom is open source under the MIT license. The MCP server is free to use. The data is open access. There is no paid tier, no API key required for the archive, and no waitlist.')
+
+moveDown(0.3)
+hr(true)
+moveDown(0.4)
+
+doc.font('Times-Bold').fontSize(12).fillColor(C.black)
+   .text('5,000 years of African wisdom. One MCP. Plug in.', ML, doc.y, { width: W, align: 'center' })
+
+moveDown(0.5)
+doc.font('Times-Roman').fontSize(9.5).fillColor(C.light)
+   .text(
+     'github.com/seathemc/pan-african-library  ·  pan-african-library.vercel.app  ·  MIT License',
+     ML, doc.y, { width: W, align: 'center' }
+   )
+
+footerLine(4)
 
 doc.end()
 console.log('Wrote', OUT)
