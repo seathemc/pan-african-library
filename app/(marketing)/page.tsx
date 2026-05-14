@@ -26,9 +26,8 @@ export default function LandingPage() {
             <span className="font-semibold text-lg">Wisdom</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link href="/browse" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Past</Link>
-            <Link href="/africa-2050" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Present</Link>
-            <Link href="/africa-2050" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Future</Link>
+            <Link href="/browse" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Archive</Link>
+            <Link href="/africa-2050" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Agenda 2063</Link>
             <Link href="/ask" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Get Wisdom</Link>
             <Link href="/developer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Developer</Link>
             <a
@@ -105,24 +104,6 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Stats bar */}
-        <div className="border-y bg-muted/20 py-10">
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { value: `${totalWorks}+`, label: "Works" },
-                { value: "200+", label: "Authors" },
-                { value: "21", label: "Themes" },
-                { value: "7", label: "MCP Tools" },
-              ].map(({ value, label }) => (
-                <div key={label} className="flex flex-col gap-1">
-                  <span className="text-3xl font-bold">{value}</span>
-                  <span className="text-sm text-muted-foreground">{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
         {/* Three features */}
         <div className="max-w-5xl mx-auto px-6 py-24">
@@ -318,9 +299,8 @@ export default function LandingPage() {
               <span className="text-sm text-muted-foreground">· Pan-African Library · Open Source (MIT)</span>
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <Link href="/browse" className="hover:text-foreground transition-colors">Past</Link>
-              <Link href="/africa-2050" className="hover:text-foreground transition-colors">Present</Link>
-              <Link href="/africa-2050" className="hover:text-foreground transition-colors">Future</Link>
+              <Link href="/browse" className="hover:text-foreground transition-colors">Archive</Link>
+              <Link href="/africa-2050" className="hover:text-foreground transition-colors">Agenda 2063</Link>
               <Link href="/ask" className="hover:text-foreground transition-colors">Get Wisdom</Link>
               <a href="https://github.com/seathemc/pan-african-library" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
               <Link href="/developer" className="hover:text-foreground transition-colors">Developer</Link>
