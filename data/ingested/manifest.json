@@ -1,0 +1,8 @@
+{
+  "fetchedAt": "2026-05-14T23:42:39.277Z",
+  "isSeed": true,
+  "seedSource": "World Bank Open Data — hand-curated public values from data.worldbank.org",
+  "indicatorCount": 21,
+  "countriesCovered": 55,
+  "nextRefresh": "Replaced by GitHub Actions weekly run of scripts/ingest/world-bank.ts"
+}

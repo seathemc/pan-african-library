@@ -25,6 +25,7 @@ import { AfricaCharts } from "./charts";
 import { ScoreDashboard } from "./score-dashboard";
 import { ViewSwitcher } from "./view-switcher";
 import { ForecastView } from "./forecast-view";
+import { LiveDataSection } from "./live-data-section";
 
 const ICON_MAP: Record<string, FC<{ className?: string }>> = {
   TrendingUp,
@@ -143,6 +144,15 @@ export default async function Africa2050Page({
         <ForecastView />
       ) : (
       <>
+
+      {/* ── NEW: Live data layer (ingested from public APIs) ─────────── */}
+      <LiveDataSection />
+
+      <div className="border-t border-muted my-4 pt-2">
+        <p className="text-xs text-muted-foreground uppercase tracking-wider">
+          Static reference dashboard (below) — uses hand-curated indicators while we expand pipeline coverage
+        </p>
+      </div>
 
       {/* Composite score dashboard + aspiration tiles + legend */}
       <ScoreDashboard />

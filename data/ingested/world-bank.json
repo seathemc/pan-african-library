@@ -1,0 +1,5462 @@
+[
+  {
+    "indicatorId": "poverty-headcount-215",
+    "source": "world-bank",
+    "sourceCode": "SI.POV.DDAY",
+    "sourceUrl": "https://data.worldbank.org/indicator/SI.POV.DDAY",
+    "fetchedAt": "2026-05-14T23:42:39.274Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "safe-water-access",
+    "source": "world-bank",
+    "sourceCode": "SH.H2O.SMDW.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SH.H2O.SMDW.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.274Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "electricity-access",
+    "source": "world-bank",
+    "sourceCode": "EG.ELC.ACCS.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/EG.ELC.ACCS.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.274Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 99.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 99.6,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 100
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 100,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 100
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 100,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 100
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 100,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 70.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 70.4,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 88.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 88.7,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 71.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 71.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 70.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 70.4,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 19.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 19.4,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 53
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 53,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 19.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 19.3,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 42.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 42.2,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 56.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 56.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 30
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 30,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 30.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 30.8,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.9,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 96.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 96.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65.8,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 76.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 76.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 51.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 51.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 45.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 45.8,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 75.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 75.6,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 11.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 11.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 49.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 49.9,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62.3,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 8.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 8.4,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "ERI": {
+        "iso3": "ERI",
+        "countryName": "ERI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 55.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 55.4,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 36.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 36.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 100
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 100,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 89.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 89.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 100
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 100,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65.2,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 17.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 17.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 11.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 11.8,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 53.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 53.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 21.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 21.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 92.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 92.9,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 67
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 67,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 79.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 79.3,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 48.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 48.2,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 86.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 86.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 56.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 56.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 73.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 73.1,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 52.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 52.7,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.5,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 14.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 14.9,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 34.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 34.2,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 48.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 48.6,
+        "baselineYear": null,
+        "baselineValue": 38
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 84.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 84.7,
+        "baselineYear": null,
+        "baselineValue": 38
+      }
+    },
+    "continental": {
+      "latestYear": 2022,
+      "latestValue": 58.40754716981131,
+      "countriesReporting": 53,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "literacy-adult",
+    "source": "world-bank",
+    "sourceCode": "SE.ADT.LITR.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SE.ADT.LITR.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.275Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 81.4
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 81.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 73.1
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 73.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 75.9
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 75.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 81.1
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 81.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 91
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 91,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 62
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 62,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 80.4
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 80.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2019,
+            "value": 89.9
+          }
+        ],
+        "latestYear": 2019,
+        "latestValue": 89.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2017,
+            "value": 51.9
+          }
+        ],
+        "latestYear": 2017,
+        "latestValue": 51.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 34.6
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 34.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2020,
+            "value": 30.8
+          }
+        ],
+        "latestYear": 2020,
+        "latestValue": 30.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 37.3
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 37.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 45.8
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 45.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2019,
+            "value": 66.5
+          }
+        ],
+        "latestYear": 2019,
+        "latestValue": 66.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 43.2
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 43.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2017,
+            "value": 48.3
+          }
+        ],
+        "latestYear": 2017,
+        "latestValue": 48.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 32
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 32,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2017,
+            "value": 53.5
+          }
+        ],
+        "latestYear": 2017,
+        "latestValue": 53.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 89.4
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 89.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2015,
+            "value": 50.8
+          }
+        ],
+        "latestYear": 2015,
+        "latestValue": 50.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 82.6
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 82.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2017,
+            "value": 51.8
+          }
+        ],
+        "latestYear": 2017,
+        "latestValue": 51.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 76.5
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 76.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2015,
+            "value": 77.9
+          }
+        ],
+        "latestYear": 2015,
+        "latestValue": 77.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 75.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 75.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2017,
+            "value": 68.4
+          }
+        ],
+        "latestYear": 2017,
+        "latestValue": 68.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 62.1
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 62.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2019,
+            "value": 35
+          }
+        ],
+        "latestYear": 2019,
+        "latestValue": 35,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 38
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 38,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 60.7
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 60.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 34.5
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 34.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 74.8
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 74.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 92.7
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 92.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 95.9
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 95.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2020,
+            "value": 78.2
+          }
+        ],
+        "latestYear": 2020,
+        "latestValue": 78.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 37.4
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 37.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 26.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 26.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 80.6
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 80.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 80
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 80,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 84.7
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 84.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 95.3
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 95.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2021,
+            "value": 93.4
+          }
+        ],
+        "latestYear": 2021,
+        "latestValue": 93.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 66
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 66,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2019,
+            "value": 88.5
+          }
+        ],
+        "latestYear": 2019,
+        "latestValue": 88.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 91.5
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 91.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 88.2
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 88.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 88.7
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 88.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 86.7
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 86.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2015,
+            "value": 62.1
+          }
+        ],
+        "latestYear": 2015,
+        "latestValue": 62.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2017,
+            "value": 60.7
+          }
+        ],
+        "latestYear": 2017,
+        "latestValue": 60.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2014,
+            "value": 76.6
+          }
+        ],
+        "latestYear": 2014,
+        "latestValue": 76.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2018,
+            "value": 88.4
+          }
+        ],
+        "latestYear": 2018,
+        "latestValue": 88.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      }
+    },
+    "continental": {
+      "latestYear": 2022,
+      "latestValue": 67.68269230769229,
+      "countriesReporting": 52,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "secondary-completion",
+    "source": "world-bank",
+    "sourceCode": "SE.SEC.CMPT.LO.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SE.SEC.CMPT.LO.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.275Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "life-expectancy",
+    "source": "world-bank",
+    "sourceCode": "SP.DYN.LE00.IN",
+    "sourceUrl": "https://data.worldbank.org/indicator/SP.DYN.LE00.IN",
+    "fetchedAt": "2026-05-14T23:42:39.275Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 77.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 77.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 70.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 70.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 75
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 75,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 76.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 76.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 71.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 71.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 53.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 53.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 63.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 63.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 59
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 59,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 68.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 68.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 59.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 59.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 59
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 59,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 64.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 64.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 74.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 74.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 66.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 66.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 66.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 66.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 56.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 56.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 55
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 55,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ERI": {
+        "iso3": "ERI",
+        "countryName": "ERI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 66.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 66.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 64.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 64.4,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 73.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 73.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 63.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 63.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 71.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 71.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 53.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 53.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 52.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 52.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 63.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 63.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 59.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 59.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65.8,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 67.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 67.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.6,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.5,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60.7,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 59.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 59.3,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 61.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 61.2,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62.9,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 58.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 58.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 53
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 53,
+        "baselineYear": null,
+        "baselineValue": 60
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 57.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 57.1,
+        "baselineYear": null,
+        "baselineValue": 60
+      }
+    },
+    "continental": {
+      "latestYear": 2022,
+      "latestValue": 63.11509433962263,
+      "countriesReporting": 53,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "under5-mortality",
+    "source": "world-bank",
+    "sourceCode": "SH.DYN.MORT",
+    "sourceUrl": "https://data.worldbank.org/indicator/SH.DYN.MORT",
+    "fetchedAt": "2026-05-14T23:42:39.275Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 21.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 21.9,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 17.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 17.5,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 17.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 17.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 13.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 13.7,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 10.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 10.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 107.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 107.2,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 44.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 44.7,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 74.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 74.3,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 35.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 35.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 79.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 79.6,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 90.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 90.5,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 110.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 110.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 76.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 76.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 100.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 100.3,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 76.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 76.6,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 95.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 95.3,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 13.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 13.9,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 38.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 38.9,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 41.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 41.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 39.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 39.2,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 49.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 49.6,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 50.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 50.6,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 50
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 50,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 109.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 109.8,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 53
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 53,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 98.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 98.5,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 65
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 65,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 16.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 16.3,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 13.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 13.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 69.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 69.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 99.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 99.5,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 105.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 105.7,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 41.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 41.7,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 79
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 79,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 39
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 39,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 73.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 73.4,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 13.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 13.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 67
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 67,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 33.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 33.7,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 38.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 38.8,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 36
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 36,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 54.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 54.3,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 56.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 56.6,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 38.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 38.9,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 70.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 70.1,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 71.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 71.6,
+        "baselineYear": null,
+        "baselineValue": 84
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 41.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 41.5,
+        "baselineYear": null,
+        "baselineValue": 84
+      }
+    },
+    "continental": {
+      "latestYear": 2022,
+      "latestValue": 55.888461538461534,
+      "countriesReporting": 52,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "maternal-mortality",
+    "source": "world-bank",
+    "sourceCode": "SH.STA.MMRT",
+    "sourceUrl": "https://data.worldbank.org/indicator/SH.STA.MMRT",
+    "fetchedAt": "2026-05-14T23:42:39.275Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "stunting",
+    "source": "world-bank",
+    "sourceCode": "SH.STA.STNT.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SH.STA.STNT.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.275Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "gdp-per-capita",
+    "source": "world-bank",
+    "sourceCode": "NY.GDP.PCAP.CD",
+    "sourceUrl": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 5260
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 5260,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 3457
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 3457,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 3812
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 3812,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 4262
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 4262,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 6817
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 6817,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1621
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1621,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2238
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2238,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2729
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2729,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1647
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1647,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 904
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 904,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 838
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 838,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 615
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 615,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1428
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1428,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1019
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1019,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 547
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 547,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 754
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 754,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1564
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1564,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2173
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2173,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 4291
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 4291,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 837
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 837,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1950
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1950,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1294
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1294,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1014
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1014,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1217
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1217,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1004
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1004,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 200
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 200,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 615
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 615,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 3606
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 3606,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2274
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2274,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 482
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 482,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "ERI": {
+        "iso3": "ERI",
+        "countryName": "ERI",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 622
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 622,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 555
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 555,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 11436
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 11436,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1576
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1576,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 17879
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 17879,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1719
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1719,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 511
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 511,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 718
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 718,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2554
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2554,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 654
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 654,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 8821
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 8821,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 8462
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 8462,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2566
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2566,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2772
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2772,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 6190
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 6190,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 4810
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 4810,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 7720
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 7720,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 2200
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 2200,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 1369
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 1369,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 580
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 580,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 671
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 671,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 916
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 916,
+        "baselineYear": null,
+        "baselineValue": 1880
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2023,
+            "value": 3905
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 3905,
+        "baselineYear": null,
+        "baselineValue": 1880
+      }
+    },
+    "continental": {
+      "latestYear": 2023,
+      "latestValue": 2824.056603773585,
+      "countriesReporting": 53,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "unemployment-youth",
+    "source": "world-bank",
+    "sourceCode": "SL.UEM.1524.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SL.UEM.1524.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "manufacturing-gdp",
+    "source": "world-bank",
+    "sourceCode": "NV.IND.MANF.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/NV.IND.MANF.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "cereal-yield",
+    "source": "world-bank",
+    "sourceCode": "AG.YLD.CREL.KG",
+    "sourceUrl": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "undernourishment",
+    "source": "world-bank",
+    "sourceCode": "SN.ITK.DEFC.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "co2-per-capita",
+    "source": "world-bank",
+    "sourceCode": "EN.GHG.CO2.PC.CE.AR5",
+    "sourceUrl": "https://data.worldbank.org/indicator/EN.GHG.CO2.PC.CE.AR5",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "forest-area",
+    "source": "world-bank",
+    "sourceCode": "AG.LND.FRST.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/AG.LND.FRST.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "renewable-energy-share",
+    "source": "world-bank",
+    "sourceCode": "EG.FEC.RNEW.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "internet-users",
+    "source": "world-bank",
+    "sourceCode": "IT.NET.USER.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/IT.NET.USER.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 70.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 70.9,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 72.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 72.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 88.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 88.1,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 79.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 79.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.9,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 35.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 35.5,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 68.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 68.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 45.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 45.7,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 22
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 22,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 33
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 33,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 19.1
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 19.1,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 34
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 34,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 27.7
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 27.7,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 19.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 19.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 30.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 30.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 26.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 26.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 70.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 70.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 33.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 33.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 40.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 40.8,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 19.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 19.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 26
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 26,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 31.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 31.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 30.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 30.5,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 11
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 11,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 27.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 27.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 67.5
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 67.5,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 16.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 16.3,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 28.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 28.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 8,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 21.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 21.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 73.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 73.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 87.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 87.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 45.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 45.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 10.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 10.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 18
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 18,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 30.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 30.8,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 27.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 27.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 73.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 73.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 47.9
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 47.9,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 33.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 33.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 39.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 39.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 75
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 75,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 62.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 62.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 80
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 80,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 34.8
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 34.8,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 21.2
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 21.2,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 24.4
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 24.4,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 21.6
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 21.6,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 50.3
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 50.3,
+        "baselineYear": null,
+        "baselineValue": 17
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2022,
+            "value": 60
+          }
+        ],
+        "latestYear": 2022,
+        "latestValue": 60,
+        "baselineYear": null,
+        "baselineValue": 17
+      }
+    },
+    "continental": {
+      "latestYear": 2022,
+      "latestValue": 42.099999999999994,
+      "countriesReporting": 52,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "mobile-subscriptions",
+    "source": "world-bank",
+    "sourceCode": "IT.CEL.SETS.P2",
+    "sourceUrl": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "women-parliament",
+    "source": "world-bank",
+    "sourceCode": "SG.GEN.PARL.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SG.GEN.PARL.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "DZA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 8.1
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 8.1,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "EGY",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 27.7
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 27.7,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "MAR",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 24.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 24.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "TUN",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 16.2
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 16.2,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "LBY",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 16.5
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 16.5,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "NGA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 4.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 4.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "GHA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 14.9
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 14.9,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "CIV",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 14.2
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 14.2,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "SEN",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 44.2
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 44.2,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "BFA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 8.5
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 8.5,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "MLI",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 28.6
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 28.6,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "NER",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 30.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 30.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "BEN",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 26.5
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 26.5,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "TGO",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 19.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 19.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "SLE",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 30.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 30.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "LBR",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 11
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 11,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "GIN",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 28.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 28.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "MRT",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 20.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 20.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "CPV",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 38.9
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 38.9,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "GMB",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 8.6
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 8.6,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "KEN",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 23.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 23.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "ETH",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 41
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 41,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "UGA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 33.8
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 33.8,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "TZA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 37.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 37.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "RWA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 61.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 61.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "BDI",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 38.2
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 38.2,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "COM",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 16.7
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 16.7,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "DJI",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 26.2
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 26.2,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "SOM",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 20
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 20,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "SDN",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 27.7
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 27.7,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "SSD",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 32.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 32.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "MDG",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 18.9
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 18.9,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "MUS",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 20
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 20,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "SYC",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 22.9
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 22.9,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "CMR",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 33.9
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 33.9,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "CAF",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 12.9
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 12.9,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "TCD",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 32.3
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 32.3,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "COG",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 17.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 17.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "COD",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 12.8
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 12.8,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "GAB",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 24.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 24.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "GNQ",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 26.6
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 26.6,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "STP",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 21.8
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 21.8,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "AGO",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 33.6
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 33.6,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "ZAF",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 45.6
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 45.6,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "NAM",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 35.6
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 35.6,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "BWA",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 11.1
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 11.1,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "ZWE",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 30.8
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 30.8,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "ZMB",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 14.4
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 14.4,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "MWI",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 21.1
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 21.1,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "MOZ",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 43.2
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 43.2,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "LSO",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 23.1
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 23.1,
+        "baselineYear": null,
+        "baselineValue": 22
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "SWZ",
+        "observations": [
+          {
+            "year": 2024,
+            "value": 11.7
+          }
+        ],
+        "latestYear": 2024,
+        "latestValue": 11.7,
+        "baselineYear": null,
+        "baselineValue": 22
+      }
+    },
+    "continental": {
+      "latestYear": 2024,
+      "latestValue": 24.873076923076912,
+      "countriesReporting": 52,
+      "countriesMissing": []
+    }
+  },
+  {
+    "indicatorId": "female-labor-participation",
+    "source": "world-bank",
+    "sourceCode": "SL.TLF.CACT.FE.ZS",
+    "sourceUrl": "https://data.worldbank.org/indicator/SL.TLF.CACT.FE.ZS",
+    "fetchedAt": "2026-05-14T23:42:39.276Z",
+    "isSeed": true,
+    "countries": {},
+    "continental": {
+      "latestYear": null,
+      "latestValue": null,
+      "countriesReporting": 0,
+      "countriesMissing": []
+    }
+  }
+]

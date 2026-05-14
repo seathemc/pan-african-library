@@ -1,0 +1,45 @@
+# Pull fresh data from public APIs (World Bank, WHO GHO, UNESCO UIS, etc.)
+# and commit the updated JSON files. Runs weekly + on demand.
+#
+# The data lives in `data/ingested/` and is read at request time by the
+# Agenda 2063 dashboard. We commit it to the repo so deploys are deterministic
+# and the dashboard never has to wait on a slow API call at render time.
+
+name: Ingest Agenda 2063 data
+
+on:
+  schedule:
+    # Sundays at 03:00 UTC — most APIs publish updates mid-week
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+    inputs:
+      sources:
+        description: 'Comma-separated list of sources to run (default: all). Options: world-bank, who-gho, unesco-uis, mo-ibrahim.'
+        required: false
+        default: 'world-bank'
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - name: Run World Bank ingestion
+        if: contains(github.event.inputs.sources || 'world-bank', 'world-bank')
+        run: npx tsx scripts/ingest/world-bank.ts
+      - name: Commit refreshed data
+        run: |
+          git config user.name "agenda-2063-bot"
+          git config user.email "bot@wisdom.example"
+          git add data/ingested/
+          if git diff --staged --quiet; then
+            echo "No data changes — skipping commit"
+          else
+            git commit -m "data: refresh Agenda 2063 indicators ($(date -u +%Y-%m-%d))"
+            git push
+          fi
