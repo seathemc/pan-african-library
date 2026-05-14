@@ -30,6 +30,7 @@ export default function LandingPage() {
             <Link href="/africa-2050" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Agenda 2063</Link>
             <Link href="/ask" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Get Wisdom</Link>
             <Link href="/developer" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Developer</Link>
+            <Link href="/manifesto" className="text-sm text-muted-foreground hover:text-foreground transition-colors">Manifesto</Link>
             <a
               href="https://github.com/seathemc/pan-african-library"
               target="_blank"
