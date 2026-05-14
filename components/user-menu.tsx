@@ -19,33 +19,37 @@ export function UserMenu({ user: initialUser }: UserMenuProps) {
   const [user, setUser] = useState(initialUser)
 
   useEffect(() => {
-    // Check for Supabase user
-    supabase.auth.getUser().then(({ data: { user: supabaseUser } }) => {
-      if (supabaseUser) {
-        setUser({
-          email: supabaseUser.email || "",
-          name: supabaseUser.user_metadata?.name || null,
-        })
-      }
-    })
+    try {
+      supabase.auth.getUser().then(({ data: { user: supabaseUser } }) => {
+        if (supabaseUser) {
+          setUser({
+            email: supabaseUser.email || "",
+            name: supabaseUser.user_metadata?.name || null,
+          })
+        }
+      }).catch(() => {})
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (session?.user) {
-        setUser({
-          email: session.user.email || "",
-          name: session.user.user_metadata?.name || null,
-        })
-      } else {
-        setUser(null)
-      }
-    })
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (session?.user) {
+          setUser({
+            email: session.user.email || "",
+            name: session.user.user_metadata?.name || null,
+          })
+        } else {
+          setUser(null)
+        }
+      })
 
-    return () => subscription.unsubscribe()
+      return () => subscription.unsubscribe()
+    } catch {
+      // Supabase not configured — show sign-in link
+    }
   }, [])
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
+    try {
+      await supabase.auth.signOut()
+    } catch {}
     setUser(null)
     router.refresh()
   }
