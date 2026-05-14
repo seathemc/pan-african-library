@@ -27,8 +27,9 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-2">
             <nav className="hidden md:inline-flex items-center rounded-lg bg-muted p-1 gap-0.5">
-              <Link href="/browse" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Archive</Link>
-              <Link href="/africa-2050" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Agenda 2063</Link>
+              <Link href="/africa-2050" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Future</Link>
+              <Link href="/africa-2050" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Present</Link>
+              <Link href="/browse" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Past</Link>
               <Link href="/ask" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Get Wisdom</Link>
               <Link href="/developer" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Developer</Link>
               <Link href="/manifesto" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Manifesto</Link>

@@ -10,12 +10,12 @@ import {
   Calendar,
   ChevronRight,
   Code2,
-  Landmark,
-  TrendingUp,
+  Bookmark,
   MessageSquare,
   Tag,
   ListOrdered,
-  Bookmark,
+  TrendingUp,
+  Telescope,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -36,7 +36,7 @@ import {
 import { getRegions, getEras, getGenres } from "@/lib/literature-data"
 import { UserMenu } from "./user-menu"
 import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
+import { ThemeToggle } from "./theme-toggle"
 
 interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
   user?: {
@@ -44,46 +44,6 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
     name?: string | null
   } | null
 }
-
-interface NavItem {
-  title: string
-  url: string
-  icon: React.ComponentType<{ className?: string }>
-  badge?: string
-}
-
-const navMain: NavItem[] = [
-  {
-    title: "Home",
-    url: "/",
-    icon: Home,
-  },
-  {
-    title: "The Archive",
-    url: "/browse",
-    icon: Library,
-  },
-  {
-    title: "Search",
-    url: "/search",
-    icon: Search,
-  },
-  {
-    title: "Agenda 2063",
-    url: "/africa-2050",
-    icon: TrendingUp,
-  },
-  {
-    title: "Get Wisdom",
-    url: "/ask",
-    icon: MessageSquare,
-  },
-  {
-    title: "My Collections",
-    url: "/collections",
-    icon: Bookmark,
-  },
-]
 
 export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const pathname = usePathname()
@@ -96,7 +56,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
     return pathname.startsWith(url)
   }
 
-  const isActiveSubRoute = (url: string) => {
+  const isActiveExact = (url: string) => {
     return decodeURIComponent(pathname) === decodeURIComponent(url)
   }
 
@@ -112,43 +72,103 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
                   <span className="font-semibold">Wisdom</span>
-                  <span className="text-xs text-muted-foreground">
-                    Pan-African Library
-                  </span>
+                  <span className="text-xs text-muted-foreground">Pan-African Library</span>
                 </div>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+
       <SidebarContent>
+
+        {/* Get Wisdom — the synthesis layer across all three */}
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navMain.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <Link href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                      {item.badge && (
-                        <Badge variant="default" className="ml-auto text-[10px] px-1.5 py-0">
-                          {item.badge}
-                        </Badge>
-                      )}
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/ask")}>
+                  <Link href="/ask">
+                    <MessageSquare />
+                    <span>Get Wisdom</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={pathname === "/"}>
+                  <Link href="/">
+                    <Home />
+                    <span>Home</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
 
+        <Separator className="mx-2" />
+
+        {/* Future */}
         <SidebarGroup>
-          <SidebarGroupLabel>Discover</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+            Future
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/africa-2050")}>
+                  <Link href="/africa-2050">
+                    <Telescope />
+                    <span>The Forecast</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Present */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+            Present
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/africa-2050")}>
+                  <Link href="/africa-2050">
+                    <TrendingUp />
+                    <span>Agenda 2063 Dashboard</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Past — most sub-items */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+            Past
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/browse")}>
+                  <Link href="/browse">
+                    <Library />
+                    <span>The Archive</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/search")}>
+                  <Link href="/search">
+                    <Search />
+                    <span>Search</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/themes")}>
                   <Link href="/themes">
@@ -169,9 +189,10 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        {/* Past — Regions */}
         <SidebarGroup>
-          <SidebarGroupLabel>
-            <Globe className="mr-2 size-4" />
+          <SidebarGroupLabel className="flex items-center gap-1.5 text-muted-foreground/60">
+            <Globe className="size-3" />
             Regions
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -180,7 +201,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                 const url = `/browse/region/${encodeURIComponent(region.toLowerCase())}`
                 return (
                   <SidebarMenuItem key={region}>
-                    <SidebarMenuButton asChild isActive={isActiveSubRoute(url)}>
+                    <SidebarMenuButton asChild isActive={isActiveExact(url)}>
                       <Link href={url}>
                         <ChevronRight className="size-4" />
                         <span>{region}</span>
@@ -193,9 +214,10 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        {/* Past — Eras */}
         <SidebarGroup>
-          <SidebarGroupLabel>
-            <Calendar className="mr-2 size-4" />
+          <SidebarGroupLabel className="flex items-center gap-1.5 text-muted-foreground/60">
+            <Calendar className="size-3" />
             Eras
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -204,7 +226,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                 const url = `/browse/era/${encodeURIComponent(era.toLowerCase())}`
                 return (
                   <SidebarMenuItem key={era}>
-                    <SidebarMenuButton asChild isActive={isActiveSubRoute(url)}>
+                    <SidebarMenuButton asChild isActive={isActiveExact(url)}>
                       <Link href={url}>
                         <ChevronRight className="size-4" />
                         <span>{era}</span>
@@ -217,9 +239,10 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        {/* Past — Genres */}
         <SidebarGroup>
-          <SidebarGroupLabel>
-            <BookOpen className="mr-2 size-4" />
+          <SidebarGroupLabel className="flex items-center gap-1.5 text-muted-foreground/60">
+            <BookOpen className="size-3" />
             Genres
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -228,7 +251,7 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                 const url = `/browse/genre/${encodeURIComponent(genre.toLowerCase())}`
                 return (
                   <SidebarMenuItem key={genre}>
-                    <SidebarMenuButton asChild isActive={isActiveSubRoute(url)}>
+                    <SidebarMenuButton asChild isActive={isActiveExact(url)}>
                       <Link href={url}>
                         <ChevronRight className="size-4" />
                         <span>{genre}</span>
@@ -241,40 +264,26 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        <Separator className="mx-2" />
+
+        {/* My Library */}
         <SidebarGroup>
-          <SidebarGroupLabel>
-            <Landmark className="mr-2 size-4" />
-            Political Thought
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>My Library</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActiveSubRoute("/browse/genre/political%20philosophy")}>
-                  <Link href="/browse/genre/political%20philosophy">
-                    <ChevronRight className="size-4" />
-                    <span>Political Philosophy</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActiveSubRoute("/browse/genre/political%20document")}>
-                  <Link href="/browse/genre/political%20document">
-                    <ChevronRight className="size-4" />
-                    <span>Political Documents</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActiveSubRoute("/browse/genre/speech")}>
-                  <Link href="/browse/genre/speech">
-                    <ChevronRight className="size-4" />
-                    <span>Speeches</span>
+                <SidebarMenuButton asChild isActive={isActive("/collections")}>
+                  <Link href="/collections">
+                    <Bookmark />
+                    <span>Collections</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* Developer */}
         <SidebarGroup>
           <SidebarGroupLabel>Developer</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -290,11 +299,16 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
       </SidebarContent>
+
       <SidebarFooter>
         <Separator />
-        <div className="p-2">
-          <UserMenu user={user || null} />
+        <div className="p-2 flex items-center justify-between gap-2">
+          <div className="flex-1 min-w-0">
+            <UserMenu user={user || null} />
+          </div>
+          <ThemeToggle />
         </div>
       </SidebarFooter>
       <SidebarRail />
