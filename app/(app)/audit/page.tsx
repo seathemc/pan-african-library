@@ -91,6 +91,62 @@ export default function AuditPage() {
         />
       </div>
 
+      {/* ── Data architecture diagram ──────────────────────────── */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl flex items-center gap-2">
+            <Database className="h-5 w-5 text-primary" />
+            Data architecture
+          </CardTitle>
+          <CardDescription>
+            How every number on Wisdom gets from a public API to your screen.
+            Four layers, one weekly refresh cycle.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-3">
+          <ArchitectureDiagram />
+          <div className="text-sm text-muted-foreground leading-relaxed space-y-3 mt-2">
+            <p>
+              <strong className="text-foreground">Sources are external and authoritative.</strong> We
+              deliberately don't trust AU self-reported numbers — they're widely seen as politically
+              optimistic (Goal 8 "United Africa" jumped 12% → 98% in two years per their 2022 report).
+              Instead we pull from the World Bank, WHO GHO, Mo Ibrahim IIAG, UN WPP, UNESCO UIS, FAO,
+              and ISS African Futures. AU's published scores appear only as comparison benchmarks.
+            </p>
+            <p>
+              <strong className="text-foreground">The indicator registry is the contract.</strong>{' '}
+              <code className="text-foreground text-[11px]">scripts/ingest/indicators-registry.ts</code>{' '}
+              declares each indicator with its goal, aspiration, source URL, baseline, target, and
+              direction. Ingestion scripts know how to fetch each <em>sourceCode</em> from each{' '}
+              <em>source</em>. Aggregation scripts know how to compute progress from{' '}
+              baseline → current → target. One file, one source of truth.
+            </p>
+            <p>
+              <strong className="text-foreground">Storage is plain JSON committed to git.</strong>{' '}
+              The GitHub Action runs <code className="text-foreground text-[11px]">npx tsx scripts/ingest/world-bank.ts</code> every Sunday at 03:00 UTC,
+              fetches every indicator × every country, computes continental aggregates, writes
+              JSON, commits to the branch, Vercel rebuilds. No live API calls at request time —
+              pages render fast and survive when source APIs are slow.
+            </p>
+            <p>
+              <strong className="text-foreground">Methodology lives in the read layer.</strong>{' '}
+              <code className="text-foreground text-[11px]">lib/agenda-2063-live.ts</code>{' '}
+              exposes <em>continentalAggregate()</em> (both simple-mean and population-weighted),{' '}
+              <em>calculateProgress()</em> (refuses to invent confidence when target===baseline or
+              current is null), and <em>getCoverageStats()</em> (surfaces missingness so the
+              composite score isn't misread).
+            </p>
+            <p>
+              <strong className="text-foreground">Forecasts are a separate layer.</strong>{' '}
+              <code className="text-foreground text-[11px]">lib/futures-data.ts</code> holds the
+              three-scenario data (Failure / Current Path / Possible Africa). Forecasting is
+              fundamentally different from measurement — you need a simulation model (we use ISS's
+              IFs platform via Pardee Institute), not linear extrapolation.
+            </p>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* ── Aspiration coverage matrix ───────────────────────────── */}
       <Card>
         <CardHeader>
@@ -527,6 +583,123 @@ function SourceItem({ name, url, topics, auth }: { name: string; url: string; to
       </a>
       <div className="text-xs text-muted-foreground mt-1">{topics}</div>
       <div className="text-[10px] uppercase tracking-wider text-muted-foreground/70 mt-1">Auth: {auth}</div>
+    </div>
+  )
+}
+
+// Visual diagram of the data architecture, using Tailwind boxes and arrows
+// instead of an SVG so it adapts to both light/dark themes via tokens.
+function ArchitectureDiagram() {
+  return (
+    <div className="flex flex-col gap-2 mx-auto w-full max-w-3xl mt-2">
+      <ArchLayer
+        title="1 · Authoritative public sources"
+        tone="muted"
+        items={[
+          'World Bank Open Data API',
+          'WHO Global Health Observatory',
+          'Mo Ibrahim IIAG',
+          'UN World Population Prospects',
+          'UNESCO UIS · FAO · IPCC · UNCTAD',
+          'ISS African Futures (forecasts)',
+          'AU / AUDA-NEPAD (comparison only)',
+        ]}
+      />
+      <ArchArrow label="HTTPS · weekly cron" />
+      <ArchLayer
+        title="2 · Ingestion (Node scripts)"
+        tone="blue"
+        items={[
+          'scripts/ingest/world-bank.ts — pulls API',
+          'scripts/ingest/mo-ibrahim-iiag.ts — CSV',
+          'scripts/ingest/indicators-registry.ts — maps 20 AU goals → source codes',
+          'scripts/ingest/african-countries.ts — 55 ISO codes',
+          'scripts/ingest/african-population.ts — UN WPP weights',
+        ]}
+        codeStyle
+      />
+      <ArchArrow label="writes JSON · commits to git" />
+      <ArchLayer
+        title="3 · Storage (versioned JSON)"
+        tone="violet"
+        items={[
+          'data/ingested/world-bank.json (21 indicators)',
+          'data/ingested/mo-ibrahim-iiag.json (1 indicator)',
+          'data/ingested/manifest.json (timestamps)',
+          'pan-african-literature-database.json (561 works)',
+        ]}
+        codeStyle
+      />
+      <ArchArrow label="imported by lib/" />
+      <ArchLayer
+        title="4 · Read + aggregate layer (TypeScript)"
+        tone="emerald"
+        items={[
+          'lib/agenda-2063-live.ts — continentalAggregate() · calculateProgress() · getCoverageStats()',
+          'lib/futures-data.ts — three-scenario forecasts (Failure / Current / Possible)',
+          'lib/literature-data.ts — search · filter · get-by-id',
+        ]}
+        codeStyle
+      />
+      <ArchArrow label="rendered as Server Components" />
+      <ArchLayer
+        title="5 · Display (Next.js routes)"
+        tone="primary"
+        items={[
+          '/africa-2050 — Our reality + Our goals (live Agenda 2063 scoring)',
+          '/futures — Three paths to 2043',
+          '/audit — This page (methodology disclosure)',
+          '/browse · /work/[id] · /themes — Literature archive',
+          '/ask — AI assistant (calls MCP literature tools)',
+        ]}
+      />
+    </div>
+  )
+}
+
+function ArchLayer({
+  title,
+  items,
+  tone,
+  codeStyle = false,
+}: {
+  title: string
+  items: string[]
+  tone: 'muted' | 'blue' | 'violet' | 'emerald' | 'primary'
+  codeStyle?: boolean
+}) {
+  const toneClasses: Record<typeof tone, string> = {
+    muted: 'border-muted-foreground/30 bg-muted/20',
+    blue: 'border-blue-500/30 bg-blue-500/[0.04]',
+    violet: 'border-violet-500/30 bg-violet-500/[0.04]',
+    emerald: 'border-emerald-500/30 bg-emerald-500/[0.04]',
+    primary: 'border-primary/40 bg-primary/[0.05]',
+  }
+  return (
+    <div className={`rounded-md border ${toneClasses[tone]} px-4 py-3`}>
+      <div className="text-xs font-semibold uppercase tracking-wider text-foreground/80 mb-2">
+        {title}
+      </div>
+      <ul className="flex flex-col gap-0.5">
+        {items.map((item, i) => (
+          <li
+            key={i}
+            className={`text-[12px] leading-relaxed ${codeStyle ? 'font-mono text-foreground/85' : 'text-foreground/85'}`}
+          >
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function ArchArrow({ label }: { label: string }) {
+  return (
+    <div className="flex flex-col items-center text-muted-foreground py-0.5">
+      <div className="w-px h-3 bg-muted-foreground/30" />
+      <span className="text-[10px] uppercase tracking-wider">↓ {label}</span>
+      <div className="w-px h-1 bg-muted-foreground/30" />
     </div>
   )
 }

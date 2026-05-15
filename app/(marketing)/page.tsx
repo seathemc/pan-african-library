@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getAllWorks } from "@/lib/literature-data";
-import { Github, ArrowRight, Library, MessageSquare, Code2 } from "lucide-react";
+import { Github, ArrowRight, Library, MessageSquare, Code2, Database, ShieldCheck, RefreshCw, ExternalLink } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WisdomLogo } from "@/components/wisdom-logo";
 
@@ -262,6 +262,118 @@ export default function LandingPage() {
           </div>
         </div>
 
+        {/* How we know what we know — credibility / data architecture */}
+        <div className="border-t py-20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="flex flex-col gap-12">
+              <div className="flex flex-col gap-4 max-w-3xl">
+                <Badge variant="outline" className="w-fit gap-1.5">
+                  <ShieldCheck className="h-3 w-3" /> How we know what we know
+                </Badge>
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  The numbers aren't AU's. They're independently verifiable.
+                </h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  African Union biennial reports are self-reported by member states and widely
+                  read as politically optimistic — one goal jumped 12% → 98% in two years in their
+                  2022 report. Wisdom rebuilds the same scoring from{' '}
+                  <strong className="text-foreground">independent public sources</strong>:
+                  the World Bank, WHO, UNESCO, Mo Ibrahim IIAG, UN Population Division, IPCC, and ISS African Futures.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <Card className="border-blue-500/30 bg-blue-500/[0.03]">
+                  <CardHeader className="pb-3">
+                    <Database className="h-5 w-5 text-blue-500 dark:text-blue-400 mb-2" />
+                    <CardTitle className="text-base">Every number cites its source</CardTitle>
+                    <CardDescription className="text-xs">
+                      Click any indicator on the dashboard and you'll see exactly which World Bank
+                      code or WHO dataset it came from. We don't blend providers within a single number.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <Card className="border-emerald-500/30 bg-emerald-500/[0.03]">
+                  <CardHeader className="pb-3">
+                    <RefreshCw className="h-5 w-5 text-emerald-500 dark:text-emerald-400 mb-2" />
+                    <CardTitle className="text-base">Refreshed weekly, not biennially</CardTitle>
+                    <CardDescription className="text-xs">
+                      A GitHub Action pulls fresh data from the source APIs every Sunday and commits
+                      it back to the repo. AU publishes once every two years in PDFs — we publish
+                      a diff every week.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+                <Card className="border-violet-500/30 bg-violet-500/[0.03]">
+                  <CardHeader className="pb-3">
+                    <ShieldCheck className="h-5 w-5 text-violet-500 dark:text-violet-400 mb-2" />
+                    <CardTitle className="text-base">Methodology is public</CardTitle>
+                    <CardDescription className="text-xs">
+                      Every formula, every coverage gap, every disagreement with AU's numbers is
+                      published on our audit page. We use population-weighted continental aggregates
+                      (matching WB/WHO methodology), not naïve country means.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </div>
+
+              {/* Mini architecture diagram */}
+              <div className="rounded-lg border bg-muted/10 p-6">
+                <div className="text-xs uppercase tracking-wider text-muted-foreground mb-4">
+                  Data flow
+                </div>
+                <div className="flex flex-col sm:flex-row items-stretch gap-2 sm:gap-3 text-xs">
+                  <FlowStep
+                    label="Sources"
+                    detail="World Bank · WHO · UNESCO · IIAG · UN · ISS"
+                    tone="muted"
+                  />
+                  <FlowArrow />
+                  <FlowStep
+                    label="Ingest"
+                    detail="Weekly cron · GitHub Actions"
+                    tone="blue"
+                  />
+                  <FlowArrow />
+                  <FlowStep
+                    label="Storage"
+                    detail="Versioned JSON · committed to git"
+                    tone="violet"
+                  />
+                  <FlowArrow />
+                  <FlowStep
+                    label="Aggregate"
+                    detail="Population-weighted · clamped · null-safe"
+                    tone="emerald"
+                  />
+                  <FlowArrow />
+                  <FlowStep
+                    label="Render"
+                    detail="Next.js · server-side · zero API calls at request time"
+                    tone="primary"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 flex-wrap">
+                <Link href="/audit">
+                  <Button variant="outline" className="gap-2">
+                    Read the full methodology
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Button>
+                </Link>
+                <a href="https://github.com/seathemc/pan-african-library" target="_blank" rel="noopener noreferrer">
+                  <Button variant="ghost" className="gap-2">
+                    <Github className="h-4 w-4" />
+                    Read the code on GitHub
+                    <ExternalLink className="h-3 w-3" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Get Wisdom */}
         <div className="border-t bg-muted/10 py-20">
           <div className="max-w-5xl mx-auto px-6">
@@ -324,6 +436,47 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+    </div>
+  );
+}
+
+// Compact horizontal data-flow step used in the "How we know what we know" section.
+// One per layer of the architecture; together they tell the source → render story.
+function FlowStep({
+  label,
+  detail,
+  tone,
+}: {
+  label: string;
+  detail: string;
+  tone: "muted" | "blue" | "violet" | "emerald" | "primary";
+}) {
+  const toneClasses = {
+    muted: "border-muted-foreground/30 bg-background",
+    blue: "border-blue-500/40 bg-blue-500/[0.04]",
+    violet: "border-violet-500/40 bg-violet-500/[0.04]",
+    emerald: "border-emerald-500/40 bg-emerald-500/[0.04]",
+    primary: "border-primary/40 bg-primary/[0.05]",
+  } as const;
+  return (
+    <div
+      className={`flex-1 rounded-md border ${toneClasses[tone]} px-3 py-2.5 flex flex-col gap-0.5 min-w-0`}
+    >
+      <div className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
+        {label}
+      </div>
+      <div className="text-[11px] text-muted-foreground leading-snug truncate">
+        {detail}
+      </div>
+    </div>
+  );
+}
+
+function FlowArrow() {
+  return (
+    <div className="flex items-center justify-center text-muted-foreground/60 shrink-0">
+      <span className="hidden sm:inline">→</span>
+      <span className="sm:hidden text-xs py-1">↓</span>
     </div>
   );
 }
