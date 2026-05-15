@@ -1,3 +1,25 @@
+// ⚠️ DEPRECATED — STATIC DATA, COMPETING SOURCE OF TRUTH
+//
+// This file contains hand-typed indicator values used by the original Score
+// Dashboard and ForecastView components. It has been superseded by the live
+// data layer (lib/agenda-2063-live.ts + scripts/ingest/indicators-registry.ts
+// + data/ingested/*.json), which:
+//   - has population-weighted continental aggregates (this file uses simple
+//     hand-typed numbers, methodology unspecified)
+//   - traces every value to a public source URL (this file just says "World
+//     Bank" or "WHO" without specific dataset references)
+//   - refreshes weekly via GitHub Actions
+//   - aligns to AU's official 20-goal framework (this file uses an older
+//     13-goal structure)
+//
+// As long as this file exists alongside the live layer, the dashboard has two
+// sources of truth that can drift. The plan is to migrate ScoreDashboard,
+// ForecastView, and any remaining consumers to read from the live layer, then
+// delete this file. Until then, treat values here as illustrative only.
+//
+// Last reconciled with live layer: 2026-05-15 — no full reconciliation done;
+// see /audit page for known divergences.
+
 export interface Indicator {
   id: string
   name: string

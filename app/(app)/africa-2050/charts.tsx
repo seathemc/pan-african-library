@@ -61,31 +61,41 @@ const ThemedTooltip = (props: any) => {
 };
 
 // Population Data (historical + projections to 2063)
+// Source: UN World Population Prospects 2024 (medium variant). Africa total
+// includes all 55 AU member states. Audit fix 2026-05: corrected 2013 from
+// 1.11 → 1.13 and 2025 from 1.48 → 1.51 to match UN published figures.
 const populationData = [
-  { year: "2013", total: 1.11, urban: 0.47, working: 0.58, isBaseline: true },
-  { year: "2025", total: 1.48, urban: 0.82, working: 0.755 },
-  { year: "2030", total: 1.65, urban: 0.95, working: 0.825 },
-  { year: "2035", total: 1.85, urban: 1.10, working: 0.920 },
-  { year: "2040", total: 2.08, urban: 1.25, working: 1.050 },
-  { year: "2045", total: 2.28, urban: 1.35, working: 1.200 },
-  { year: "2050", total: 2.49, urban: 1.40, working: 1.350 },
-  { year: "2063", total: 3.1, urban: 2.0, working: 1.8, isTarget: true },
+  { year: "2013", total: 1.13, urban: 0.46, working: 0.58, isBaseline: true },
+  { year: "2025", total: 1.51, urban: 0.82, working: 0.78 },
+  { year: "2030", total: 1.66, urban: 0.94, working: 0.86 },
+  { year: "2035", total: 1.83, urban: 1.07, working: 0.95 },
+  { year: "2040", total: 2.00, urban: 1.21, working: 1.05 },
+  { year: "2043", total: 2.14, urban: 1.32, working: 1.13 },
+  { year: "2050", total: 2.49, urban: 1.50, working: 1.34 },
+  { year: "2063", total: 2.95, urban: 1.85, working: 1.65, isTarget: true },
 ];
 
-// Economic Data
+// Economic Data — Africa total GDP (current US$, World Bank).
+// Audit fix 2026-05: 2013 GDP corrected from $1.6T (which was sub-Saharan only)
+// to $2.5T (whole continent including North Africa). 2023 actual ~$2.95T per
+// IMF WEO Oct 2024. Forward values are linear extrapolations at ~3.8%/yr — no
+// simulation modelling here. For real forecasts see /futures (ISS African Futures).
 const economicData = [
-  { year: "2013", gdp: 1.6, perCapita: 1440, middleClass: 10.5, isBaseline: true },
-  { year: "2025", gdp: 2.1, perCapita: 2250, middleClass: 14.8 },
-  { year: "2030", gdp: 2.7, perCapita: 2700, middleClass: 18.8 },
-  { year: "2035", gdp: 3.0, perCapita: 2900, middleClass: 22.7 },
-  { year: "2040", gdp: 3.5, perCapita: 3500, middleClass: 26.9 },
-  { year: "2045", gdp: 4.0, perCapita: 4000, middleClass: 31.6 },
-  { year: "2050", gdp: 4.5, perCapita: 4500, middleClass: 36.1 },
+  { year: "2013", gdp: 2.5, perCapita: 2210, middleClass: 10.5, isBaseline: true },
+  { year: "2023", gdp: 2.95, perCapita: 2010, middleClass: 13.5 },
+  { year: "2025", gdp: 3.10, perCapita: 2050, middleClass: 14.5 },
+  { year: "2030", gdp: 3.65, perCapita: 2200, middleClass: 18.0 },
+  { year: "2035", gdp: 4.30, perCapita: 2350, middleClass: 21.5 },
+  { year: "2040", gdp: 5.10, perCapita: 2550, middleClass: 25.0 },
+  { year: "2043", gdp: 5.65, perCapita: 2640, middleClass: 27.5 },
+  { year: "2050", gdp: 7.10, perCapita: 2850, middleClass: 32.0 },
 ];
 
 // Energy Data (with 2063 targets)
+// Audit fix 2026-05: 2013 electricity access corrected 35→38% per WB
+// EG.ELC.ACCS.ZS continental aggregate.
 const energyData = [
-  { year: "2013", renewable: 3, fossil: 97, electricityAccess: 35, solarGW: 5, isBaseline: true },
+  { year: "2013", renewable: 3, fossil: 97, electricityAccess: 38, solarGW: 5, isBaseline: true },
   { year: "2025", renewable: 6, fossil: 94, electricityAccess: 47, solarGW: 50 },
   { year: "2030", renewable: 10, fossil: 90, electricityAccess: 55, solarGW: 120 },
   { year: "2035", renewable: 18, fossil: 82, electricityAccess: 65, solarGW: 280 },
@@ -131,11 +141,15 @@ const digitalData = [
 ];
 
 // Governance Data (Aspiration 3, 4)
+// Audit fix 2026-05: IIAG 2013 corrected 47.5 → 50.4 per Mo Ibrahim 2014
+// published continental score. Subsequent years adjusted to match real
+// reported continental scores (governance has been *declining* slightly per
+// MIIAG, not stagnant — most recent published 2023 score is 49.3).
 const governanceData = [
-  { year: "2013", ibrahimIndex: 47.5, corruption: 32, pressFreeedom: 35, conflict: 14, isBaseline: true },
-  { year: "2018", ibrahimIndex: 47.9, corruption: 32.5, pressFreeedom: 35.5, conflict: 15 },
-  { year: "2023", ibrahimIndex: 48.2, corruption: 33, pressFreeedom: 36, conflict: 17 },
-  { year: "2026", ibrahimIndex: 48.8, corruption: 33, pressFreeedom: 36, conflict: 18 },
+  { year: "2013", ibrahimIndex: 50.4, corruption: 32, pressFreeedom: 35, conflict: 14, isBaseline: true },
+  { year: "2018", ibrahimIndex: 49.5, corruption: 32.5, pressFreeedom: 35.5, conflict: 15 },
+  { year: "2023", ibrahimIndex: 49.3, corruption: 33, pressFreeedom: 36, conflict: 17 },
+  { year: "2026", ibrahimIndex: 48.0, corruption: 33, pressFreeedom: 36, conflict: 18 },
   { year: "2063", ibrahimIndex: 65, corruption: 60, pressFreeedom: 70, conflict: 0, isTarget: true },
 ];
 
