@@ -1,0 +1,1001 @@
+[
+  {
+    "indicatorId": "iiag-overall",
+    "source": "mo-ibrahim-iiag",
+    "sourceCode": "IIAG-Overall-Governance",
+    "sourceUrl": "https://iiag.online",
+    "fetchedAt": "2026-05-15T00:00:52.642Z",
+    "isSeed": true,
+    "countries": {
+      "DZA": {
+        "iso3": "DZA",
+        "countryName": "Algeria",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 52
+          },
+          {
+            "year": 2023,
+            "value": 48.5
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 48.5,
+        "baselineYear": 2013,
+        "baselineValue": 52
+      },
+      "EGY": {
+        "iso3": "EGY",
+        "countryName": "Egypt",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 48.1
+          },
+          {
+            "year": 2023,
+            "value": 47
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 47,
+        "baselineYear": 2013,
+        "baselineValue": 48.1
+      },
+      "LBY": {
+        "iso3": "LBY",
+        "countryName": "Libya",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 41.9
+          },
+          {
+            "year": 2023,
+            "value": 27.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 27.6,
+        "baselineYear": 2013,
+        "baselineValue": 41.9
+      },
+      "MAR": {
+        "iso3": "MAR",
+        "countryName": "Morocco",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 57.8
+          },
+          {
+            "year": 2023,
+            "value": 57
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 57,
+        "baselineYear": 2013,
+        "baselineValue": 57.8
+      },
+      "SDN": {
+        "iso3": "SDN",
+        "countryName": "Sudan",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 32.5
+          },
+          {
+            "year": 2023,
+            "value": 26.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 26.6,
+        "baselineYear": 2013,
+        "baselineValue": 32.5
+      },
+      "TUN": {
+        "iso3": "TUN",
+        "countryName": "Tunisia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 62.4
+          },
+          {
+            "year": 2023,
+            "value": 60.5
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 60.5,
+        "baselineYear": 2013,
+        "baselineValue": 62.4
+      },
+      "ESH": {
+        "iso3": "ESH",
+        "countryName": "Western Sahara (SADR)",
+        "observations": [],
+        "latestYear": null,
+        "latestValue": null,
+        "baselineYear": null,
+        "baselineValue": null
+      },
+      "BEN": {
+        "iso3": "BEN",
+        "countryName": "Benin",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 58.5
+          },
+          {
+            "year": 2023,
+            "value": 56.9
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 56.9,
+        "baselineYear": 2013,
+        "baselineValue": 58.5
+      },
+      "BFA": {
+        "iso3": "BFA",
+        "countryName": "Burkina Faso",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 53.7
+          },
+          {
+            "year": 2023,
+            "value": 45
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 45,
+        "baselineYear": 2013,
+        "baselineValue": 53.7
+      },
+      "CPV": {
+        "iso3": "CPV",
+        "countryName": "Cabo Verde",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 75.7
+          },
+          {
+            "year": 2023,
+            "value": 67.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 67.6,
+        "baselineYear": 2013,
+        "baselineValue": 75.7
+      },
+      "CIV": {
+        "iso3": "CIV",
+        "countryName": "Côte d'Ivoire",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 50.5
+          },
+          {
+            "year": 2023,
+            "value": 56.7
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 56.7,
+        "baselineYear": 2013,
+        "baselineValue": 50.5
+      },
+      "GMB": {
+        "iso3": "GMB",
+        "countryName": "Gambia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 52.6
+          },
+          {
+            "year": 2023,
+            "value": 53.7
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 53.7,
+        "baselineYear": 2013,
+        "baselineValue": 52.6
+      },
+      "GHA": {
+        "iso3": "GHA",
+        "countryName": "Ghana",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 67.3
+          },
+          {
+            "year": 2023,
+            "value": 60.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 60.4,
+        "baselineYear": 2013,
+        "baselineValue": 67.3
+      },
+      "GIN": {
+        "iso3": "GIN",
+        "countryName": "Guinea",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 41
+          },
+          {
+            "year": 2023,
+            "value": 40.5
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 40.5,
+        "baselineYear": 2013,
+        "baselineValue": 41
+      },
+      "GNB": {
+        "iso3": "GNB",
+        "countryName": "Guinea-Bissau",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 31.8
+          },
+          {
+            "year": 2023,
+            "value": 41
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 41,
+        "baselineYear": 2013,
+        "baselineValue": 31.8
+      },
+      "LBR": {
+        "iso3": "LBR",
+        "countryName": "Liberia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 50.6
+          },
+          {
+            "year": 2023,
+            "value": 49.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 49.4,
+        "baselineYear": 2013,
+        "baselineValue": 50.6
+      },
+      "MLI": {
+        "iso3": "MLI",
+        "countryName": "Mali",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 47
+          },
+          {
+            "year": 2023,
+            "value": 39
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 39,
+        "baselineYear": 2013,
+        "baselineValue": 47
+      },
+      "MRT": {
+        "iso3": "MRT",
+        "countryName": "Mauritania",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 41.6
+          },
+          {
+            "year": 2023,
+            "value": 49.3
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 49.3,
+        "baselineYear": 2013,
+        "baselineValue": 41.6
+      },
+      "NER": {
+        "iso3": "NER",
+        "countryName": "Niger",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 52
+          },
+          {
+            "year": 2023,
+            "value": 49
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 49,
+        "baselineYear": 2013,
+        "baselineValue": 52
+      },
+      "NGA": {
+        "iso3": "NGA",
+        "countryName": "Nigeria",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 47.6
+          },
+          {
+            "year": 2023,
+            "value": 45.3
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 45.3,
+        "baselineYear": 2013,
+        "baselineValue": 47.6
+      },
+      "SEN": {
+        "iso3": "SEN",
+        "countryName": "Senegal",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 60
+          },
+          {
+            "year": 2023,
+            "value": 58.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 58.4,
+        "baselineYear": 2013,
+        "baselineValue": 60
+      },
+      "SLE": {
+        "iso3": "SLE",
+        "countryName": "Sierra Leone",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 48.6
+          },
+          {
+            "year": 2023,
+            "value": 52.3
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 52.3,
+        "baselineYear": 2013,
+        "baselineValue": 48.6
+      },
+      "TGO": {
+        "iso3": "TGO",
+        "countryName": "Togo",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 47.4
+          },
+          {
+            "year": 2023,
+            "value": 47.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 47.6,
+        "baselineYear": 2013,
+        "baselineValue": 47.4
+      },
+      "BDI": {
+        "iso3": "BDI",
+        "countryName": "Burundi",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 48
+          },
+          {
+            "year": 2023,
+            "value": 38.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 38.6,
+        "baselineYear": 2013,
+        "baselineValue": 48
+      },
+      "COM": {
+        "iso3": "COM",
+        "countryName": "Comoros",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 50.5
+          },
+          {
+            "year": 2023,
+            "value": 47.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 47.4,
+        "baselineYear": 2013,
+        "baselineValue": 50.5
+      },
+      "DJI": {
+        "iso3": "DJI",
+        "countryName": "Djibouti",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 49.6
+          },
+          {
+            "year": 2023,
+            "value": 43.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 43.4,
+        "baselineYear": 2013,
+        "baselineValue": 49.6
+      },
+      "ERI": {
+        "iso3": "ERI",
+        "countryName": "Eritrea",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 33.8
+          },
+          {
+            "year": 2023,
+            "value": 27
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 27,
+        "baselineYear": 2013,
+        "baselineValue": 33.8
+      },
+      "ETH": {
+        "iso3": "ETH",
+        "countryName": "Ethiopia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 49.3
+          },
+          {
+            "year": 2023,
+            "value": 43.1
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 43.1,
+        "baselineYear": 2013,
+        "baselineValue": 49.3
+      },
+      "KEN": {
+        "iso3": "KEN",
+        "countryName": "Kenya",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 54.9
+          },
+          {
+            "year": 2023,
+            "value": 56.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 56.6,
+        "baselineYear": 2013,
+        "baselineValue": 54.9
+      },
+      "MDG": {
+        "iso3": "MDG",
+        "countryName": "Madagascar",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 47
+          },
+          {
+            "year": 2023,
+            "value": 46
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 46,
+        "baselineYear": 2013,
+        "baselineValue": 47
+      },
+      "MUS": {
+        "iso3": "MUS",
+        "countryName": "Mauritius",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 81.7
+          },
+          {
+            "year": 2023,
+            "value": 73
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 73,
+        "baselineYear": 2013,
+        "baselineValue": 81.7
+      },
+      "RWA": {
+        "iso3": "RWA",
+        "countryName": "Rwanda",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 55.4
+          },
+          {
+            "year": 2023,
+            "value": 60.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 60.6,
+        "baselineYear": 2013,
+        "baselineValue": 55.4
+      },
+      "SYC": {
+        "iso3": "SYC",
+        "countryName": "Seychelles",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 73.7
+          },
+          {
+            "year": 2023,
+            "value": 71.2
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 71.2,
+        "baselineYear": 2013,
+        "baselineValue": 73.7
+      },
+      "SOM": {
+        "iso3": "SOM",
+        "countryName": "Somalia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 8.6
+          },
+          {
+            "year": 2023,
+            "value": 21.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 21.6,
+        "baselineYear": 2013,
+        "baselineValue": 8.6
+      },
+      "SSD": {
+        "iso3": "SSD",
+        "countryName": "South Sudan",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 28.7
+          },
+          {
+            "year": 2023,
+            "value": 21
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 21,
+        "baselineYear": 2013,
+        "baselineValue": 28.7
+      },
+      "TZA": {
+        "iso3": "TZA",
+        "countryName": "Tanzania",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 58.2
+          },
+          {
+            "year": 2023,
+            "value": 54.9
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 54.9,
+        "baselineYear": 2013,
+        "baselineValue": 58.2
+      },
+      "UGA": {
+        "iso3": "UGA",
+        "countryName": "Uganda",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 55.4
+          },
+          {
+            "year": 2023,
+            "value": 47.2
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 47.2,
+        "baselineYear": 2013,
+        "baselineValue": 55.4
+      },
+      "AGO": {
+        "iso3": "AGO",
+        "countryName": "Angola",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 46.7
+          },
+          {
+            "year": 2023,
+            "value": 46.8
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 46.8,
+        "baselineYear": 2013,
+        "baselineValue": 46.7
+      },
+      "CMR": {
+        "iso3": "CMR",
+        "countryName": "Cameroon",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 44
+          },
+          {
+            "year": 2023,
+            "value": 42.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 42.6,
+        "baselineYear": 2013,
+        "baselineValue": 44
+      },
+      "CAF": {
+        "iso3": "CAF",
+        "countryName": "Central African Republic",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 33.8
+          },
+          {
+            "year": 2023,
+            "value": 31.2
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 31.2,
+        "baselineYear": 2013,
+        "baselineValue": 33.8
+      },
+      "TCD": {
+        "iso3": "TCD",
+        "countryName": "Chad",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 33.4
+          },
+          {
+            "year": 2023,
+            "value": 35.8
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 35.8,
+        "baselineYear": 2013,
+        "baselineValue": 33.4
+      },
+      "COG": {
+        "iso3": "COG",
+        "countryName": "Republic of Congo",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 38.4
+          },
+          {
+            "year": 2023,
+            "value": 39.5
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 39.5,
+        "baselineYear": 2013,
+        "baselineValue": 38.4
+      },
+      "COD": {
+        "iso3": "COD",
+        "countryName": "DR Congo",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 33.2
+          },
+          {
+            "year": 2023,
+            "value": 36.7
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 36.7,
+        "baselineYear": 2013,
+        "baselineValue": 33.2
+      },
+      "GNQ": {
+        "iso3": "GNQ",
+        "countryName": "Equatorial Guinea",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 30.4
+          },
+          {
+            "year": 2023,
+            "value": 30.2
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 30.2,
+        "baselineYear": 2013,
+        "baselineValue": 30.4
+      },
+      "GAB": {
+        "iso3": "GAB",
+        "countryName": "Gabon",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 49.7
+          },
+          {
+            "year": 2023,
+            "value": 50.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 50.4,
+        "baselineYear": 2013,
+        "baselineValue": 49.7
+      },
+      "STP": {
+        "iso3": "STP",
+        "countryName": "São Tomé and Príncipe",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 60.3
+          },
+          {
+            "year": 2023,
+            "value": 60.5
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 60.5,
+        "baselineYear": 2013,
+        "baselineValue": 60.3
+      },
+      "BWA": {
+        "iso3": "BWA",
+        "countryName": "Botswana",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 76.2
+          },
+          {
+            "year": 2023,
+            "value": 65.5
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 65.5,
+        "baselineYear": 2013,
+        "baselineValue": 76.2
+      },
+      "SWZ": {
+        "iso3": "SWZ",
+        "countryName": "Eswatini",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 46.5
+          },
+          {
+            "year": 2023,
+            "value": 42.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 42.6,
+        "baselineYear": 2013,
+        "baselineValue": 46.5
+      },
+      "LSO": {
+        "iso3": "LSO",
+        "countryName": "Lesotho",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 57
+          },
+          {
+            "year": 2023,
+            "value": 53
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 53,
+        "baselineYear": 2013,
+        "baselineValue": 57
+      },
+      "MWI": {
+        "iso3": "MWI",
+        "countryName": "Malawi",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 57.1
+          },
+          {
+            "year": 2023,
+            "value": 52.6
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 52.6,
+        "baselineYear": 2013,
+        "baselineValue": 57.1
+      },
+      "MOZ": {
+        "iso3": "MOZ",
+        "countryName": "Mozambique",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 56.5
+          },
+          {
+            "year": 2023,
+            "value": 48.4
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 48.4,
+        "baselineYear": 2013,
+        "baselineValue": 56.5
+      },
+      "NAM": {
+        "iso3": "NAM",
+        "countryName": "Namibia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 69.5
+          },
+          {
+            "year": 2023,
+            "value": 64.9
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 64.9,
+        "baselineYear": 2013,
+        "baselineValue": 69.5
+      },
+      "ZAF": {
+        "iso3": "ZAF",
+        "countryName": "South Africa",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 73.3
+          },
+          {
+            "year": 2023,
+            "value": 64
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 64,
+        "baselineYear": 2013,
+        "baselineValue": 73.3
+      },
+      "ZMB": {
+        "iso3": "ZMB",
+        "countryName": "Zambia",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 58.6
+          },
+          {
+            "year": 2023,
+            "value": 54
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 54,
+        "baselineYear": 2013,
+        "baselineValue": 58.6
+      },
+      "ZWE": {
+        "iso3": "ZWE",
+        "countryName": "Zimbabwe",
+        "observations": [
+          {
+            "year": 2013,
+            "value": 39.6
+          },
+          {
+            "year": 2023,
+            "value": 42
+          }
+        ],
+        "latestYear": 2023,
+        "latestValue": 42,
+        "baselineYear": 2013,
+        "baselineValue": 39.6
+      }
+    },
+    "continental": {
+      "latestYear": 2023,
+      "latestValue": 47.99259259259258,
+      "countriesReporting": 54,
+      "countriesMissing": [
+        "ESH"
+      ]
+    }
+  }
+]

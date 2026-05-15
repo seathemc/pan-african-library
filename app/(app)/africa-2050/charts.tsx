@@ -23,15 +23,42 @@ import {
   ReferenceLine,
 } from "recharts";
 
-// Color scheme — all chosen to be visible on both white and pitch-black backgrounds
-const BLUE = "#60a5fa";       // blue-400 — bright enough for dark mode, clear on light
-const VIOLET = "#a78bfa";     // violet-400
-const BLUE_LIGHT = "#bfdbfe"; // blue-200
-const TARGET_COLOR = "#34d399"; // emerald-400 — target/goal color
+// Chart palette — picked so series read against both pitch-black and white
+// backgrounds. Tied to the shadcn `--chart-*` CSS variables defined in
+// globals.css so theme switches just work; the hex fallbacks are only used by
+// recharts internals that don't respect CSS vars.
+const BLUE = "hsl(217 91% 65%)";    // primary series
+const VIOLET = "hsl(263 70% 65%)";  // secondary series
+const BLUE_LIGHT = "hsl(217 91% 80%)";
+const TARGET_COLOR = "hsl(160 65% 50%)"; // 2063 target / goal
 
-// Grid and axis colors adapt to dark mode via CSS variable
-const GRID_COLOR = "rgba(128,128,128,0.15)";
-const AXIS_COLOR = "rgba(128,128,128,0.6)";
+// Grid lines and axis text adapt to theme — the rgba is mid-gray, equally
+// visible on both backgrounds at low opacity.
+const GRID_COLOR = "rgba(128,128,128,0.18)";
+const AXIS_COLOR = "rgba(128,128,128,0.7)";
+
+// Themed tooltip — replaces recharts' default white-on-white pop with a
+// border-styled card matching the rest of the dashboard.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ThemedTooltip = (props: any) => {
+  if (!props.active || !props.payload?.length) return null;
+  return (
+    <div className="rounded-md border border-border/60 bg-popover/95 px-3 py-2 text-xs shadow-lg backdrop-blur-sm">
+      {props.label && <div className="font-medium mb-1">{props.label}</div>}
+      <div className="grid gap-1">
+        {props.payload.map((p: { name: string; value: number | string; color: string; dataKey: string }) => (
+          <div key={p.dataKey} className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-1.5">
+              <span className="h-2 w-2 rounded-[2px]" style={{ backgroundColor: p.color }} />
+              <span className="text-muted-foreground">{p.name}</span>
+            </div>
+            <span className="font-mono tabular-nums">{typeof p.value === "number" ? p.value.toLocaleString() : p.value}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // Population Data (historical + projections to 2063)
 const populationData = [
@@ -397,7 +424,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
                     <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis label={{ value: "Per 1,000 births", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
-                    <Tooltip />
+                    <Tooltip content={<ThemedTooltip />} />
                     <ReferenceLine y={25} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 25", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={92} stroke={VIOLET} strokeDasharray="4 4" label={{ value: "2013: 92", position: "insideTopRight", fill: VIOLET, fontSize: 11 }} />
                     <Line type="monotone" dataKey="infantMortality" stroke={VIOLET} strokeWidth={3} name="Under-5 Mortality (declining)" dot={<TargetDot />} />
@@ -420,7 +447,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
                     <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip content={<ThemedTooltip />} />
                     <Legend />
                     <ReferenceLine y={100} stroke={TARGET_COLOR} strokeDasharray="4 4" label={{ value: "Water target: 100%", position: "right", fill: TARGET_COLOR, fontSize: 10 }} />
                     <ReferenceLine y={70} stroke={TARGET_COLOR} strokeDasharray="2 4" label={{ value: "Maternal target: 70/100k", position: "insideBottomRight", fill: TARGET_COLOR, fontSize: 10 }} />
@@ -450,7 +477,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
                     <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis domain={[30, 75]} label={{ value: "Score (0-100)", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
-                    <Tooltip />
+                    <Tooltip content={<ThemedTooltip />} />
                     <Legend />
                     <ReferenceLine y={65} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 65", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={60} stroke={TARGET_COLOR} strokeDasharray="3 3" label={{ value: "CPI target: 60", position: "insideBottomRight", fill: TARGET_COLOR, fontSize: 10 }} />
@@ -475,7 +502,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
                     <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis domain={[0, 25]} label={{ value: "Countries in conflict", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} />
-                    <Tooltip />
+                    <Tooltip content={<ThemedTooltip />} />
                     <ReferenceLine y={0} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "2063 target: 0", position: "insideTopRight", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={14} stroke={VIOLET} strokeDasharray="4 4" label={{ value: "2013 baseline: 14", position: "insideBottomRight", fill: VIOLET, fontSize: 11 }} />
                     <Line type="monotone" dataKey="conflict" stroke="#ef4444" strokeWidth={3} name="Countries in armed conflict" dot={<TargetDot />} />
@@ -498,7 +525,7 @@ export function AfricaCharts() {
                     <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
                     <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                     <YAxis />
-                    <Tooltip />
+                    <Tooltip content={<ThemedTooltip />} />
                     <Legend />
                     <ReferenceLine y={50} stroke={TARGET_COLOR} strokeDasharray="6 3" label={{ value: "Trade target: 50%", position: "right", fill: TARGET_COLOR, fontSize: 11 }} />
                     <ReferenceLine y={55} stroke={TARGET_COLOR} strokeDasharray="3 3" label={{ value: "AfCFTA target: 55", position: "insideTopRight", fill: TARGET_COLOR, fontSize: 11 }} />
@@ -626,7 +653,7 @@ export function AfricaCharts() {
                   <Radar name="2026 Current" dataKey="current" stroke={BLUE} fill={BLUE} fillOpacity={0.35} />
                   <Radar name="2063 Target" dataKey="target" stroke={TARGET_COLOR} fill={TARGET_COLOR} fillOpacity={0.15} strokeDasharray="5 3" />
                   <Legend />
-                  <Tooltip />
+                  <Tooltip content={<ThemedTooltip />} />
                 </RadarChart>
               </ResponsiveContainer>
               <p className="text-xs text-muted-foreground mt-2 text-center">
@@ -649,7 +676,7 @@ export function AfricaCharts() {
                   <CartesianGrid strokeDasharray="3 3" stroke={GRID_COLOR} />
                   <XAxis dataKey="year" tick={{ fill: AXIS_COLOR, fontSize: 11 }} axisLine={{ stroke: GRID_COLOR }} tickLine={false} />
                   <YAxis label={{ value: "Score (0-10)", angle: -90, position: "insideLeft", style: { fill: AXIS_COLOR, fontSize: 10 } }} domain={[4, 9]} />
-                  <Tooltip />
+                  <Tooltip content={<ThemedTooltip />} />
                   <Legend />
                   <Line type="monotone" dataKey="happiness" stroke={BLUE} strokeWidth={2} name="Happiness Score" />
                   <Line type="monotone" dataKey="satisfaction" stroke={BLUE_LIGHT} strokeWidth={2} name="Life Satisfaction" />

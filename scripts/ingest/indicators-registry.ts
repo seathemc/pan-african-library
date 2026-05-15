@@ -339,6 +339,24 @@ export const INDICATORS: IndicatorDef[] = [
     targetSource: 'FTYIP — gender parity in economic participation',
     higherIsBetter: true,
   },
+
+  // ── Aspiration 3: Good Governance (Goals 11, 12) — IIAG ─────────────────
+  {
+    id: 'iiag-overall',
+    name: 'Mo Ibrahim Overall Governance score',
+    description:
+      'Composite governance index covering security & rule of law, participation & rights, economic opportunity, and human development. Independent (not AU-reported).',
+    goalId: 11, aspirationId: 3,
+    source: 'mo-ibrahim-iiag',
+    sourceCode: 'IIAG-Overall-Governance',
+    sourceUrl: 'https://iiag.online',
+    unit: 'score',
+    baseline2013: 48, target2063: 75,
+    targetSource: 'AU Aspiration 3 — derived from Goal 11 commitments',
+    higherIsBetter: true,
+    notes:
+      "The most respected African governance index. AU's own 2021 score for Aspiration 3 was 42% — IIAG's continental average is in the high 40s and has barely moved in a decade.",
+  },
 ]
 
 // Convenience: indicators organised by AU's 20-goal framework

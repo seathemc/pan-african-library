@@ -8,6 +8,7 @@
 // The ingestion pipeline runs weekly via GitHub Actions and updates the JSON.
 
 import worldBankData from '@/data/ingested/world-bank.json'
+import iiagData from '@/data/ingested/mo-ibrahim-iiag.json'
 import manifest from '@/data/ingested/manifest.json'
 import { INDICATORS, INDICATORS_BY_GOAL, type IndicatorDef } from '@/scripts/ingest/indicators-registry'
 import { AU_MEMBER_STATES, COUNTRIES_BY_REGION, type AfricanCountry } from '@/scripts/ingest/african-countries'
@@ -54,8 +55,15 @@ export interface Manifest {
 }
 
 // ── Indexed access ───────────────────────────────────────────────────────
+// Merge every ingested source file into a single id-keyed map. Each source
+// (World Bank, IIAG, future: WHO, UNESCO, ACLED) produces its own file in
+// data/ingested/ and they all flow into the same dashboard.
+const ALL_INGESTED: IngestedIndicator[] = [
+  ...(worldBankData as IngestedIndicator[]),
+  ...(iiagData as IngestedIndicator[]),
+]
 const INGESTED_BY_ID: Record<string, IngestedIndicator> = Object.fromEntries(
-  (worldBankData as IngestedIndicator[]).map((i) => [i.indicatorId, i]),
+  ALL_INGESTED.map((i) => [i.indicatorId, i]),
 )
 
 export function getIndicatorDef(id: string): IndicatorDef | undefined {
