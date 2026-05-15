@@ -27,16 +27,22 @@ import type { IndicatorDef } from '@/scripts/ingest/indicators-registry'
 
 function formatValue(value: number | null, unit: string): string {
   if (value === null || value === undefined) return '—'
-  if (unit === '%') return `${value.toFixed(1)}%`
-  if (unit === 'USD') return `$${Math.round(value).toLocaleString()}`
-  if (unit === 'years') return `${value.toFixed(1)} yrs`
-  if (unit === 't CO₂/person') return `${value.toFixed(2)} t`
-  if (unit === 'per 1,000') return `${value.toFixed(1)}/1k`
-  if (unit === 'per 100k') return `${value.toFixed(0)}/100k`
-  if (unit === 'kg/ha') return `${Math.round(value).toLocaleString()} kg/ha`
-  if (unit === 'per 100') return `${value.toFixed(0)}`
-  if (unit === 'score') return `${value.toFixed(1)}`
-  return `${value.toFixed(1)} ${unit}`
+  switch (unit) {
+    case '%': return `${value.toFixed(1)}%`
+    case 'USD': return `$${Math.round(value).toLocaleString()}`
+    case '$B': return `$${value.toFixed(0)}B`
+    case 'M': return `${value.toLocaleString()}M`
+    case 'years': return `${value.toFixed(1)} yrs`
+    case 't CO₂/person': return `${value.toFixed(2)} t CO₂`
+    case 't/ha': return `${value.toFixed(1)} t/ha`
+    case 'kg/ha': return `${Math.round(value).toLocaleString()} kg/ha`
+    case 'per 1,000': return `${value.toFixed(1)}/1k`
+    case 'per 100k': return `${value.toFixed(0)}/100k`
+    case 'per 100': return `${value.toFixed(0)}/100`
+    case 'score': return `${value.toFixed(1)}`
+    case 'index (-2.5 to 2.5)': return value.toFixed(2)
+    default: return `${value.toFixed(1)} ${unit}`
+  }
 }
 
 const ASPIRATION_NAMES: Record<number, string> = {

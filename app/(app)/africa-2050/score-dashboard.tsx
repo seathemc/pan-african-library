@@ -4,8 +4,8 @@ import { useCallback } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   ASPIRATIONS,
-  calculateAspirationScore,
-  calculateOverallScore,
+  calculateAspirationScore_static,
+  calculateOverallScore_static,
   getStatus,
 } from "@/lib/agenda-2063-data";
 
@@ -40,7 +40,7 @@ const EXPECTED_PROGRESS = 26; // (2026-2013)/50 * 100
 const AT_RISK_THRESHOLD = Math.round(EXPECTED_PROGRESS * 0.7); // 18
 
 export function ScoreDashboard() {
-  const overallScore = calculateOverallScore(ASPIRATIONS);
+  const overallScore = calculateOverallScore_static(ASPIRATIONS);
   const overallScoreRounded = parseFloat(overallScore.toFixed(1));
   const overallStatus = getStatus(overallScore);
   const overallColors = STATUS_COLORS[overallStatus];
@@ -148,7 +148,7 @@ export function ScoreDashboard() {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
           {ASPIRATIONS.map((asp) => {
-            const score = calculateAspirationScore(asp);
+            const score = calculateAspirationScore_static(asp);
             const scoreRounded = Math.round(score);
             const status = getStatus(score);
             const colors = STATUS_COLORS[status];

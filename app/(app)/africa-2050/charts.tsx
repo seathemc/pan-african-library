@@ -118,26 +118,33 @@ const educationData = [
 ];
 
 // Health Data (with 2063 targets)
+// Audit fix 2026-05 (pass III): `infantMortality` was 92 — but that's the
+// UNDER-5 mortality rate, not infant (under 1 year). Real infant mortality
+// for Africa 2013 was ~60/1000 per WHO/UN IGME (childmortality.org).
+// Renamed series for clarity. Forward values revised proportionally.
 const healthData = [
-  { year: "2013", lifeExpectancy: 60, infantMortality: 92, maternalMortality: 480, waterAccess: 61, isBaseline: true },
-  { year: "2025", lifeExpectancy: 64, infantMortality: 71, maternalMortality: 394, waterAccess: 72 },
-  { year: "2030", lifeExpectancy: 66, infantMortality: 58, maternalMortality: 320, waterAccess: 78 },
-  { year: "2035", lifeExpectancy: 67.5, infantMortality: 48, maternalMortality: 260, waterAccess: 83 },
-  { year: "2040", lifeExpectancy: 69, infantMortality: 40, maternalMortality: 200, waterAccess: 88 },
-  { year: "2045", lifeExpectancy: 69.5, infantMortality: 33, maternalMortality: 150, waterAccess: 93 },
-  { year: "2050", lifeExpectancy: 70, infantMortality: 28, maternalMortality: 120, waterAccess: 97 },
-  { year: "2063", lifeExpectancy: 75, infantMortality: 25, maternalMortality: 70, waterAccess: 100, isTarget: true },
+  { year: "2013", lifeExpectancy: 60, infantMortality: 60, maternalMortality: 480, waterAccess: 61, isBaseline: true },
+  { year: "2025", lifeExpectancy: 64, infantMortality: 46, maternalMortality: 394, waterAccess: 72 },
+  { year: "2030", lifeExpectancy: 66, infantMortality: 38, maternalMortality: 320, waterAccess: 78 },
+  { year: "2035", lifeExpectancy: 67.5, infantMortality: 32, maternalMortality: 260, waterAccess: 83 },
+  { year: "2040", lifeExpectancy: 69, infantMortality: 27, maternalMortality: 200, waterAccess: 88 },
+  { year: "2045", lifeExpectancy: 69.5, infantMortality: 22, maternalMortality: 150, waterAccess: 93 },
+  { year: "2050", lifeExpectancy: 70, infantMortality: 19, maternalMortality: 120, waterAccess: 97 },
+  { year: "2063", lifeExpectancy: 75, infantMortality: 15, maternalMortality: 70, waterAccess: 100, isTarget: true },
 ];
 
 // Digital Transformation Data
+// Audit fix 2026-05 (pass III): `mobile` field is mobile SIM connections in
+// MILLIONS (GSMA Mobile Economy Africa). 2013 actual ~750M (chart had 280 —
+// wrong by 3x). Forward values follow GSMA's projection trajectory.
 const digitalData = [
-  { year: "2013", internet: 16, mobile: 280, digitalPayments: 40, techStartups: 1.0 },
-  { year: "2025", internet: 36, mobile: 560, digitalPayments: 180, techStartups: 3.2 },
-  { year: "2030", internet: 48, mobile: 720, digitalPayments: 350, techStartups: 6.5 },
-  { year: "2035", internet: 62, mobile: 920, digitalPayments: 620, techStartups: 12 },
-  { year: "2040", internet: 74, mobile: 1150, digitalPayments: 1000, techStartups: 18 },
-  { year: "2045", internet: 85, mobile: 1380, digitalPayments: 1450, techStartups: 24 },
-  { year: "2050", internet: 93, mobile: 1650, digitalPayments: 1920, techStartups: 30 },
+  { year: "2013", internet: 16, mobile: 750, digitalPayments: 40, techStartups: 1.0 },
+  { year: "2025", internet: 36, mobile: 1100, digitalPayments: 180, techStartups: 3.2 },
+  { year: "2030", internet: 48, mobile: 1280, digitalPayments: 350, techStartups: 6.5 },
+  { year: "2035", internet: 62, mobile: 1450, digitalPayments: 620, techStartups: 12 },
+  { year: "2040", internet: 74, mobile: 1600, digitalPayments: 1000, techStartups: 18 },
+  { year: "2045", internet: 85, mobile: 1750, digitalPayments: 1450, techStartups: 24 },
+  { year: "2050", internet: 93, mobile: 1900, digitalPayments: 1920, techStartups: 30 },
 ];
 
 // Governance Data (Aspiration 3, 4)

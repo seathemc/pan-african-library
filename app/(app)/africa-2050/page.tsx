@@ -11,18 +11,19 @@ import {
   Users,
   Globe2,
   Target,
-  Info,
 } from "lucide-react";
 import {
   ASPIRATIONS,
-  calculateProgress,
-  calculateAspirationScore,
+  calculateProgress_static,
+  calculateAspirationScore_static,
   getStatus,
   type Aspiration,
   type Indicator,
 } from "@/lib/agenda-2063-data";
 import { AfricaCharts } from "./charts";
-import { ScoreDashboard } from "./score-dashboard";
+// ScoreDashboard intentionally removed from render — it consumed the
+// deprecated static data layer and rendered a competing composite score.
+// LiveDataSection (below) is the canonical composite display now.
 import { ViewSwitcher } from "./view-switcher";
 import { ForecastView } from "./forecast-view";
 import { LiveDataSection } from "./live-data-section";
@@ -91,7 +92,7 @@ function getTopIndicators(aspiration: Aspiration): Indicator[] {
   // Pick the 2–3 most interesting ones: best and worst performers
   if (allIndicators.length <= 3) return allIndicators;
   const sorted = [...allIndicators].sort(
-    (a, b) => calculateProgress(b) - calculateProgress(a),
+    (a, b) => calculateProgress_static(b) - calculateProgress_static(a),
   );
   return [sorted[0], sorted[Math.floor(sorted.length / 2)], sorted[sorted.length - 1]];
 }
@@ -147,41 +148,15 @@ export default async function Africa2050Page({
       ) : (
       <>
 
-      {/* ── NEW: Live data layer (ingested from public APIs) ─────────── */}
+      {/* ── Live data layer (ingested from public APIs) ─────────── */}
       <LiveDataSection />
-
-      <div className="border-t border-muted my-4 pt-2">
-        <p className="text-xs text-muted-foreground uppercase tracking-wider">
-          Static reference dashboard (below) — uses hand-curated indicators while we expand pipeline coverage
-        </p>
-      </div>
-
-      {/* Composite score dashboard + aspiration tiles + legend */}
-      <ScoreDashboard />
-
-      {/* Score methodology note */}
-      <Card className="border-muted/60 bg-muted/10">
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Info className="h-4 w-4" />
-            How This Score Works
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="text-sm text-muted-foreground leading-relaxed">
-          Each indicator is scored 0–100 representing how far Africa has traveled from its 2013
-          baseline toward its 2063 target. Goal scores average their indicators; aspiration scores
-          average their goals; the overall composite score averages all 7 aspirations equally.
-          The expected-progress benchmark assumes linear progress over 50 years (2013–2063),
-          placing the 2026 expectation at ~26% (13/50 years elapsed).
-        </CardContent>
-      </Card>
 
       {/* 7 Aspiration Cards */}
       <div>
         <h2 className="text-2xl font-bold mb-4">The 7 Aspirations</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {ASPIRATIONS.map((aspiration) => {
-            const score = calculateAspirationScore(aspiration);
+            const score = calculateAspirationScore_static(aspiration);
             const status = getStatus(score);
             const colors = STATUS_COLORS[status];
             const Icon = ICON_MAP[aspiration.icon] ?? Target;
@@ -217,7 +192,7 @@ export default async function Africa2050Page({
 
                   <div className="flex flex-col gap-1.5">
                     {highlights.map((indicator) => {
-                      const indProgress = calculateProgress(indicator);
+                      const indProgress = calculateProgress_static(indicator);
                       const indStatus = getStatus(indProgress);
                       const indColors = STATUS_COLORS[indStatus];
                       const direction =
@@ -271,7 +246,7 @@ export default async function Africa2050Page({
           </TabsList>
 
           {ASPIRATIONS.map((aspiration) => {
-            const aspScore = calculateAspirationScore(aspiration);
+            const aspScore = calculateAspirationScore_static(aspiration);
             const aspStatus = getStatus(aspScore);
             return (
               <TabsContent key={aspiration.id} value={aspiration.id}>
@@ -327,7 +302,7 @@ export default async function Africa2050Page({
                                 </td>
                               </tr>
                               {goal.indicators.map((indicator, idx) => {
-                                const progress = calculateProgress(indicator);
+                                const progress = calculateProgress_static(indicator);
                                 const status = getStatus(progress);
                                 const colors = STATUS_COLORS[status];
                                 return (

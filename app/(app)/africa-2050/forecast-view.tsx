@@ -2,8 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import {
   ASPIRATIONS,
-  calculateProgress,
-  calculateAspirationScore,
+  calculateProgress_static,
+  calculateAspirationScore_static,
   getStatus,
   type Indicator,
 } from "@/lib/agenda-2063-data"
@@ -16,7 +16,7 @@ const TARGET_YEAR = 2063
 const YEARS_ELAPSED = CURRENT_YEAR - START_YEAR // 13
 
 function projectCompletionYear(indicator: Indicator): number | null {
-  const progress = calculateProgress(indicator)
+  const progress = calculateProgress_static(indicator)
   if (progress >= 100) return CURRENT_YEAR
   if (YEARS_ELAPSED === 0) return null
   const progressPerYear = progress / YEARS_ELAPSED
@@ -91,7 +91,7 @@ export function ForecastView() {
 
       {ASPIRATIONS.map((aspiration) => {
         const allIndicators = aspiration.goals.flatMap(g => g.indicators)
-        const score = calculateAspirationScore(aspiration)
+        const score = calculateAspirationScore_static(aspiration)
         const onTrack = allIndicators.filter(ind => {
           const yr = projectCompletionYear(ind)
           return yr !== null && yr <= TARGET_YEAR
@@ -119,7 +119,7 @@ export function ForecastView() {
                 {allIndicators.map((indicator) => {
                   const completionYear = projectCompletionYear(indicator)
                   const traj = trajectoryLabel(completionYear)
-                  const progress = Math.round(calculateProgress(indicator))
+                  const progress = Math.round(calculateProgress_static(indicator))
                   const yearsToGo = completionYear ? completionYear - CURRENT_YEAR : null
 
                   return (

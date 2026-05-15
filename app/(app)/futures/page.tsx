@@ -26,15 +26,22 @@ export const metadata = {
 }
 
 function formatValue(value: number, unit: string): string {
-  if (unit === '%') return `${value}%`
-  if (unit === 'USD') return `$${value.toLocaleString()}`
-  if (unit === 'years') return `${value} yrs`
-  if (unit === 't/ha') return `${value.toFixed(1)} t/ha`
-  if (unit === '$B') return `$${value}B`
-  if (unit === 'M') return `${value.toLocaleString()}M`
-  if (unit === 'per 1,000') return `${value}/1k`
-  if (unit === 'index (-2.5 to 2.5)') return value.toFixed(2)
-  return `${value} ${unit}`
+  switch (unit) {
+    case '%': return `${value}%`
+    case 'USD': return `$${value.toLocaleString()}`
+    case '$B': return `$${value}B`
+    case 'M': return `${value.toLocaleString()}M`
+    case 'years': return `${value} yrs`
+    case 't CO₂/person': return `${value.toFixed(2)} t CO₂`
+    case 't/ha': return `${value.toFixed(1)} t/ha`
+    case 'kg/ha': return `${Math.round(value).toLocaleString()} kg/ha`
+    case 'per 1,000': return `${value}/1k`
+    case 'per 100k': return `${value}/100k`
+    case 'per 100': return `${value}/100`
+    case 'score': return `${value.toFixed(1)}`
+    case 'index (-2.5 to 2.5)': return value.toFixed(2)
+    default: return `${value} ${unit}`
+  }
 }
 
 function trendIcon(current: number, future: number, higherIsBetter: boolean) {

@@ -332,6 +332,12 @@ export default function AuditPage() {
             body="The Failure scenario on the Our Paths page is not from ISS African Futures. We assembled it from documented historical worst-case patterns: 1980s-1995 lost decade (SAP era), Zimbabwe 2000-2008 collapse, Sahel 2020-2024 coup contagion, +3°C climate trajectory."
             mitigation="Each Failure value cites its specific historical anchor in the indicator card's expandable methodology section."
           />
+          <Issue
+            severity="info"
+            title="Audit pass III (2026-05-15) fixes applied"
+            body="Third deep audit pass found and fixed: (1) charts.tsx healthData infantMortality showed 92/1000 — that's the under-5 rate, not infant. Corrected to ~60/1000 per WHO/UN IGME. (2) charts.tsx digitalData mobile field was 280 in 2013 — wrong by 3x; GSMA reports ~750M SIM connections. Corrected. (3) Dual composite-score rendering removed: page.tsx no longer renders ScoreDashboard alongside LiveDataSection. (4) Function name collisions resolved: the deprecated lib/agenda-2063-data.ts now exports calculateProgress_static, calculateGoalScore_static, calculateAspirationScore_static, calculateOverallScore_static to prevent silent wrong-import bugs. (5) AU Continental Report URL changed from a fabricated /20220207/ path to https://au.int/en/documents (the documents index) where users can search reliably. (6) formatValue() in both live-data-section.tsx and futures/page.tsx expanded to handle all 13 declared units."
+            mitigation="All fixes shipped in commit applied today. Verifiable in git history."
+          />
         </CardContent>
       </Card>
 

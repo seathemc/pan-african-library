@@ -52,7 +52,11 @@ export interface Aspiration {
 
 // ─── Scoring functions ────────────────────────────────────────────────────────
 
-export function calculateProgress(indicator: Indicator): number {
+// NB: renamed with _static suffix to prevent accidental collisions with the
+// live-layer versions (lib/agenda-2063-live.ts). The two compute different
+// things (this one uses static current values; live uses pop-weighted live
+// data). Consumers should be explicit about which they want.
+export function calculateProgress_static(indicator: Indicator): number {
   const range = indicator.target2063 - indicator.baseline2013
   if (range === 0) return 100
   if (indicator.higherIsBetter) {
@@ -70,21 +74,21 @@ export function calculateProgress(indicator: Indicator): number {
   }
 }
 
-export function calculateGoalScore(goal: Goal): number {
+export function calculateGoalScore_static(goal: Goal): number {
   if (goal.indicators.length === 0) return 0
-  const sum = goal.indicators.reduce((acc, ind) => acc + calculateProgress(ind), 0)
+  const sum = goal.indicators.reduce((acc, ind) => acc + calculateProgress_static(ind), 0)
   return sum / goal.indicators.length
 }
 
-export function calculateAspirationScore(aspiration: Aspiration): number {
+export function calculateAspirationScore_static(aspiration: Aspiration): number {
   if (aspiration.goals.length === 0) return 0
-  const sum = aspiration.goals.reduce((acc, goal) => acc + calculateGoalScore(goal), 0)
+  const sum = aspiration.goals.reduce((acc, goal) => acc + calculateGoalScore_static(goal), 0)
   return sum / aspiration.goals.length
 }
 
-export function calculateOverallScore(aspirations: Aspiration[]): number {
+export function calculateOverallScore_static(aspirations: Aspiration[]): number {
   if (aspirations.length === 0) return 0
-  const sum = aspirations.reduce((acc, asp) => acc + calculateAspirationScore(asp), 0)
+  const sum = aspirations.reduce((acc, asp) => acc + calculateAspirationScore_static(asp), 0)
   return sum / aspirations.length
 }
 

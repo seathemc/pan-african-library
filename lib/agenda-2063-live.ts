@@ -294,7 +294,11 @@ export const AU_REPORTED_SCORES = {
     7: { score2019: 26, score2021: 58, trend: 'up' as const },
   },
   publishedAt: '2022-02-01',
-  reportUrl: 'https://au.int/en/documents/20220207/second-continental-report-implementation-agenda-2063',
+  // AU document URLs are unstable — point users to the documents index page where
+  // they can search for "Second Continental Report" rather than a specific PDF URL
+  // that may move. Verified via the user-shared screenshot of the report cover
+  // (AUDA-NEPAD, February 2022).
+  reportUrl: 'https://au.int/en/documents',
   reportingCountries: 38,
   totalCountries: 55,
   notes:
