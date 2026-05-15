@@ -7,6 +7,35 @@ and methodology.
 
 ---
 
+## ⚠️ CRITICAL: BRANCH CONTEXT — READ FIRST
+
+All audit-relevant files live on the **`claude/deep-dive-mcp-planning-pON7y`**
+branch of `https://github.com/seathemc/pan-african-library`, NOT on `main`.
+
+If you are auditing a local checkout, first run:
+```bash
+git fetch origin claude/deep-dive-mcp-planning-pON7y
+git checkout claude/deep-dive-mcp-planning-pON7y
+git pull origin claude/deep-dive-mcp-planning-pON7y
+```
+
+Then verify these files exist before proceeding:
+- `AUDIT_PROMPT.md` (this file) at repo root
+- `lib/agenda-2063-live.ts`
+- `lib/futures-data.ts`
+- `scripts/ingest/indicators-registry.ts`
+- `data/ingested/world-bank.json`
+- `app/(app)/futures/page.tsx`
+- `app/(app)/audit/page.tsx`
+
+If any of those return "file not found", **stop the audit and report the
+branch checkout failure**. Do NOT audit the `main` branch — its `charts.tsx`,
+score dashboard, and ingestion pipeline are pre-audit and will produce
+misleading findings (e.g., electricity access 47% on `charts.tsx:52` was
+already corrected to 38% on this branch).
+
+---
+
 ## ROLE
 
 You are the Chief Data Officer of a UN statistical division being asked to
