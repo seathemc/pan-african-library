@@ -113,7 +113,9 @@ export default async function Africa2050Page({
   searchParams: Promise<{ view?: string }>
 }) {
   const { view } = await searchParams
-  const isForecast = view === "forecast"
+  // Backwards-compatible: legacy "forecast" / "dashboard" map to new "goals" / "reality"
+  const normalised = view === "forecast" ? "goals" : view === "dashboard" ? "reality" : (view ?? "reality")
+  const isGoals = normalised === "goals"
 
   return (
     <div className="flex flex-col gap-8 max-w-6xl mx-auto">
@@ -123,7 +125,7 @@ export default async function Africa2050Page({
           <div className="flex items-center gap-2">
             <Target className="h-5 w-5 text-primary" />
             <Badge variant="secondary" className="text-xs">
-              African Union · Agenda 2063
+              The Forecast · Africa 2013 → 2063
             </Badge>
           </div>
           <Suspense>
@@ -131,16 +133,16 @@ export default async function Africa2050Page({
           </Suspense>
         </div>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight">
-          {isForecast ? "Agenda 2063 Forecast" : "Agenda 2063 Dashboard"}
+          {isGoals ? "Our goals" : "Our reality"}
         </h1>
         <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
-          {isForecast
-            ? "At the current rate of progress, when will Africa reach its 2063 targets?"
-            : "Africa's progress against the African Union's 50-year vision"}
+          {isGoals
+            ? "What the African Union committed to by 2063 — and at the current pace, whether each indicator gets there."
+            : "What's actually happening on the continent, computed live from public data and benchmarked against the African Union's own self-reported scores."}
         </p>
       </div>
 
-      {isForecast ? (
+      {isGoals ? (
         <ForecastView />
       ) : (
       <>

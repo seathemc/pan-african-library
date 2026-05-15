@@ -7,6 +7,8 @@ import {
   getStatus,
   type Indicator,
 } from "@/lib/agenda-2063-data"
+import { calculateOverallScore } from "@/lib/agenda-2063-live"
+import { ForecastSummary } from "./forecast-summary"
 
 const CURRENT_YEAR = 2026
 const START_YEAR = 2013
@@ -35,8 +37,45 @@ function trajectoryLabel(completionYear: number | null): {
 }
 
 export function ForecastView() {
+  // Compute aggregate forecast stats across all indicators
+  const allIndicators = ASPIRATIONS.flatMap((a) => a.goals.flatMap((g) => g.indicators))
+  let onTrackByTarget = 0
+  let lateButReachable = 0
+  let farBehind = 0
+  let noData = 0
+  const completionYears: number[] = []
+  for (const ind of allIndicators) {
+    const yr = projectCompletionYear(ind)
+    if (yr === null) {
+      noData++
+      continue
+    }
+    completionYears.push(yr)
+    if (yr <= TARGET_YEAR) onTrackByTarget++
+    else if (yr <= TARGET_YEAR + 20) lateButReachable++
+    else farBehind++
+  }
+  const sortedYears = [...completionYears].sort((a, b) => a - b)
+  const medianCompletionYear =
+    sortedYears.length > 0
+      ? sortedYears[Math.floor(sortedYears.length / 2)]
+      : null
+  // Pull live composite for the chart
+  const liveComposite = calculateOverallScore() ?? 18
+
   return (
     <div className="flex flex-col gap-8">
+      {/* Aggregated forecast summary card with trajectory chart */}
+      <ForecastSummary
+        totalIndicators={allIndicators.length}
+        onTrackByTarget={onTrackByTarget}
+        lateButReachable={lateButReachable}
+        farBehind={farBehind}
+        noData={noData}
+        medianCompletionYear={medianCompletionYear}
+        currentScore={liveComposite}
+      />
+
       {/* Framing */}
       <div className="flex flex-col gap-2">
         <p className="text-muted-foreground leading-relaxed max-w-2xl">

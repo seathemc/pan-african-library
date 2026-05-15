@@ -8,6 +8,7 @@ import { ExternalLink, RefreshCw, CheckCircle2, AlertCircle, XCircle, TrendingUp
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { AfricaTileMap, type TileValue } from '@/components/africa-tile-map'
+import { AspirationRadar } from './aspiration-radar'
 import {
   getAllIndicators,
   getCountryRanking,
@@ -49,6 +50,9 @@ const ASPIRATION_NAMES: Record<number, string> = {
 const EXPECTED_PROGRESS_2026 = 26 // (2026 - 2013) / 50 * 100
 
 // ── Hero progress card ────────────────────────────────────────────────────
+// Modeled on the shadcn line-chart-interactive pattern: title + description on
+// the left, key numbers as right-aligned stat tiles on the same row, body
+// below.
 function HeroProgressCard({ overall }: { overall: number | null }) {
   const expectedPct = EXPECTED_PROGRESS_2026
   const actualPct = overall ?? 0
@@ -57,110 +61,113 @@ function HeroProgressCard({ overall }: { overall: number | null }) {
   const status =
     actualPct >= expectedPct ? 'on-track' : actualPct >= expectedPct * 0.7 ? 'at-risk' : 'behind'
 
+  // Reasoned, less-aggressive color tokens. "Behind" reads as amber-orange
+  // rather than emergency red — this is a measurement, not an alarm.
+  const accentText =
+    status === 'on-track'
+      ? 'text-emerald-600 dark:text-emerald-400'
+      : status === 'at-risk'
+        ? 'text-amber-600 dark:text-amber-400'
+        : 'text-orange-600 dark:text-orange-400'
+  const barFill =
+    status === 'on-track'
+      ? 'bg-emerald-500'
+      : status === 'at-risk'
+        ? 'bg-amber-500'
+        : 'bg-orange-500'
+  const statusLabel =
+    status === 'on-track' ? 'On track' : status === 'at-risk' ? 'Slipping' : 'Behind pace'
+
   return (
-    <Card className="overflow-hidden border-primary/30 relative">
-      {/* Subtle background gradient */}
-      <div
-        className="absolute inset-0 -z-0 opacity-40"
-        style={{
-          background:
-            status === 'on-track'
-              ? 'radial-gradient(ellipse at top left, hsl(160 60% 50% / 0.08), transparent 60%)'
-              : status === 'at-risk'
-                ? 'radial-gradient(ellipse at top left, hsl(40 90% 55% / 0.08), transparent 60%)'
-                : 'radial-gradient(ellipse at top left, hsl(0 70% 55% / 0.08), transparent 60%)',
-        }}
-      />
-      <CardContent className="p-6 sm:p-8 relative z-10">
-        <div className="flex flex-col gap-6">
-          {/* Headline number */}
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
-            <Badge variant="outline" className="text-[10px] uppercase tracking-wider gap-1.5 self-start">
+    <Card className="overflow-hidden">
+      {/* Header row: title left · stat tiles right (shadcn pattern) */}
+      <div className="flex flex-col sm:flex-row sm:items-stretch border-b">
+        <div className="flex-1 px-6 py-5 sm:py-6 flex flex-col gap-1.5 justify-center">
+          <div className="flex items-center gap-2">
+            <Badge variant="outline" className="text-[10px] uppercase tracking-wider gap-1.5 font-normal">
               <RefreshCw className="h-3 w-3" />
-              Live · {new Date().getFullYear()}
+              Live
             </Badge>
-            <span
-              className={`text-7xl sm:text-8xl font-black tabular-nums leading-none ${
-                status === 'on-track'
-                  ? 'text-emerald-500 dark:text-emerald-400'
-                  : status === 'at-risk'
-                    ? 'text-amber-500 dark:text-amber-400'
-                    : 'text-red-500 dark:text-red-400'
-              }`}
-            >
-              {Math.round(actualPct)}<span className="text-3xl sm:text-4xl">%</span>
+            <span className="text-xs text-muted-foreground tabular-nums">
+              13 of 50 years elapsed (2013 → 2063)
             </span>
-            <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-medium">
-                Agenda 2063 progress
-              </span>
-              <span className="text-xs text-muted-foreground">
-                Composite of 7 aspirations · {Math.round(expectedPct)}% expected by 2026
-              </span>
-            </div>
           </div>
+          <h2 className="text-xl sm:text-2xl font-semibold tracking-tight">
+            Agenda 2063 composite progress
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Continental average across the seven aspirations, computed from public data.
+          </p>
+        </div>
 
-          {/* The bar */}
-          <div className="flex flex-col gap-2">
-            <div className="relative h-8 bg-muted/60 rounded-md overflow-hidden">
-              {/* Expected marker (background tick) */}
-              <div
-                className="absolute top-0 bottom-0 border-l-2 border-dashed border-muted-foreground/50 z-10 flex items-end"
-                style={{ left: `${expectedPct}%` }}
-              >
-                <span className="text-[10px] text-muted-foreground bg-background/90 px-1 py-px rounded ml-1 mb-0.5 whitespace-nowrap">
-                  ↑ expected by 2026
-                </span>
-              </div>
-              {/* Actual fill */}
-              <div
-                className={`h-full rounded-md transition-all relative ${
-                  status === 'on-track'
-                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-400'
-                    : status === 'at-risk'
-                      ? 'bg-gradient-to-r from-amber-500 to-amber-400'
-                      : 'bg-gradient-to-r from-red-500 to-red-400'
-                }`}
-                style={{ width: `${Math.min(100, actualPct)}%` }}
-              />
-              {/* 2063 target marker (right edge) */}
-              <div className="absolute top-0 right-0 bottom-0 w-0.5 bg-emerald-500/40" />
-            </div>
-
-            {/* Axis */}
-            <div className="flex justify-between text-xs text-muted-foreground tabular-nums">
-              <span>2013 baseline · 0%</span>
-              <span className="font-medium">
-                2026 expected · {Math.round(expectedPct)}%
-              </span>
-              <span className="text-emerald-500 dark:text-emerald-400 font-medium">
-                2063 target · 100%
-              </span>
-            </div>
+        {/* Right-aligned stat tiles — composite score + delta vs expected */}
+        <div className="flex sm:border-l divide-x">
+          <div className="px-6 py-4 sm:py-6 flex flex-col gap-1 min-w-[140px]">
+            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+              Composite
+            </span>
+            <span className={`text-3xl sm:text-4xl font-bold tabular-nums leading-none ${accentText}`}>
+              {Math.round(actualPct)}%
+            </span>
           </div>
-
-          {/* Delta + status callouts */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="bg-muted/40 rounded-md px-4 py-3">
-              <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-1">
-                {ahead ? <TrendingUp className="h-3.5 w-3.5 text-emerald-500" /> : <TrendingDown className="h-3.5 w-3.5 text-red-500" />}
-                vs. expected pace
-              </div>
-              <div className={`text-xl font-bold tabular-nums ${ahead ? 'text-emerald-500 dark:text-emerald-400' : 'text-red-500 dark:text-red-400'}`}>
-                {ahead ? '+' : ''}{delta.toFixed(1)} pts
-              </div>
-            </div>
-            <div className="bg-muted/40 rounded-md px-4 py-3">
-              <div className="text-xs text-muted-foreground mb-1">Years elapsed of 50</div>
-              <div className="text-xl font-bold tabular-nums">13 / 50</div>
-            </div>
-            <div className="bg-muted/40 rounded-md px-4 py-3">
-              <div className="text-xs text-muted-foreground mb-1">At current pace, on track?</div>
-              <div className={`text-xl font-bold ${status === 'on-track' ? 'text-emerald-500 dark:text-emerald-400' : status === 'at-risk' ? 'text-amber-500 dark:text-amber-400' : 'text-red-500 dark:text-red-400'}`}>
-                {status === 'on-track' ? 'Yes' : status === 'at-risk' ? 'Slipping' : 'No'}
-              </div>
-            </div>
+          <div className="px-6 py-4 sm:py-6 flex flex-col gap-1 min-w-[140px]">
+            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+              vs. expected
+            </span>
+            <span className="flex items-baseline gap-1.5">
+              <span className={`text-3xl sm:text-4xl font-bold tabular-nums leading-none ${ahead ? 'text-emerald-600 dark:text-emerald-400' : accentText}`}>
+                {ahead ? '+' : ''}{delta.toFixed(1)}
+              </span>
+              <span className="text-xs text-muted-foreground">pts</span>
+            </span>
           </div>
+        </div>
+      </div>
+
+      {/* Body: progress bar + status + axis */}
+      <CardContent className="px-6 py-5 sm:py-6 flex flex-col gap-3">
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-2 text-sm">
+            {ahead ? (
+              <TrendingUp className="h-4 w-4 text-emerald-500" />
+            ) : (
+              <TrendingDown className={status === 'behind' ? 'h-4 w-4 text-orange-500' : 'h-4 w-4 text-amber-500'} />
+            )}
+            <span className={`font-medium ${accentText}`}>{statusLabel}</span>
+            <span className="text-muted-foreground text-xs">
+              {ahead
+                ? `${Math.abs(delta).toFixed(1)} points ahead of where 2063 trajectory expects us`
+                : `${Math.abs(delta).toFixed(1)} points below where 2063 trajectory expects us`}
+            </span>
+          </div>
+          <span className="text-xs text-muted-foreground tabular-nums">
+            Expected by {new Date().getFullYear()}: {expectedPct}%
+          </span>
+        </div>
+
+        {/* Slim progress bar with markers */}
+        <div className="relative">
+          <div className="h-2.5 bg-muted rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all ${barFill}`}
+              style={{ width: `${Math.min(100, actualPct)}%` }}
+            />
+          </div>
+          {/* Expected marker */}
+          <div
+            className="absolute top-1/2 -translate-y-1/2 h-4 w-px bg-muted-foreground/60"
+            style={{ left: `${expectedPct}%` }}
+          />
+          {/* 2063 target marker (right edge accent) */}
+          <div className="absolute top-1/2 -translate-y-1/2 right-0 h-4 w-px bg-emerald-500" />
+        </div>
+
+        <div className="flex justify-between text-xs text-muted-foreground tabular-nums pt-1">
+          <span>2013 baseline</span>
+          <span style={{ marginLeft: `${expectedPct - 2}%` }}>
+            <span className="text-foreground/60">{expectedPct}% expected</span>
+          </span>
+          <span className="text-emerald-600 dark:text-emerald-400">2063 target</span>
         </div>
       </CardContent>
     </Card>
@@ -385,7 +392,17 @@ export function LiveDataSection() {
             independently from public data. Divergence is the story.
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(280px,420px)] gap-6 items-start">
+          {/* Radar shows the same scores as a shape — instantly readable */}
+          <AspirationRadar
+            data={[1, 2, 3, 4, 5, 6, 7].map((id) => ({
+              aspiration: ASPIRATION_NAMES[id],
+              ours: calculateAspirationScore(id),
+              au2021: AU_REPORTED_SCORES.aspirations[id as 1 | 2 | 3 | 4 | 5 | 6 | 7].score2021,
+              au2019: AU_REPORTED_SCORES.aspirations[id as 1 | 2 | 3 | 4 | 5 | 6 | 7].score2019,
+            }))}
+          />
+          <div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -474,6 +491,7 @@ export function LiveDataSection() {
             </a>{' '}
             · {AU_REPORTED_SCORES.reportingCountries}/{AU_REPORTED_SCORES.totalCountries} countries reported.
           </p>
+          </div>
         </CardContent>
       </Card>
 

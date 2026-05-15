@@ -130,37 +130,26 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
         <Separator className="mx-2" />
 
-        {/* Future */}
+        {/* The Forecast — single parent with two child views */}
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
-            Future
+            The Forecast
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/africa-2050")}>
-                  <Link href="/africa-2050">
-                    <Telescope />
-                    <span>The Forecast</span>
+                <SidebarMenuButton asChild isActive={isActive("/africa-2050") && !pathname.includes("goals")}>
+                  <Link href="/africa-2050?view=reality">
+                    <TrendingUp />
+                    <span>Our reality</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        {/* Present */}
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
-            Present
-          </SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/africa-2050")}>
-                  <Link href="/africa-2050">
-                    <TrendingUp />
-                    <span>Agenda 2063 Dashboard</span>
+                <SidebarMenuButton asChild isActive={isActive("/africa-2050") && pathname.includes("goals")}>
+                  <Link href="/africa-2050?view=goals">
+                    <Telescope />
+                    <span>Our goals</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
