@@ -216,7 +216,10 @@ export function getCoverageStats() {
 }
 
 // ── Scoring ──────────────────────────────────────────────────────────────
-/** 0-100 progress score: how far from baseline toward target, clamped. */
+/** 0-100 progress score: how far from baseline toward target, clamped.
+ *  Returns null when progress is undefined: missing inputs OR baseline === target
+ *  (no direction of "progress" to measure). Audit pass IX: previously returned
+ *  100 or 0 at range===0, inconsistent with the static layer's null semantics. */
 export function calculateProgress(
   current: number | null,
   baseline: number | null,
@@ -225,7 +228,7 @@ export function calculateProgress(
 ): number | null {
   if (current === null || baseline === null) return null
   const range = target - baseline
-  if (range === 0) return current === target ? 100 : 0
+  if (range === 0) return null
   if (higherIsBetter) {
     return Math.max(0, Math.min(100, ((current - baseline) / range) * 100))
   }

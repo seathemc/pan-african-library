@@ -93,7 +93,11 @@ function colorForValue(
   if (value === null) return "bg-muted/40"
   const [min, max] = domain
   const range = max - min
-  if (range === 0) return "bg-muted"
+  // Audit fix pass IX: when only one country has data (or all values are
+  // equal), range=0 — previously every tile rendered muted, hiding the
+  // single data point. Now: the tile with a value gets the mid-scale colour
+  // so the user can see it has data even when there's nothing to compare to.
+  if (range === 0) return "bg-amber-500/80 text-amber-950"
   let normalised = (value - min) / range // 0..1
   if (!higherIsBetter) normalised = 1 - normalised
   // 5-stop diverging scale, red → amber → emerald

@@ -2,7 +2,7 @@
   "panAfricanLiterature": {
     "metadata": {
       "compiledDate": "2026-05-14",
-      "totalWorks": 564,
+      "totalWorks": 561,
       "description": "Most comprehensive pan-African literature archive in existence. Includes: foundational texts (Douglass, Wheatley, Jacobs), Marcus Garvey & Pan-Africanism (Padmore, Eric Williams, CLR James), African-American canon (Baldwin, Morrison, Walker, Wright, Ellison, Hughes, Hurston, Angelou, Brooks, Giovanni), Black feminist theory (bell hooks, Angela Davis, Collins, Crenshaw, Hartman), Caribbean intellectual tradition (Walcott, Lamming, Kincaid, Césaire, Wynter), Harlem Renaissance, civil rights literature (MLK, Malcolm X), Black Power writings (Newton, Seale, Shakur), African independence leaders (Nkrumah, Nyerere, Cabral, Sankara, Mandela), contemporary award winners (Coates, Whitehead, Ward, Jemisin, Gyasi), August Wilson's Pittsburgh Cycle, Afrofuturism (Butler, Delany, Solomon), critical theory (Stuart Hall, Appiah, Fanon, Diop), plus African Union policy documents"
     },
     "works": [
@@ -4111,22 +4111,6 @@
         "significance": "Hugo Award; first author EVER to win Hugo three consecutive years"
       },
       {
-        "id": 256,
-        "title": "Homegoing",
-        "author": "Yaa Gyasi",
-        "yearPublished": 2016,
-        "language": "English",
-        "region": "Diaspora",
-        "country": "Ghana/USA",
-        "genre": "Fiction",
-        "era": "Contemporary",
-        "description": "Epic spanning 300 years following two half-sisters: one married to slave trader, one sold into slavery.",
-        "accessLinks": [
-          "Commercial - check libraries and bookstores"
-        ],
-        "significance": "National Book Critics Circle Award; seven-figure advance; breakthrough debut"
-      },
-      {
         "id": 257,
         "title": "Transcendent Kingdom",
         "author": "Yaa Gyasi",
@@ -4173,22 +4157,6 @@
           "https://www.marxists.org/archive/sankara/1987/october/08.htm"
         ],
         "significance": "Radical feminist praxis; appointed women to cabinet positions"
-      },
-      {
-        "id": 260,
-        "title": "Facing Mount Kenya",
-        "author": "Jomo Kenyatta",
-        "yearPublished": 1938,
-        "language": "English",
-        "region": "East Africa",
-        "country": "Kenya",
-        "genre": "Anthropology",
-        "era": "Post-colonial",
-        "description": "Anthropological study of Kikuyu people's traditions written by future Kenyan president.",
-        "accessLinks": [
-          "https://archive.org/details/facingmountkenya00keny"
-        ],
-        "significance": "First Kenyan president; defended African culture against colonialism"
       },
       {
         "id": 261,
@@ -4973,22 +4941,6 @@
           "Commercial - check libraries and bookstores"
         ],
         "significance": "Dylan Thomas Prize; masterful second novel"
-      },
-      {
-        "id": 310,
-        "title": "We Need New Names",
-        "author": "NoViolet Bulawayo",
-        "yearPublished": 2013,
-        "language": "English",
-        "region": "Southern Africa",
-        "country": "Zimbabwe",
-        "genre": "Fiction",
-        "era": "Contemporary",
-        "description": "Novel about girl growing up in Zimbabwean shantytown who immigrates to America.",
-        "accessLinks": [
-          "Commercial - check libraries and bookstores"
-        ],
-        "significance": "Man Booker Prize shortlist; debut novel; Zimbabwean emigration"
       },
       {
         "id": 311,
