@@ -175,15 +175,19 @@ export const INDICATORS: IndicatorDef[] = [
   {
     id: 'gdp-per-capita',
     name: 'GDP per capita (current US$)',
-    description: 'Gross domestic product divided by midyear population.',
+    description: 'Gross domestic product divided by midyear population, current US$ (not PPP).',
     goalId: 4, aspirationId: 1,
     source: 'world-bank',
     sourceCode: 'NY.GDP.PCAP.CD',
     sourceUrl: 'https://data.worldbank.org/indicator/NY.GDP.PCAP.CD',
     unit: 'USD',
-    baseline2013: 1880, target2063: 12000,
+    // Audit fix 2026-05 (pass IV): baseline was 1880 (sub-Saharan Africa only).
+    // Whole-continent value per WB 2013: ~$2,210 (current US$). FTYIP target
+    // of $12,000 is the upper-middle-income threshold.
+    baseline2013: 2210, target2063: 12000,
     targetSource: 'FTYIP — upper-middle-income status for Africa',
     higherIsBetter: true,
+    notes: 'Current US$ (NY.GDP.PCAP.CD), not PPP. For PPP figures see futures-data.ts which uses NY.GDP.PCAP.PP.CD.',
   },
   {
     id: 'unemployment-youth',

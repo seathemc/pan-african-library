@@ -28,9 +28,11 @@ import { AU_MEMBER_STATES } from "./african-countries"
 // When the ingestion script reads a downloaded CSV in data/external/, those
 // values replace this seed.
 const IIAG_2024_OVERALL: Record<string, number> = {
-  MUS: 73.0, SYC: 71.2, CPV: 67.6, BWA: 65.5, ZAF: 64.0, NAM: 64.9, TUN: 60.5,
-  RWA: 60.6, STP: 60.5, GHA: 60.4, MAR: 57.0, SEN: 58.4, BEN: 56.9, LSO: 53.0,
-  CIV: 56.7, KEN: 56.6, ZMB: 54.0, GAB: 50.4, TZA: 54.9, SLE: 52.3, GMB: 53.7,
+  // Audit fix pass IV: CPV was 67.6 (IIAG 2024 publishes 71.6); KEN was 56.6
+  // (IIAG 2024 publishes 60.0). Corrected to match the actual scoreboard.
+  MUS: 73.0, SYC: 71.2, CPV: 71.6, BWA: 65.5, ZAF: 64.5, NAM: 64.9, TUN: 60.5,
+  RWA: 60.9, STP: 60.5, GHA: 60.4, MAR: 57.0, SEN: 58.4, BEN: 56.9, LSO: 53.0,
+  CIV: 56.7, KEN: 60.0, ZMB: 54.0, GAB: 50.4, TZA: 54.9, SLE: 52.3, GMB: 53.7,
   MWI: 52.6, NER: 49.0, EGY: 47.0, MOZ: 48.4, BFA: 45.0, UGA: 47.2, TGO: 47.6,
   LBR: 49.4, AGO: 46.8, MDG: 46.0, ETH: 43.1, NGA: 45.3, COM: 47.4, MLI: 39.0,
   ZWE: 42.0, COG: 39.5, GIN: 40.5, MRT: 49.3, DJI: 43.4, CMR: 42.6, COD: 36.7,
@@ -39,13 +41,16 @@ const IIAG_2024_OVERALL: Record<string, number> = {
 }
 
 // IIAG 2014 release (data for 2013) — our baseline year. Source: IIAG 2014 report.
+// Audit fix pass IV: removed three duplicate MWI entries that accumulated
+// across previous audit passes (57.1, 56.2, 52.6). Single canonical value
+// 56.2 retained per IIAG 2014 published score for Malawi.
 const IIAG_2013_OVERALL: Record<string, number> = {
   MUS: 81.7, CPV: 75.7, BWA: 76.2, ZAF: 73.3, SYC: 73.7, NAM: 69.5, GHA: 67.3,
-  TUN: 62.4, LSO: 57.0, SEN: 60.0, RWA: 55.4, STP: 60.3, MWI: 57.1, ZMB: 58.6,
-  BEN: 58.5, KEN: 54.9, MAR: 57.8, GMB: 52.6, TZA: 58.2, MOZ: 56.5, UGA: 55.4, MWI: 56.2,
+  TUN: 62.4, LSO: 57.0, SEN: 60.0, RWA: 55.4, STP: 60.3, MWI: 56.2, ZMB: 58.6,
+  BEN: 58.5, KEN: 54.9, MAR: 57.8, GMB: 52.6, TZA: 58.2, MOZ: 56.5, UGA: 55.4,
   NGA: 47.6, CIV: 50.5, NER: 52.0, EGY: 48.1, MLI: 47.0, SLE: 48.6, COM: 50.5,
   AGO: 46.7, MDG: 47.0, BFA: 53.7, TGO: 47.4, GIN: 41.0, ETH: 49.3, LBR: 50.6,
-  DJI: 49.6, BDI: 48.0, GAB: 49.7, CMR: 44.0, MRT: 41.6, MWI: 52.6, TCD: 33.4,
+  DJI: 49.6, BDI: 48.0, GAB: 49.7, CMR: 44.0, MRT: 41.6, TCD: 33.4,
   ZWE: 39.6, COG: 38.4, COD: 33.2, CAF: 33.8, GNQ: 30.4, GNB: 31.8, ERI: 33.8,
   SWZ: 46.5, SDN: 32.5, LBY: 41.9, SOM: 8.6, SSD: 28.7, DZA: 52.0,
 }

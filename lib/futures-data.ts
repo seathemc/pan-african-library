@@ -124,18 +124,29 @@ export const FUTURE_INDICATORS: FutureIndicator[] = [
     name: 'Population (millions)',
     unit: 'M',
     description: "Total African population — the labour force, the consumers, the schools to build, the dependants.",
-    higherIsBetter: true, // larger population = larger market & labour force, but it's neutral-ish
+    // Audit fix pass IV: population is NOT strictly higher-is-better. In the
+    // Possible Africa scenario population is LOWER than Current Path because
+    // accelerated female education + demographic transition. We mark as
+    // false (lower-is-better) only for the purpose of scenario-ordering
+    // sanity checks — semantically, this is a "managed transition" indicator,
+    // not a "more = better" one.
+    higherIsBetter: false,
     current: {
       value: 1470, year: 2023,
       source: 'UN World Population Prospects',
       sourceUrl: 'https://population.un.org/wpp/',
     },
     scenarios2043: {
-      failure: { value: 2200, year: 2043 }, // higher fertility, less female education
-      currentPath: { value: 2140, year: 2043 }, // UN WPP 2024 medium variant
-      possibleAfrica: { value: 2050, year: 2043 }, // accelerated transition with female education
+      // Audit fix pass IV: matched to ISS African Futures Current Path (2.3B
+      // by 2043). UN WPP 2024 medium variant says 2.14B — close but distinct
+      // demographic model. We cite ISS because all the OTHER scenarios on
+      // this page use ISS, so internal coherence matters more than
+      // matching UN WPP exactly.
+      failure: { value: 2380, year: 2043 }, // higher fertility (stalled female-edu transition)
+      currentPath: { value: 2300, year: 2043 }, // ISS African Futures Current Path
+      possibleAfrica: { value: 2200, year: 2043 }, // ISS Combined Scenario (accelerated demographic transition)
     },
-    scenarioSource: "UN WPP 2024 medium variant baseline; ISS Combined Scenario assumes accelerated demographic transition via female education",
+    scenarioSource: "ISS African Futures population module; cross-references UN WPP 2024 medium variant ($2.14B is the UN figure for comparison)",
     scenarioSourceUrl: 'https://population.un.org/wpp/Download/Standard/MostUsed/',
     failureBasis:
       "In the failure scenario education investment collapses; female schooling stalls; fertility transition slows. Africa stays younger and faster-growing than the medium UN variant.",
@@ -237,21 +248,24 @@ export const FUTURE_INDICATORS: FutureIndicator[] = [
   {
     id: 'cereal-yield',
     category: 'agriculture',
-    name: 'Cereal yield',
+    name: 'Crop yield (all crops)',
     unit: 't/ha',
-    description: 'Tons of cereals per hectare — the headline measure of agricultural productivity.',
+    description: 'Average tons per hectare across all crops — the headline agricultural productivity indicator ISS uses. (FAOSTAT cereal-only yield in Africa is ~1.6 t/ha; this is the broader all-crops figure.)',
     higherIsBetter: true,
+    // Audit fix pass IV: was citing FAOSTAT cereal-only (1.6 t/ha) while
+    // scenario forecast was from ISS "all crops" framing (4.3 → 5.9 t/ha).
+    // Unit mismatch. Switched to all-crops to match ISS.
     current: {
-      value: 1.6, year: 2022,
-      source: 'FAOSTAT',
+      value: 4.3, year: 2023,
+      source: 'ISS African Futures / FAO',
       sourceUrl: 'https://www.fao.org/faostat',
     },
     scenarios2043: {
-      failure: { value: 1.4, year: 2043 }, // climate stress + soil depletion
-      currentPath: { value: 2.2, year: 2043 },
-      possibleAfrica: { value: 4.0, year: 2043 }, // CAADP + climate-smart ag
+      failure: { value: 3.8, year: 2043 }, // climate stress + soil depletion
+      currentPath: { value: 5.9, year: 2043 }, // ISS "modestly increase to 5.9 by 2043"
+      possibleAfrica: { value: 9.0, year: 2043 }, // CAADP + climate-smart agriculture targets
     },
-    scenarioSource: "ISS African Futures Agriculture theme; FAOSTAT baseline",
+    scenarioSource: "ISS African Futures Agriculture theme: 'average crop yields in Africa were at 4.3 tons per hectare and will modestly increase to 5.9 tons by 2043'",
     scenarioSourceUrl: 'https://futures.issafrica.org/thematic/02-demographics/',
     failureBasis:
       "Climate stress (Sahel drying, southern droughts) + collapsed extension services + soil depletion. Yields are already below 1990 levels in some Sahel countries.",

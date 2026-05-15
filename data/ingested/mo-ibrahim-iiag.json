@@ -4,7 +4,7 @@
     "source": "mo-ibrahim-iiag",
     "sourceCode": "IIAG-Overall-Governance",
     "sourceUrl": "https://iiag.online",
-    "fetchedAt": "2026-05-15T01:05:20.194Z",
+    "fetchedAt": "2026-05-15T01:49:19.986Z",
     "isSeed": true,
     "countries": {
       "DZA": {
@@ -170,11 +170,11 @@
           },
           {
             "year": 2023,
-            "value": 67.6
+            "value": 71.6
           }
         ],
         "latestYear": 2023,
-        "latestValue": 67.6,
+        "latestValue": 71.6,
         "baselineYear": 2013,
         "baselineValue": 75.7
       },
@@ -512,11 +512,11 @@
           },
           {
             "year": 2023,
-            "value": 56.6
+            "value": 60
           }
         ],
         "latestYear": 2023,
-        "latestValue": 56.6,
+        "latestValue": 60,
         "baselineYear": 2013,
         "baselineValue": 54.9
       },
@@ -566,11 +566,11 @@
           },
           {
             "year": 2023,
-            "value": 60.6
+            "value": 60.9
           }
         ],
         "latestYear": 2023,
-        "latestValue": 60.6,
+        "latestValue": 60.9,
         "baselineYear": 2013,
         "baselineValue": 55.4
       },
@@ -886,7 +886,7 @@
         "observations": [
           {
             "year": 2013,
-            "value": 52.6
+            "value": 56.2
           },
           {
             "year": 2023,
@@ -896,7 +896,7 @@
         "latestYear": 2023,
         "latestValue": 52.6,
         "baselineYear": 2013,
-        "baselineValue": 52.6
+        "baselineValue": 56.2
       },
       "MOZ": {
         "iso3": "MOZ",
@@ -944,11 +944,11 @@
           },
           {
             "year": 2023,
-            "value": 64
+            "value": 64.5
           }
         ],
         "latestYear": 2023,
-        "latestValue": 64,
+        "latestValue": 64.5,
         "baselineYear": 2013,
         "baselineValue": 73.3
       },
@@ -991,7 +991,7 @@
     },
     "continental": {
       "latestYear": 2023,
-      "latestValue": 47.99259259259258,
+      "latestValue": 48.14444444444444,
       "countriesReporting": 54,
       "countriesMissing": [
         "ESH"
