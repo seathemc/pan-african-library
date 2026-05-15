@@ -14,7 +14,10 @@ export async function GET(req: NextRequest) {
   const offset = Number(searchParams.get('offset') ?? 0)
 
   try {
-    const where: Parameters<typeof prisma.work.findMany>[0]['where'] = {}
+    // Audit pass XXII: Parameters<typeof fn>[0]['where'] yielded an optional
+    // type ({...} | undefined) so the index access failed. Use Prisma's
+    // generated WhereInput type via the import path instead.
+    const where: NonNullable<Parameters<typeof prisma.work.findMany>[0]>['where'] = {}
 
     if (region) where.region = { equals: region, mode: 'insensitive' }
     if (era)    where.era    = { equals: era,    mode: 'insensitive' }

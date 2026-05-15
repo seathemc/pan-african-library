@@ -25,18 +25,22 @@ export default async function CollectionsPage() {
     )
   }
 
-  let collections: Awaited<ReturnType<typeof prisma.collection.findMany>> = []
-  try {
-    collections = await prisma.collection.findMany({
-      where: { userId: user.id },
-      orderBy: { createdAt: 'desc' },
-      include: {
-        _count: { select: { works: true } },
-      },
-    })
-  } catch {
-    // DB unavailable — show empty state
+  // Audit pass XXII: removed Awaited<ReturnType<...>> type annotation —
+  // it inferred the default return type (without `include._count`) so the
+  // _count property was missing from the inferred type. Letting TypeScript
+  // infer from the actual call resolves this.
+  const fetchCollections = async () => {
+    try {
+      return await prisma.collection.findMany({
+        where: { userId: user.id },
+        orderBy: { createdAt: 'desc' },
+        include: { _count: { select: { works: true } } },
+      })
+    } catch {
+      return []
+    }
   }
+  const collections = await fetchCollections()
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto w-full">
