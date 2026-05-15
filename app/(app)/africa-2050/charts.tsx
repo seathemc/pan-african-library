@@ -92,16 +92,21 @@ const economicData = [
 ];
 
 // Energy Data (with 2063 targets)
-// Audit fix 2026-05: 2013 electricity access corrected 35→38% per WB
-// EG.ELC.ACCS.ZS continental aggregate.
+// Audit fix pass V (2026-05-15): electricityAccess trajectory was too pessimistic
+// — 47% at 2025, but WB 2022 actual continental (whole-Africa, pop-weighted)
+// was already 58%. The 2013→2025 segment was projecting +9pts/12y when actual
+// was +20pts/9y. Trajectory rebuilt: 38% baseline (2013), 58% (2022 WB actual),
+// 62% (2025 projected from current trend), then accelerating toward 100% by 2063.
+// Source: WB EG.ELC.ACCS.ZS continental aggregate.
 const energyData = [
   { year: "2013", renewable: 3, fossil: 97, electricityAccess: 38, solarGW: 5, isBaseline: true },
-  { year: "2025", renewable: 6, fossil: 94, electricityAccess: 47, solarGW: 50 },
-  { year: "2030", renewable: 10, fossil: 90, electricityAccess: 55, solarGW: 120 },
-  { year: "2035", renewable: 18, fossil: 82, electricityAccess: 65, solarGW: 280 },
-  { year: "2040", renewable: 30, fossil: 70, electricityAccess: 76, solarGW: 500 },
-  { year: "2045", renewable: 45, fossil: 55, electricityAccess: 86, solarGW: 750 },
-  { year: "2050", renewable: 60, fossil: 40, electricityAccess: 95, solarGW: 1000 },
+  { year: "2022", renewable: 5, fossil: 95, electricityAccess: 58, solarGW: 28 },
+  { year: "2025", renewable: 8, fossil: 92, electricityAccess: 62, solarGW: 50 },
+  { year: "2030", renewable: 14, fossil: 86, electricityAccess: 71, solarGW: 120 },
+  { year: "2035", renewable: 22, fossil: 78, electricityAccess: 80, solarGW: 280 },
+  { year: "2040", renewable: 35, fossil: 65, electricityAccess: 87, solarGW: 500 },
+  { year: "2045", renewable: 50, fossil: 50, electricityAccess: 93, solarGW: 750 },
+  { year: "2050", renewable: 65, fossil: 35, electricityAccess: 97, solarGW: 1000 },
   { year: "2063", renewable: 80, fossil: 20, electricityAccess: 100, solarGW: 1500, isTarget: true },
 ];
 
@@ -153,11 +158,11 @@ const digitalData = [
 // reported continental scores (governance has been *declining* slightly per
 // MIIAG, not stagnant — most recent published 2023 score is 49.3).
 const governanceData = [
-  { year: "2013", ibrahimIndex: 50.4, corruption: 32, pressFreeedom: 35, conflict: 14, isBaseline: true },
-  { year: "2018", ibrahimIndex: 49.5, corruption: 32.5, pressFreeedom: 35.5, conflict: 15 },
-  { year: "2023", ibrahimIndex: 49.3, corruption: 33, pressFreeedom: 36, conflict: 17 },
-  { year: "2026", ibrahimIndex: 48.0, corruption: 33, pressFreeedom: 36, conflict: 18 },
-  { year: "2063", ibrahimIndex: 65, corruption: 60, pressFreeedom: 70, conflict: 0, isTarget: true },
+  { year: "2013", ibrahimIndex: 50.4, corruption: 32, pressFreedom: 35, conflict: 14, isBaseline: true },
+  { year: "2018", ibrahimIndex: 49.5, corruption: 32.5, pressFreedom: 35.5, conflict: 15 },
+  { year: "2023", ibrahimIndex: 49.3, corruption: 33, pressFreedom: 36, conflict: 17 },
+  { year: "2026", ibrahimIndex: 48.0, corruption: 33, pressFreedom: 36, conflict: 18 },
+  { year: "2063", ibrahimIndex: 65, corruption: 60, pressFreedom: 70, conflict: 0, isTarget: true },
 ];
 
 // Trade & Integration Data (Aspiration 2)

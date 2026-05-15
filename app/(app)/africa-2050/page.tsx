@@ -70,14 +70,27 @@ function StatusBadge({ status }: { status: "on-track" | "at-risk" | "behind" }) 
   );
 }
 
-function ProgressBar({ progress, status }: { progress: number; status: "on-track" | "at-risk" | "behind" }) {
+// Audit fix pass V: expected-marker was hardcoded at 26% (the value for
+// year 2026). Now computed from the passed `markerYear` so the marker tracks
+// the actual benchmark for the data's measurement year. Defaults to current
+// calendar year.
+function ProgressBar({
+  progress,
+  status,
+  markerYear = new Date().getFullYear(),
+}: {
+  progress: number;
+  status: "on-track" | "at-risk" | "behind";
+  markerYear?: number;
+}) {
   const colors = STATUS_COLORS[status];
+  const expectedPct = Math.max(0, Math.min(100, ((markerYear - 2013) / 50) * 100));
   return (
     <div className="relative h-2 w-full overflow-hidden rounded-full bg-muted">
-      {/* Expected progress marker at ~26% */}
+      {/* Expected-progress-by-markerYear marker */}
       <div
         className="absolute top-0 bottom-0 w-0.5 bg-gray-400 z-10"
-        style={{ left: "26%" }}
+        style={{ left: `${expectedPct}%` }}
       />
       <div
         className={`h-full rounded-full transition-all ${colors.bar}`}
@@ -92,7 +105,7 @@ function getTopIndicators(aspiration: Aspiration): Indicator[] {
   // Pick the 2–3 most interesting ones: best and worst performers
   if (allIndicators.length <= 3) return allIndicators;
   const sorted = [...allIndicators].sort(
-    (a, b) => calculateProgress_static(b) - calculateProgress_static(a),
+    (a, b) => (calculateProgress_static(b) ?? 0) - (calculateProgress_static(a) ?? 0),
   );
   return [sorted[0], sorted[Math.floor(sorted.length / 2)], sorted[sorted.length - 1]];
 }
@@ -156,7 +169,8 @@ export default async function Africa2050Page({
         <h2 className="text-2xl font-bold mb-4">The 7 Aspirations</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {ASPIRATIONS.map((aspiration) => {
-            const score = calculateAspirationScore_static(aspiration);
+            const scoreRaw = calculateAspirationScore_static(aspiration);
+            const score = scoreRaw ?? 0;
             const status = getStatus(score);
             const colors = STATUS_COLORS[status];
             const Icon = ICON_MAP[aspiration.icon] ?? Target;
@@ -192,8 +206,11 @@ export default async function Africa2050Page({
 
                   <div className="flex flex-col gap-1.5">
                     {highlights.map((indicator) => {
-                      const indProgress = calculateProgress_static(indicator);
-                      const indStatus = getStatus(indProgress);
+                      const indProgressRaw = calculateProgress_static(indicator);
+                      const indProgress = indProgressRaw ?? 0;
+                      // Audit fix pass V: judge against indicator's own
+                      // measurement year, not a global hardcoded year.
+                      const indStatus = getStatus(indProgress, indicator.currentYear);
                       const indColors = STATUS_COLORS[indStatus];
                       const direction =
                         indicator.current > indicator.baseline2013 ? "↑" : "↓";
@@ -246,7 +263,8 @@ export default async function Africa2050Page({
           </TabsList>
 
           {ASPIRATIONS.map((aspiration) => {
-            const aspScore = calculateAspirationScore_static(aspiration);
+            const aspScoreRaw = calculateAspirationScore_static(aspiration);
+            const aspScore = aspScoreRaw ?? 0;
             const aspStatus = getStatus(aspScore);
             return (
               <TabsContent key={aspiration.id} value={aspiration.id}>
@@ -302,8 +320,10 @@ export default async function Africa2050Page({
                                 </td>
                               </tr>
                               {goal.indicators.map((indicator, idx) => {
-                                const progress = calculateProgress_static(indicator);
-                                const status = getStatus(progress);
+                                const progressRaw = calculateProgress_static(indicator);
+                                const progress = progressRaw ?? 0;
+                                // Year-aware status (audit fix pass V)
+                                const status = getStatus(progress, indicator.currentYear);
                                 const colors = STATUS_COLORS[status];
                                 return (
                                   <tr

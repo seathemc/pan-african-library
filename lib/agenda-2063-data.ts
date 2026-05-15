@@ -52,13 +52,19 @@ export interface Aspiration {
 
 // ─── Scoring functions ────────────────────────────────────────────────────────
 
-// NB: renamed with _static suffix to prevent accidental collisions with the
-// live-layer versions (lib/agenda-2063-live.ts). The two compute different
-// things (this one uses static current values; live uses pop-weighted live
-// data). Consumers should be explicit about which they want.
-export function calculateProgress_static(indicator: Indicator): number {
+// Audit fix pass V: previously this function returned 100 when target===baseline
+// (range=0) regardless of current — wrong. And it didn't handle null/NaN
+// current values. Now: returns null when progress is undefined, callers must
+// handle that explicitly (matching the live-layer semantics).
+export function calculateProgress_static(indicator: Indicator): number | null {
+  if (indicator.current === null || indicator.current === undefined || Number.isNaN(indicator.current)) {
+    return null
+  }
   const range = indicator.target2063 - indicator.baseline2013
-  if (range === 0) return 100
+  if (range === 0) {
+    // No defined direction of progress. Caller should treat as "not measurable".
+    return null
+  }
   if (indicator.higherIsBetter) {
     return Math.min(100, Math.max(0, ((indicator.current - indicator.baseline2013) / range) * 100))
   } else {
@@ -74,27 +80,44 @@ export function calculateProgress_static(indicator: Indicator): number {
   }
 }
 
-export function calculateGoalScore_static(goal: Goal): number {
-  if (goal.indicators.length === 0) return 0
-  const sum = goal.indicators.reduce((acc, ind) => acc + calculateProgress_static(ind), 0)
-  return sum / goal.indicators.length
+export function calculateGoalScore_static(goal: Goal): number | null {
+  if (goal.indicators.length === 0) return null
+  const scores = goal.indicators
+    .map(calculateProgress_static)
+    .filter((p): p is number => p !== null)
+  if (scores.length === 0) return null
+  return scores.reduce((a, b) => a + b, 0) / scores.length
 }
 
-export function calculateAspirationScore_static(aspiration: Aspiration): number {
-  if (aspiration.goals.length === 0) return 0
-  const sum = aspiration.goals.reduce((acc, goal) => acc + calculateGoalScore_static(goal), 0)
-  return sum / aspiration.goals.length
+export function calculateAspirationScore_static(aspiration: Aspiration): number | null {
+  if (aspiration.goals.length === 0) return null
+  const scores = aspiration.goals
+    .map(calculateGoalScore_static)
+    .filter((s): s is number => s !== null)
+  if (scores.length === 0) return null
+  return scores.reduce((a, b) => a + b, 0) / scores.length
 }
 
-export function calculateOverallScore_static(aspirations: Aspiration[]): number {
-  if (aspirations.length === 0) return 0
-  const sum = aspirations.reduce((acc, asp) => acc + calculateAspirationScore_static(asp), 0)
-  return sum / aspirations.length
+export function calculateOverallScore_static(aspirations: Aspiration[]): number | null {
+  if (aspirations.length === 0) return null
+  const scores = aspirations
+    .map(calculateAspirationScore_static)
+    .filter((s): s is number => s !== null)
+  if (scores.length === 0) return null
+  return scores.reduce((a, b) => a + b, 0) / scores.length
 }
 
-export function getStatus(progress: number): 'on-track' | 'at-risk' | 'behind' {
-  const yearsElapsed = 2026 - 2013 // 13 years of 50
-  const expectedProgress = (yearsElapsed / 50) * 100 // ~26%
+// Audit fix pass V: was hardcoded to 2026, ignoring each indicator's
+// currentYear. An indicator measured in 2023 should be benchmarked against
+// 2023's expected progress (20%), not 2026's (26%). New signature accepts
+// the year of the observation; legacy callers without a year default to the
+// current calendar year for backwards-compat.
+export function getStatus(
+  progress: number,
+  currentYear: number = new Date().getFullYear(),
+): 'on-track' | 'at-risk' | 'behind' {
+  const yearsElapsed = Math.max(0, currentYear - 2013)
+  const expectedProgress = (yearsElapsed / 50) * 100
   if (progress >= expectedProgress) return 'on-track'
   if (progress >= expectedProgress * 0.7) return 'at-risk'
   return 'behind'

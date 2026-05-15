@@ -40,7 +40,10 @@ const EXPECTED_PROGRESS = 26; // (2026-2013)/50 * 100
 const AT_RISK_THRESHOLD = Math.round(EXPECTED_PROGRESS * 0.7); // 18
 
 export function ScoreDashboard() {
-  const overallScore = calculateOverallScore_static(ASPIRATIONS);
+  // Audit fix pass V: handle null returns from the static scoring functions.
+  // Component is currently not rendered (see page.tsx) but kept compilable
+  // until full migration to live-data layer.
+  const overallScore = calculateOverallScore_static(ASPIRATIONS) ?? 0;
   const overallScoreRounded = parseFloat(overallScore.toFixed(1));
   const overallStatus = getStatus(overallScore);
   const overallColors = STATUS_COLORS[overallStatus];
@@ -148,7 +151,7 @@ export function ScoreDashboard() {
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2">
           {ASPIRATIONS.map((asp) => {
-            const score = calculateAspirationScore_static(asp);
+            const score = calculateAspirationScore_static(asp) ?? 0;
             const scoreRounded = Math.round(score);
             const status = getStatus(score);
             const colors = STATUS_COLORS[status];

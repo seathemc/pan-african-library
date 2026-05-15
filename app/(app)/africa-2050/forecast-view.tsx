@@ -17,6 +17,7 @@ const YEARS_ELAPSED = CURRENT_YEAR - START_YEAR // 13
 
 function projectCompletionYear(indicator: Indicator): number | null {
   const progress = calculateProgress_static(indicator)
+  if (progress === null) return null
   if (progress >= 100) return CURRENT_YEAR
   if (YEARS_ELAPSED === 0) return null
   const progressPerYear = progress / YEARS_ELAPSED
@@ -119,7 +120,7 @@ export function ForecastView() {
                 {allIndicators.map((indicator) => {
                   const completionYear = projectCompletionYear(indicator)
                   const traj = trajectoryLabel(completionYear)
-                  const progress = Math.round(calculateProgress_static(indicator))
+                  const progress = Math.round(calculateProgress_static(indicator) ?? 0)
                   const yearsToGo = completionYear ? completionYear - CURRENT_YEAR : null
 
                   return (
