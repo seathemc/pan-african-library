@@ -333,6 +333,42 @@ export default function AuditPage() {
             mitigation="Each Failure value cites its specific historical anchor in the indicator card's expandable methodology section."
           />
           <Issue
+            severity="medium"
+            title="/api/ask LLM endpoint has no rate limit and no auth"
+            body="The /api/ask route forwards user prompts to OpenRouter using a Wisdom-owned API key. It does not require authentication and has no per-IP or per-session rate limiting. A malicious or buggy client can hit this endpoint indefinitely and drain credits. Discovered in audit pass XII (2026-05-15)."
+            mitigation="Two reasonable fixes: (1) require Supabase auth on the route (re-use the same getCurrentUser pattern as the rest of the app), or (2) add an in-memory token bucket per IP and a daily cap per key. We've intentionally NOT shipped either fix without explicit product direction — both change runtime behaviour and may break dev. Documented openly so anyone deploying this can see the gap before going public."
+          />
+          <Issue
+            severity="info"
+            title="Audit pass XII (2026-05-15) — bundle/security/orphan sweep"
+            body="Twelfth pass found and fixed: (1) /app/(app)/africa-2050/page.tsx imported ScoreDashboard but never rendered it (dead import). Removed. The component file itself stays until the deprecated lib/agenda-2063-data.ts is fully migrated to live data. (2) System prompt for /api/ask said '370+ works' but database is now 561. Updated to '500+' as a forward-looking floor. (3) 56/561 works (10%) had no accessLinks, dead-ending the user. Added a fallback card on /work/[id] with 3 search links (Internet Archive, Open Library, WorldCat) so every work has a way to look further. (4) 3 browse-filter pages (/browse/era/[era], /browse/genre/[genre], /browse/region/[region]) have no pagination — render up to 170 cards at once for popular categories. Flagged but not fixed; not critical at 170 items. (5) Two orphan exports: WisdomIcon in wisdom-logo.tsx and ScoreDashboard. Left in place for future use; the WisdomIcon may be needed once the marketing site refactors."
+            mitigation="All fixes in commit applied today."
+          />
+          <Issue
+            severity="info"
+            title="Audit pass XI (2026-05-15) — geography + completeness + 3 DB duplicates"
+            body="Eleventh pass: (1) verified tile map geography — 0 of 55 country positions mismatch their expected latitude band; north coast west-to-east ordering correct. (2) verified DB field completeness — language/region/country/genre/era/description/significance all 100% present across 561 works; only accessLinks is 90% (gap fixed via fallback). (3) removed 3 confirmed duplicate works: 'We Need New Names' (id 310), 'Homegoing' (id 256), 'Facing Mount Kenya' (id 260). 'Paradise' (×2) retained — Toni Morrison's 1997 and Abdulrazak Gurnah's 1994 are legitimately different works that share a title. (4) verified all 9 futures categories have ≥1 indicator. (5) verified AU framework mapping in ASPIRATION_GOALS still matches 7+3+2+3+1+2+2=20."
+            mitigation="3 duplicates removed, work count 564 → 561."
+          />
+          <Issue
+            severity="info"
+            title="Audit pass IX-X (2026-05-15) — formula consistency + feature gaps"
+            body="Pass IX-X: (1) calculateProgress in lib/agenda-2063-live returned 100 or 0 at range==0, inconsistent with the static layer's null. Made live match static — both now return null when baseline === target (progress is mathematically undefined). (2) AfricaTileMap rendered all tiles muted when only one country had data (range==0); now mid-scale amber so the data point is visible. (3) MCP server exposes 7 literature tools but no Agenda 2063 tools — feature gap, not bug. (4) /api/ask provides no Agenda 2063 context to the LLM — feature gap."
+            mitigation="Live/static formula consistency restored; MCP+ask Agenda 2063 integration logged for future iteration."
+          />
+          <Issue
+            severity="info"
+            title="Audit pass VIII (2026-05-15) — 8 verification checks"
+            body="Pass VIII verified clean (no issues found): (1) ScenarioHero indicator references all exist in FUTURE_INDICATORS. (2) ScenarioHero displayed numbers (2.0/3.3/6.0 GDP share, 38/18/6 poverty, 320/188/80 ag imports) match ISS exactly. (3) scenario-chart 2043 endpoints match futures-data gdp-per-capita card. (4) forecast-summary requiredPace 2063 = exactly 100 (algebraic). (5) trendIcon logic correct for negative deltas (governance-effectiveness). (6) 1458M population sum matches UN WPP 1460M within rounding. (7) /audit dynamic StatBlocks use live coverage stats. (8) Tile-map ESH position row 0 col 2 — geographically correct for north-western Africa."
+            mitigation="No fixes needed; documented as verified-clean."
+          />
+          <Issue
+            severity="info"
+            title="Audit pass VII (2026-05-15) — aspiration-radar null-collapse fix"
+            body="Pass VII: AspirationRadar was doing ours: d.ours ?? 0 to feed recharts. When an aspiration had no live indicators (4, 5, 7 currently), the polygon collapsed to that vertex at 0% AND the tooltip showed '0%' — visually claiming Africa scored zero when truth was 'we don't measure this'. Now: passes undefined (not 0) so recharts breaks the polygon at the null vertex; tooltip formatter displays 'no data' for null values."
+            mitigation="Radar now honestly shows missing data instead of misleading zero."
+          />
+          <Issue
             severity="info"
             title="Audit pass VI (2026-05-15) — wellbeing radar + dead links + chart drift"
             body="Sixth deep audit pass: (1) /futures ImaginedFuture cards linked to /work/lagoon, /rosewater, /who-fears-death — but the route is /work/[id] (numeric), not [slug]. Three dead links. Fixed by switching to numeric workIds (495, 454, 73 — looked up in the literature database). (2) Wellbeing radar in charts.tsx drifted from live data: 'Women Parl. 27%' was the simple country mean; pop-weighted continental is 24%. 'Governance 48.8' was stale IIAG; updated to 49 (IIAG 2023 published). 'Education 52%' had unclear definition; relabeled 'Secondary Completion' so the value is defined. (3) Happiness data in charts.tsx had no methodology — the World Happiness Report ranks individual countries, not regions. Added explicit comment that 'rank' is the unweighted mean of African countries' WHR global ranks, and the forward values are linear extrapolations only. (4) charts.tsx employmentData.laborForce 2013 = 330M doesn't cleanly match ILO whole-Africa (~470M) or SSA-only (~370M); scope ambiguous — flagged in code for migration to ILO modelled estimates when ingestion expands."

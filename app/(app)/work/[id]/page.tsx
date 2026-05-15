@@ -316,6 +316,38 @@ export default async function WorkPage({
         </Card>
       )}
 
+      {/* Fallback search links when no direct accessLinks provided.
+         Audit pass XI: 10% of works (56/561) had no accessLinks and dead-ended
+         the user. These cards always render so every work has at least three
+         ways to look further. */}
+      {(!work.accessLinks || work.accessLinks.length === 0) && (
+        <Card className="border-dashed">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-base">
+              <ExternalLink className="h-5 w-5" />
+              Find this work elsewhere
+            </CardTitle>
+            <CardDescription>
+              We don't have a direct access link on file. Try these public archives:
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-col gap-2">
+            {[
+              { name: 'Internet Archive', url: `https://archive.org/search?query=${encodeURIComponent(work.title + ' ' + work.author)}` },
+              { name: 'Open Library', url: `https://openlibrary.org/search?q=${encodeURIComponent(work.title + ' ' + work.author)}` },
+              { name: 'WorldCat (library lookup)', url: `https://www.worldcat.org/search?q=${encodeURIComponent(work.title + ' ' + work.author)}` },
+            ].map((s) => (
+              <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer" className="w-full">
+                <Button variant="outline" className="w-full justify-between">
+                  <span className="truncate">Search on {s.name}</span>
+                  <ExternalLink className="h-4 w-4 shrink-0 ml-2" />
+                </Button>
+              </a>
+            ))}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Save to Collection */}
       <Card>
         <CardHeader>

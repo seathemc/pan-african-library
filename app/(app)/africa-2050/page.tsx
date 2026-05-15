@@ -21,9 +21,10 @@ import {
   type Indicator,
 } from "@/lib/agenda-2063-data";
 import { AfricaCharts } from "./charts";
-// ScoreDashboard intentionally removed from render — it consumed the
-// deprecated static data layer and rendered a competing composite score.
-// LiveDataSection (below) is the canonical composite display now.
+// ScoreDashboard was intentionally removed from render in pass III — it
+// competed with LiveDataSection's composite score. Import removed in pass XI
+// to eliminate dead reference. The component file itself is retained until
+// the deprecated lib/agenda-2063-data.ts is fully migrated to live data.
 import { ViewSwitcher } from "./view-switcher";
 import { ForecastView } from "./forecast-view";
 import { LiveDataSection } from "./live-data-section";
