@@ -13,10 +13,44 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Audit pass XVI (2026-05-15): expanded root metadata with OpenGraph +
+// Twitter cards. Previously had only title + description so social
+// link-previews used generic stock metadata.
 export const metadata: Metadata = {
-  title: "Wisdom — Africa's greatest thinkers, writers, and fighters. One library.",
-  description: "Building pan-African optimism through knowledge. The most comprehensive archive of African and diaspora thought—reviving the past, visualizing the future, building in the present.",
-};
+  metadataBase: new URL('https://wisdom.pan-african-library.example'),
+  title: {
+    default: "Wisdom — Africa's greatest thinkers, writers, and fighters. One library.",
+    template: "%s · Wisdom",
+  },
+  description:
+    "Building pan-African optimism through knowledge. The most comprehensive archive of African and diaspora thought — reviving the past, visualizing the future, building in the present.",
+  keywords: [
+    'pan-African literature', 'African literature', 'Agenda 2063',
+    'African Union', 'African futures', 'Afrofuturism', 'Black studies',
+    'African philosophy', 'Harlem Renaissance', 'African diaspora',
+    'Mo Ibrahim Index', 'African development',
+  ],
+  authors: [{ name: 'Wisdom Pan-African Library' }],
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Wisdom',
+    title: "Wisdom — Africa's greatest thinkers, writers, and fighters. One library.",
+    description:
+      '500+ pan-African and diaspora works. Live Agenda 2063 progress. Three futures for Africa by 2043.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Wisdom — Africa's greatest thinkers, writers, and fighters.",
+    description:
+      '500+ pan-African and diaspora works. Live Agenda 2063 progress. Three futures for Africa.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
+}
 
 export default function RootLayout({
   children,
