@@ -4,7 +4,7 @@
     "source": "mo-ibrahim-iiag",
     "sourceCode": "IIAG-Overall-Governance",
     "sourceUrl": "https://iiag.online",
-    "fetchedAt": "2026-05-15T00:00:52.642Z",
+    "fetchedAt": "2026-05-15T01:05:20.194Z",
     "isSeed": true,
     "countries": {
       "DZA": {
@@ -886,7 +886,7 @@
         "observations": [
           {
             "year": 2013,
-            "value": 57.1
+            "value": 52.6
           },
           {
             "year": 2023,
@@ -896,7 +896,7 @@
         "latestYear": 2023,
         "latestValue": 52.6,
         "baselineYear": 2013,
-        "baselineValue": 57.1
+        "baselineValue": 52.6
       },
       "MOZ": {
         "iso3": "MOZ",

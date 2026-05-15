@@ -131,11 +131,11 @@ export const FUTURE_INDICATORS: FutureIndicator[] = [
       sourceUrl: 'https://population.un.org/wpp/',
     },
     scenarios2043: {
-      failure: { value: 2100, year: 2043 }, // higher fertility, less education
-      currentPath: { value: 2300, year: 2043 },
-      possibleAfrica: { value: 2200, year: 2043 }, // slightly lower with female education
+      failure: { value: 2200, year: 2043 }, // higher fertility, less female education
+      currentPath: { value: 2140, year: 2043 }, // UN WPP 2024 medium variant
+      possibleAfrica: { value: 2050, year: 2043 }, // accelerated transition with female education
     },
-    scenarioSource: "UN WPP 2024 medium variant; ISS Combined assumes accelerated demographic transition",
+    scenarioSource: "UN WPP 2024 medium variant baseline; ISS Combined Scenario assumes accelerated demographic transition via female education",
     scenarioSourceUrl: 'https://population.un.org/wpp/Download/Standard/MostUsed/',
     failureBasis:
       "In the failure scenario education investment collapses; female schooling stalls; fertility transition slows. Africa stays younger and faster-growing than the medium UN variant.",

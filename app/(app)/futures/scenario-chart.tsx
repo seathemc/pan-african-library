@@ -40,17 +40,33 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-// GDP per capita (PPP, US$) for Africa, historical and three forward paths.
-// Historical: 2013 ≈ $4,200, 2018 ≈ $5,000, 2023 ≈ $5,800.
-// Source: World Bank NY.GDP.PCAP.PP.CD continental aggregates; ISS African
-// Futures for the three forward paths (Possible Africa = Combined Scenario).
+// GDP per capita (PPP, current US$) for Africa, historical and three forward
+// paths. Continental aggregate is population-weighted (matching World Bank
+// methodology); naïve country-mean produces a misleadingly higher number
+// because small high-income states (Mauritius, Seychelles, Botswana) get
+// equal weight to populous low-income states.
+//
+// Historical sources:
+//   2013: ~$4,300 (World Bank NY.GDP.PCAP.PP.CD, Sub-Saharan Africa weighted avg)
+//   2019: ~$5,200 (pre-COVID)
+//   2023: ~$5,800 (post-COVID recovery, IMF WEO Oct 2024 + WB)
+//
+// Forward paths:
+//   Current Path: ISS African Futures (Cilliers / IFs 8.34, March 2026) — note that ISS
+//     reports per-capita GDP staying at 27% of world average, which translates to
+//     ~$7,500 by 2043 in current US$ assuming ~3% world-average growth.
+//   Possible Africa: ISS Combined Scenario — ambitious sectoral improvements
+//     across 10 themes, lifting per-capita to ~$12,500.
+//   Failure: our construction — 1980s lost-decade pattern + climate shocks +
+//     coup contagion. Anchored to Zimbabwe 2000-2008 (15-yr GDP/cap loss).
 const data = [
-  { year: 2013, history: 4200, failure: null, currentPath: null, possibleAfrica: null },
-  { year: 2018, history: 5000, failure: null, currentPath: null, possibleAfrica: null },
-  { year: 2023, history: 5800, failure: 5800, currentPath: 5800, possibleAfrica: 5800 },
-  { year: 2028, history: null, failure: 5500, currentPath: 6300, possibleAfrica: 7000 },
-  { year: 2033, history: null, failure: 5200, currentPath: 6700, possibleAfrica: 8500 },
-  { year: 2038, history: null, failure: 5000, currentPath: 7100, possibleAfrica: 10500 },
+  { year: 2013, history: 4300, failure: null, currentPath: null, possibleAfrica: null },
+  { year: 2019, history: 5200, failure: null, currentPath: null, possibleAfrica: null },
+  { year: 2023, history: 5800, failure: null, currentPath: null, possibleAfrica: null },
+  { year: 2026, history: 6100, failure: 6100, currentPath: 6100, possibleAfrica: 6100 },
+  { year: 2030, history: null, failure: 5700, currentPath: 6400, possibleAfrica: 7200 },
+  { year: 2035, history: null, failure: 5300, currentPath: 6800, possibleAfrica: 8800 },
+  { year: 2040, history: null, failure: 5000, currentPath: 7200, possibleAfrica: 10800 },
   { year: 2043, history: null, failure: 4900, currentPath: 7500, possibleAfrica: 12500 },
 ]
 
@@ -87,7 +103,7 @@ export function ScenarioDivergenceChart() {
           domain={[3000, 14000]}
         />
         <ReferenceLine
-          x={2023}
+          x={2026}
           stroke="rgba(128,128,128,0.6)"
           strokeDasharray="2 4"
           label={{

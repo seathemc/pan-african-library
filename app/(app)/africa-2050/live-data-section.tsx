@@ -18,6 +18,8 @@ import {
   calculateOverallScore,
   getFreshnessLabel,
   getManifest,
+  continentalAggregate,
+  getCoverageStats,
   AU_REPORTED_SCORES,
   type IngestedIndicator,
 } from '@/lib/agenda-2063-live'
@@ -176,8 +178,13 @@ function HeroProgressCard({ overall }: { overall: number | null }) {
 
 // ── Indicator card with map ───────────────────────────────────────────────
 function IndicatorCard({ def, live }: { def: IndicatorDef; live: IngestedIndicator }) {
+  // Use population-weighted continental average — matches WB/WHO/IMF reporting
+  // methodology. The simple country-mean (live.continental.latestValue) skews
+  // toward smaller, often higher-income states.
+  const agg = continentalAggregate(def.id)
+  const continentalValue = agg.populationWeighted ?? live.continental.latestValue
   const progress = calculateProgress(
-    live.continental.latestValue,
+    continentalValue,
     def.baseline2013,
     def.target2063,
     def.higherIsBetter,
@@ -218,11 +225,16 @@ function IndicatorCard({ def, live }: { def: IndicatorDef; live: IngestedIndicat
           </div>
           <div className="text-right shrink-0">
             <div className="text-2xl font-bold tabular-nums">
-              {formatValue(live.continental.latestValue, def.unit)}
+              {formatValue(continentalValue, def.unit)}
             </div>
             <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              continental avg · {live.continental.latestYear}
+              pop-weighted · {live.continental.latestYear}
             </div>
+            {agg.simpleMean !== null && agg.populationWeighted !== null && Math.abs(agg.simpleMean - agg.populationWeighted) > Math.abs(agg.populationWeighted * 0.05) && (
+              <div className="text-[10px] text-muted-foreground/70 tabular-nums" title="Simple country mean (each country counted equally)">
+                simple mean: {formatValue(agg.simpleMean, def.unit)}
+              </div>
+            )}
           </div>
         </div>
       </CardHeader>
@@ -347,6 +359,7 @@ export function LiveDataSection() {
   const manifest = getManifest()
   const indicators = getAllIndicators()
   const ourOverall = calculateOverallScore()
+  const coverage = getCoverageStats()
 
   const indicatorsWithData = indicators.filter(
     ({ live }) => live && live.continental.countriesReporting > 0,
@@ -381,6 +394,62 @@ export function LiveDataSection() {
 
       {/* ── Hero progress card ──────────────────────────────────────── */}
       <HeroProgressCard overall={ourOverall} />
+
+      {/* ── Coverage transparency: don't hide the gaps ─────────────── */}
+      <Card className="border-amber-500/30 bg-amber-500/[0.03]">
+        <CardHeader className="pb-2">
+          <div className="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <Badge variant="outline" className="text-[10px] uppercase tracking-wider mb-1.5 border-amber-500/40">
+                Methodology disclosure
+              </Badge>
+              <CardTitle className="text-base">
+                Composite covers {coverage.aspirationsWithData} of 7 aspirations · {coverage.goalsWithData} of 20 goals
+              </CardTitle>
+              <CardDescription className="text-xs mt-1 max-w-2xl">
+                {coverage.indicatorCount} indicators wired so far. AU goals not
+                covered have no public data we can pull. Composite score is
+                computed only from aspirations with at least one indicator —
+                missing aspirations are <em>excluded</em>, not assumed zero.
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="grid gap-1.5 text-xs">
+          {coverage.aspirationCoverage.map((a) => {
+            const ASP_NAMES: Record<number, string> = {
+              1: 'Prosperous', 2: 'Integrated', 3: 'Good Governance',
+              4: 'Peaceful', 5: 'Cultural Identity', 6: 'People-driven', 7: 'Global Partner',
+            }
+            const pct = (a.goalsWithIndicators / a.goalsTotal) * 100
+            return (
+              <div key={a.aspirationId} className="flex items-center gap-3">
+                <span className="w-32 text-muted-foreground shrink-0 truncate">
+                  #{a.aspirationId} {ASP_NAMES[a.aspirationId]}
+                </span>
+                <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${
+                      pct === 0
+                        ? 'bg-red-500/40'
+                        : pct < 50
+                          ? 'bg-amber-500/70'
+                          : 'bg-emerald-500/70'
+                    }`}
+                    style={{ width: `${pct}%` }}
+                  />
+                </div>
+                <span className="tabular-nums text-muted-foreground w-20 text-right shrink-0">
+                  {a.goalsWithIndicators}/{a.goalsTotal} goals
+                </span>
+                <span className="tabular-nums font-medium w-14 text-right shrink-0">
+                  {a.score !== null ? `${Math.round(a.score)}%` : '—'}
+                </span>
+              </div>
+            )
+          })}
+        </CardContent>
+      </Card>
 
       {/* ── Our score vs AU ─────────────────────────────────────────── */}
       <Card>

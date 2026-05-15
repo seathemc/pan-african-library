@@ -42,10 +42,10 @@ const IIAG_2024_OVERALL: Record<string, number> = {
 const IIAG_2013_OVERALL: Record<string, number> = {
   MUS: 81.7, CPV: 75.7, BWA: 76.2, ZAF: 73.3, SYC: 73.7, NAM: 69.5, GHA: 67.3,
   TUN: 62.4, LSO: 57.0, SEN: 60.0, RWA: 55.4, STP: 60.3, MWI: 57.1, ZMB: 58.6,
-  BEN: 58.5, KEN: 54.9, MAR: 57.8, GMB: 52.6, TZA: 58.2, MOZ: 56.5, UGA: 55.4,
+  BEN: 58.5, KEN: 54.9, MAR: 57.8, GMB: 52.6, TZA: 58.2, MOZ: 56.5, UGA: 55.4, MWI: 56.2,
   NGA: 47.6, CIV: 50.5, NER: 52.0, EGY: 48.1, MLI: 47.0, SLE: 48.6, COM: 50.5,
   AGO: 46.7, MDG: 47.0, BFA: 53.7, TGO: 47.4, GIN: 41.0, ETH: 49.3, LBR: 50.6,
-  DJI: 49.6, BDI: 48.0, GAB: 49.7, CMR: 44.0, MRT: 41.6, TCD: 33.4,
+  DJI: 49.6, BDI: 48.0, GAB: 49.7, CMR: 44.0, MRT: 41.6, MWI: 52.6, TCD: 33.4,
   ZWE: 39.6, COG: 38.4, COD: 33.2, CAF: 33.8, GNQ: 30.4, GNB: 31.8, ERI: 33.8,
   SWZ: 46.5, SDN: 32.5, LBY: 41.9, SOM: 8.6, SSD: 28.7, DZA: 52.0,
 }

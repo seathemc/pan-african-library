@@ -12,6 +12,7 @@ import iiagData from '@/data/ingested/mo-ibrahim-iiag.json'
 import manifest from '@/data/ingested/manifest.json'
 import { INDICATORS, INDICATORS_BY_GOAL, type IndicatorDef } from '@/scripts/ingest/indicators-registry'
 import { AU_MEMBER_STATES, COUNTRIES_BY_REGION, type AfricanCountry } from '@/scripts/ingest/african-countries'
+import { POP_2023_M } from '@/scripts/ingest/african-population'
 
 // ── Types matching the ingestion output ──────────────────────────────────
 export interface Observation {
@@ -95,6 +96,123 @@ export function getIndicatorsForGoal(goalId: number) {
 
 export function getCountryByIso3(iso3: string): AfricanCountry | undefined {
   return AU_MEMBER_STATES.find((c) => c.iso3 === iso3)
+}
+
+// ── Continental aggregation ─────────────────────────────────────────────
+// Two methods, both honest, used in different places:
+//
+//   - simple mean: equal weight per country. Honest framing: "what's the
+//     average country's outcome." Useful when comparing African countries to
+//     each other (each country is one observation).
+//
+//   - population-weighted: weights by 2023 population. Honest framing:
+//     "what's the average African person's outcome." This is the standard
+//     used by World Bank / WHO / IMF for continental aggregates, because
+//     Nigeria's 224M people shouldn't carry the same weight as Seychelles' 100k.
+//
+// We expose both, label them clearly, and use weighted as default for headline
+// numbers (matching how AU and other agencies report).
+export function continentalAggregate(indicatorId: string): {
+  simpleMean: number | null
+  populationWeighted: number | null
+  countriesReporting: number
+  totalCountries: number
+  populationCovered: number  // millions
+  populationCoveragePct: number
+} {
+  const live = getIngestedIndicator(indicatorId)
+  if (!live) {
+    return {
+      simpleMean: null,
+      populationWeighted: null,
+      countriesReporting: 0,
+      totalCountries: AU_MEMBER_STATES.length,
+      populationCovered: 0,
+      populationCoveragePct: 0,
+    }
+  }
+  const reporting = Object.values(live.countries).filter(
+    (c) => c.latestValue !== null,
+  )
+  if (reporting.length === 0) {
+    return {
+      simpleMean: null,
+      populationWeighted: null,
+      countriesReporting: 0,
+      totalCountries: AU_MEMBER_STATES.length,
+      populationCovered: 0,
+      populationCoveragePct: 0,
+    }
+  }
+  const values = reporting.map((c) => c.latestValue as number)
+  const simpleMean = values.reduce((a, b) => a + b, 0) / values.length
+
+  // Population-weighted
+  let weightedSum = 0
+  let weightTotal = 0
+  let popCovered = 0
+  for (const c of reporting) {
+    const pop = POP_2023_M[c.iso3] ?? 0
+    if (pop > 0) {
+      weightedSum += (c.latestValue as number) * pop
+      weightTotal += pop
+      popCovered += pop
+    }
+  }
+  const populationWeighted = weightTotal > 0 ? weightedSum / weightTotal : null
+  const totalAfricanPop = Object.values(POP_2023_M).reduce((a, b) => a + b, 0)
+  return {
+    simpleMean,
+    populationWeighted,
+    countriesReporting: reporting.length,
+    totalCountries: AU_MEMBER_STATES.length,
+    populationCovered: popCovered,
+    populationCoveragePct: totalAfricanPop > 0 ? (popCovered / totalAfricanPop) * 100 : 0,
+  }
+}
+
+// ── Coverage transparency ───────────────────────────────────────────────
+// AU's framework has 7 aspirations × 20 goals. We don't have indicators for
+// every goal — and the user deserves to know exactly what's covered and what
+// isn't, so they can judge how much weight to give the composite score.
+export function getCoverageStats() {
+  const ASPIRATION_GOALS: Record<number, number[]> = {
+    1: [1, 2, 3, 4, 5, 6, 7],
+    2: [8, 9, 10],
+    3: [11, 12],
+    4: [13, 14, 15],
+    5: [16],
+    6: [17, 18],
+    7: [19, 20],
+  }
+  const goalsCovered = new Set<number>()
+  for (const def of INDICATORS) goalsCovered.add(def.goalId)
+
+  const aspirationCoverage = Object.entries(ASPIRATION_GOALS).map(([asp, goals]) => {
+    const covered = goals.filter((g) => goalsCovered.has(g))
+    const score = calculateAspirationScore(parseInt(asp))
+    return {
+      aspirationId: parseInt(asp),
+      goalsTotal: goals.length,
+      goalsWithIndicators: covered.length,
+      goalIdsCovered: covered,
+      goalIdsMissing: goals.filter((g) => !goalsCovered.has(g)),
+      score, // null if 0 indicators
+    }
+  })
+
+  const totalGoals = 20
+  const goalsWithData = goalsCovered.size
+  const aspirationsWithData = aspirationCoverage.filter((a) => a.score !== null).length
+
+  return {
+    totalAspirations: 7,
+    aspirationsWithData,
+    totalGoals,
+    goalsWithData,
+    aspirationCoverage,
+    indicatorCount: INDICATORS.length,
+  }
 }
 
 // ── Scoring ──────────────────────────────────────────────────────────────
