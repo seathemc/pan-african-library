@@ -46,12 +46,24 @@ const chartConfig = {
 } satisfies ChartConfig
 
 export function AspirationRadar({ data, showAU2019 = false }: AspirationRadarProps) {
-  // Replace nulls with 0 for chart rendering, but tooltip will still distinguish
+  // Audit fix pass VII: previously replaced null→0 silently. The polygon
+  // collapsed at no-data aspirations and the tooltip showed "0%" as if Africa
+  // truly scored zero. Now: null aspirations are excluded from the "ours"
+  // polygon entirely (recharts skips undefined values) and the tooltip shows
+  // "no data" for those points.
   const chartData = data.map((d) => ({
     ...d,
-    ours: d.ours ?? 0,
-    _oursIsNull: d.ours === null,
+    // undefined (not 0) so recharts breaks the polygon at this vertex rather
+    // than drawing a line to zero
+    ours: d.ours === null ? undefined : d.ours,
   }))
+
+  // Custom tooltip formatter that distinguishes 0 ("Africa scored zero") from
+  // undefined ("no live indicator for this aspiration yet")
+  const formatOurs = (v: number | string | null | undefined) => {
+    if (v === null || v === undefined) return 'no data'
+    return `${typeof v === 'number' ? Math.round(v) : v}%`
+  }
 
   return (
     <ChartContainer config={chartConfig} className="aspect-square w-full max-h-[420px] mx-auto">
@@ -94,13 +106,7 @@ export function AspirationRadar({ data, showAU2019 = false }: AspirationRadarPro
           fillOpacity={0.25}
           strokeWidth={2.5}
         />
-        <ChartTooltip
-          content={
-            <ChartTooltipContent
-              formatter={(v) => `${typeof v === "number" ? Math.round(v) : v}%`}
-            />
-          }
-        />
+        <ChartTooltip content={<ChartTooltipContent formatter={formatOurs} />} />
         <Legend
           iconSize={10}
           wrapperStyle={{ paddingTop: 8, fontSize: 11 }}
