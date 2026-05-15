@@ -151,7 +151,7 @@ export default function FuturesPage() {
             title="Lagoon"
             author="Nnedi Okorafor"
             year={2014}
-            slug="lagoon"
+            workId={495}
             scenario="possibleAfrica"
             blurb="Aliens make first contact in Lagos, not Washington. The city's chaos becomes the protagonist."
           />
@@ -159,7 +159,7 @@ export default function FuturesPage() {
             title="Rosewater"
             author="Tade Thompson"
             year={2016}
-            slug="rosewater"
+            workId={454}
             scenario="currentPath"
             blurb="Nigeria 2066: a town has grown around an alien biodome. Biopunk meets corruption-as-usual."
           />
@@ -167,7 +167,7 @@ export default function FuturesPage() {
             title="Who Fears Death"
             author="Nnedi Okorafor"
             year={2010}
-            slug="who-fears-death"
+            workId={73}
             scenario="failure"
             blurb="Post-apocalyptic Sudan after climate and ethnic collapse. The failure scenario as fiction."
           />
@@ -415,14 +415,14 @@ function ImaginedFutureCard({
   title,
   author,
   year,
-  slug,
+  workId,
   scenario,
   blurb,
 }: {
   title: string
   author: string
   year: number
-  slug: string
+  workId: number
   scenario: ScenarioKey
   blurb: string
 }) {
@@ -445,7 +445,7 @@ function ImaginedFutureCard({
       </div>
       <span className="text-xs text-muted-foreground">{author}</span>
       <p className="text-xs leading-relaxed mt-1">{blurb}</p>
-      <Link href={`/work/${slug}`} className="mt-1">
+      <Link href={`/work/${workId}`} className="mt-1">
         <Button size="sm" variant="ghost" className="h-7 px-2 text-xs gap-1">
           Read in the archive →
         </Button>

@@ -173,14 +173,19 @@ const tradeData = [
   { year: "2063", intraAfrica: 50, afcftaCountries: 55, openBorders: 100, infraScore: 75, isTarget: true },
 ];
 
-// Wellbeing Radar (2063 targets vs 2026 actuals)
+// Wellbeing Radar — 2026 continental values (pop-weighted) vs 2063 AU targets.
+// Audit fix pass VI: Women in Parliament corrected from 27 (simple country
+// mean) to 24 (pop-weighted, matching the live data layer). "Education"
+// relabeled to "Secondary Completion" so the 52% has a defined meaning
+// (UNESCO secondary completion rate). Governance refreshed to 49.3 (IIAG
+// 2023 published continental score) from stale 48.8.
 const wellbeingComparison = [
   { metric: "Life Expectancy", current: 64, target: 75, fullMark: 100 },
-  { metric: "Governance", current: 48.8, target: 65, fullMark: 100 },
-  { metric: "Education", current: 52, target: 95, fullMark: 100 },
+  { metric: "Governance (IIAG)", current: 49, target: 65, fullMark: 100 },
+  { metric: "Secondary Completion", current: 52, target: 95, fullMark: 100 },
   { metric: "Electricity", current: 58, target: 100, fullMark: 100 },
-  { metric: "Intra-Trade", current: 16, target: 50, fullMark: 100 },
-  { metric: "Women Parl.", current: 27, target: 50, fullMark: 100 },
+  { metric: "Intra-Africa Trade", current: 16, target: 50, fullMark: 100 },
+  { metric: "Women in Parl.", current: 24, target: 50, fullMark: 100 },
 ];
 
 // Employment Data
@@ -215,6 +220,12 @@ const wagesData = [
 ];
 
 // Happiness & Life Satisfaction Data
+// Methodology note (audit fix pass VI): the World Happiness Report ranks
+// individual countries, not regions. "rank" here is the African average
+// position across the WHR's ~137-country ranking (i.e., the unweighted mean
+// of African countries' global ranks). "happiness" is the average Cantril
+// ladder score (0-10) across African countries. All forward values are
+// linear extrapolations of recent African averages — illustrative only.
 const happinessData = [
   { year: "2025", happiness: 4.4, satisfaction: 5.1, optimism: 54, meaning: 6.1, positiveAffect: 65, rank: 113 },
   { year: "2030", happiness: 4.6, satisfaction: 5.4, optimism: 58, meaning: 6.4, positiveAffect: 67, rank: 105 },
