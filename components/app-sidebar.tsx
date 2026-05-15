@@ -16,6 +16,7 @@ import {
   ListOrdered,
   TrendingUp,
   Telescope,
+  Target,
   Zap,
 } from "lucide-react"
 import Link from "next/link"
@@ -111,16 +112,18 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
         <Separator className="mx-2" />
 
-        {/* MCP Server — moved to top of feature sections */}
+        {/* Developer */}
         <SidebarGroup>
-          <SidebarGroupLabel>Developer</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+            Developer
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/developer")}>
                   <Link href="/developer">
                     <Code2 />
-                    <span>MCP Server</span>
+                    <span>Integrate the Wisdom</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -130,10 +133,29 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
 
         <Separator className="mx-2" />
 
-        {/* The Forecast — single parent with two child views */}
+        {/* Future — three-scenario futures forecast */}
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
-            The Forecast
+            Future
+          </SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/futures")}>
+                  <Link href="/futures">
+                    <Telescope />
+                    <span>Our Paths</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Present — Agenda 2063 measurement (live data + goals) */}
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/70">
+            Present
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -148,8 +170,8 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={isActive("/africa-2050") && pathname.includes("goals")}>
                   <Link href="/africa-2050?view=goals">
-                    <Telescope />
-                    <span>Our goals</span>
+                    <Target />
+                    <span>Our goals (Agenda 2063)</span>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>

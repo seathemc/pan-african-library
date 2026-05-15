@@ -731,6 +731,69 @@ export function AfricaCharts() {
           </div>
         </TabsContent>
       </Tabs>
+
+      {/* Trust footer — every chart above is an aggregation of the sources below */}
+      <Card className="bg-muted/20 mt-2">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-sm">Chart sources &amp; methodology</CardTitle>
+          <CardDescription className="text-xs">
+            All charts above are built from public data. 2013 baseline values use the
+            year Agenda 2063 was adopted; 2024–2025 are most recent observations;
+            forward projections are linear-trend extrapolations except where Agenda 2063
+            targets are stated explicitly. Charts are illustrative — for forecasts with
+            real simulation modelling see <a href="/futures" className="underline hover:text-foreground">Our Paths</a>.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="text-xs text-muted-foreground leading-relaxed grid gap-2 sm:grid-cols-2">
+          <div>
+            <strong className="text-foreground">Demographics:</strong>{' '}
+            <a href="https://population.un.org/wpp/" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">UN World Population Prospects 2024</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Economy &amp; Trade:</strong>{' '}
+            <a href="https://data.worldbank.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">World Bank Open Data</a> ·{' '}
+            <a href="https://unctad.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">UNCTAD</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Energy:</strong>{' '}
+            <a href="https://www.iea.org/topics/africa" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">IEA Africa Energy Outlook</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Education:</strong>{' '}
+            <a href="https://uis.unesco.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">UNESCO Institute for Statistics</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Health:</strong>{' '}
+            <a href="https://www.who.int/data/gho" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">WHO Global Health Observatory</a> ·{' '}
+            <a href="https://childmortality.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">UN IGME</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Governance:</strong>{' '}
+            <a href="https://iiag.online" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">Mo Ibrahim IIAG</a> ·{' '}
+            <a href="https://www.transparency.org/en/cpi" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">Transparency International CPI</a> ·{' '}
+            <a href="https://rsf.org/en/index" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">RSF Press Freedom Index</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Conflict &amp; Peace:</strong>{' '}
+            <a href="https://acleddata.com" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">ACLED</a> ·{' '}
+            <a href="https://sipri.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">SIPRI</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Wellbeing:</strong>{' '}
+            <a href="https://worldhappiness.report" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">World Happiness Report</a> ·{' '}
+            <a href="https://www.afrobarometer.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">Afrobarometer</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Agenda 2063 framework:</strong>{' '}
+            <a href="https://au.int/en/agenda2063/overview" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">African Union</a> ·{' '}
+            <a href="https://au.int/en/documents" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">AUDA-NEPAD Continental Reports</a>
+          </div>
+          <div>
+            <strong className="text-foreground">Forecasts &amp; scenarios:</strong>{' '}
+            <a href="https://futures.issafrica.org" target="_blank" rel="noopener noreferrer" className="hover:text-foreground underline">ISS African Futures (IFs platform)</a>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }
