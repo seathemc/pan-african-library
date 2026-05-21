@@ -196,8 +196,10 @@ Wisdom is not just a literature retriever.
 - It exposes generic `search` and `fetch` tools for ChatGPT/OpenAI-style connectors.
 - It can search the archive for canon, movements, authors, and themes.
 - It can explain what Wisdom is and how to use it well from inside a host.
-- It can distinguish between internal archive content and external-only records.
+- It can distinguish between internal archive context and external-only catalog records.
 - It can query independent Agenda 2063 data instead of relying on PDF summaries.
+- It can explain the Agenda 2063 scoring methodology and missing-data caveats.
+- It can return a country-level Agenda 2063 profile for any AU member state.
 - It can compare Africa's futures through Failure, Current Path, and Possible Africa scenarios.
 
 When a request is broad, the best pattern is:
@@ -211,6 +213,8 @@ When a request is broad, the best pattern is:
 - `What is Wisdom and what can you do with it here?`
 - `Find political philosophy from West Africa after 1960.`
 - `Give me the independent Agenda 2063 overview and tell me how much of the framework is actually covered.`
+- `Explain exactly how Wisdom calculates the Agenda 2063 score.`
+- `Give me Kenya's Agenda 2063 profile and flag which indicators are missing.`
 - `Show me the life expectancy indicator and the top and bottom countries.`
 - `List the futures indicators in governance and explain the failure scenario logic.`
 - `Compare the archive, present data, and future scenario layers for education in Africa.`

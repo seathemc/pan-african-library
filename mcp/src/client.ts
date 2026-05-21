@@ -49,6 +49,12 @@ export interface Work extends WorkSummary {
   coverImageUrl: string | null
   accessLinks: Array<{ url: string; type: string }>
   themes: Array<{ name: string; slug: string }>
+  indicators?: Array<{
+    id: string
+    name: string
+    layer: 'present' | 'future'
+    reason: string
+  }>
   relations: Array<{
     type: string
     direction: 'incoming' | 'outgoing'
@@ -133,6 +139,8 @@ export interface AgendaOverview {
       score: number | null
     }>
   }
+  caveat?: string
+  methodology?: AgendaMethodology
   aspirations: Array<{
     aspirationId: number
     score: number | null
@@ -149,6 +157,15 @@ export interface AgendaOverview {
     totalCountries: number
     notes: string
   }
+}
+
+export interface AgendaMethodology {
+  formula: string
+  goalAggregation: string
+  aspirationAggregation: string
+  overallAggregation: string
+  missingDataTreatment: string
+  defaultAggregate: string
 }
 
 export interface AgendaIndicatorSummary {
@@ -199,6 +216,49 @@ export interface AgendaIndicatorDetail extends AgendaIndicatorSummary {
     latestYear: number | null
     latestValue: number | null
   }>
+  caveat?: string
+  methodology?: AgendaMethodology
+  crossLayerNotes?: string[]
+  relatedWorks?: Array<{
+    id: number
+    title: string
+    author: string
+    yearPublished: number
+    region: string
+    genre: string
+    era: string
+    reason: string
+  }>
+}
+
+export interface AgendaCountryProfile {
+  country: {
+    iso3: string
+    iso2: string
+    name: string
+    region: string
+  }
+  coverage: {
+    indicatorsAvailable: number
+    totalIndicators: number
+    indicatorsMissing: number
+  }
+  indicators: Array<{
+    id: string
+    name: string
+    aspirationId: number
+    goalId: number
+    unit: string
+    latestYear: number | null
+    latestValue: number | null
+    progressScore: number | null
+    rank: number | null
+    rankTotal: number
+    rankDirection: string
+    source: string
+    sourceCode: string
+  }>
+  caveat: string
 }
 
 export interface FutureIndicatorSummary {
@@ -215,17 +275,18 @@ export interface FutureIndicatorSummary {
     currentPath: { value: number; year: number }
     possibleAfrica: { value: number; year: number }
   }
-}
-
-export interface FutureIndicatorDetail extends FutureIndicatorSummary {
   scenarios2063?: {
     failure: { value: number; year: number }
     currentPath: { value: number; year: number }
     possibleAfrica: { value: number; year: number }
   }
+}
+
+export interface FutureIndicatorDetail extends FutureIndicatorSummary {
   scenarioSource: string
   scenarioSourceUrl: string
   failureBasis: string
+  scenarioHorizonNote?: string
 }
 
 export interface SearchResult {
@@ -279,11 +340,17 @@ export const api = {
   getAgendaOverview: () =>
     get<AgendaOverview>('/api/agenda/overview'),
 
+  getAgendaMethodology: () =>
+    get<AgendaMethodology>('/api/agenda/methodology'),
+
   listAgendaIndicators: () =>
     get<AgendaIndicatorSummary[]>('/api/agenda/indicators'),
 
   getAgendaIndicator: (id: string) =>
     get<AgendaIndicatorDetail>(`/api/agenda/indicators/${id}`),
+
+  getAgendaCountryProfile: (country: string) =>
+    get<AgendaCountryProfile>(`/api/agenda/countries/${encodeURIComponent(country)}`),
 
   listFutureIndicators: () =>
     get<FutureIndicatorSummary[]>('/api/futures/indicators'),

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { getAllWorks } from '@/lib/literature-data'
+import { getAllWorks, getEnrichedWorkData, getWorksByThemeSlug } from '@/lib/literature-data'
 import { getWorkContentStatus } from '@/lib/work-content'
 
 export async function GET(req: NextRequest) {
@@ -21,7 +21,11 @@ export async function GET(req: NextRequest) {
     const where: NonNullable<Parameters<typeof prisma.work.findMany>[0]>['where'] = {}
 
     if (region) where.region = { equals: region, mode: 'insensitive' }
-    if (era)    where.era    = { equals: era,    mode: 'insensitive' }
+    if (era) {
+      where.era = era.toLowerCase() === 'pre-colonial'
+        ? { contains: 'pre-colonial', mode: 'insensitive' }
+        : { equals: era, mode: 'insensitive' }
+    }
     if (genre)  where.genre  = { equals: genre,  mode: 'insensitive' }
     if (theme)  where.themes = { some: { theme: { slug: theme } } }
 
@@ -59,8 +63,21 @@ export async function GET(req: NextRequest) {
     // Database unavailable — fall back to JSON file
     let all = getAllWorks()
     if (region) all = all.filter(w => w.region.toLowerCase().includes(region.toLowerCase()))
-    if (era)    all = all.filter(w => w.era.toLowerCase() === era.toLowerCase())
+    if (era) {
+      const normalizedEra = era.toLowerCase()
+      all = all.filter(w => {
+        const workEra = w.era.toLowerCase()
+        return normalizedEra === 'pre-colonial'
+          ? workEra.includes('pre-colonial')
+          : workEra === normalizedEra
+      })
+    }
     if (genre)  all = all.filter(w => w.genre.toLowerCase() === genre.toLowerCase())
+    if (theme) {
+      const themed = getWorksByThemeSlug(theme)
+      const themedIds = new Set(themed.map((w) => w.id))
+      all = all.filter((w) => themedIds.has(w.id))
+    }
     if (q) {
       const lq = q.toLowerCase()
       all = all.filter(w =>
@@ -70,7 +87,6 @@ export async function GET(req: NextRequest) {
         (w.significance ?? '').toLowerCase().includes(lq)
       )
     }
-    // theme filter not available without DB; skip silently
     const total = all.length
     const sliced = all.slice(offset, offset + limit)
     return NextResponse.json({
@@ -80,7 +96,12 @@ export async function GET(req: NextRequest) {
         originalLanguage: null, translator: null, region: w.region,
         country: w.country, genre: w.genre, era: w.era,
         description: w.description, significance: w.significance ?? null,
-        coverImageUrl: null, accessLinks: [], themes: [],
+        coverImageUrl: null,
+        accessLinks: w.accessLinks.map((url) => ({
+          url,
+          type: url.includes("archive.org") ? "archive" : url.includes(".pdf") ? "pdf" : "web",
+        })),
+        themes: getEnrichedWorkData(w.id).themes,
         contentStatus: getWorkContentStatus(w),
       })),
       total, limit, offset,

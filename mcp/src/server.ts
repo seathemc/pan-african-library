@@ -4,6 +4,8 @@ import { api } from './client.js'
 import type {
   AgendaIndicatorDetail,
   AgendaIndicatorSummary,
+  AgendaCountryProfile,
+  AgendaMethodology,
   AgendaOverview,
   FutureIndicatorDetail,
   FutureIndicatorSummary,
@@ -35,6 +37,8 @@ type CompatibilitySearchResult = {
   layer: 'archive' | 'present' | 'future'
 }
 
+type CompatibilitySearchLayer = 'all' | 'archive' | 'agenda' | 'futures'
+
 type CompatibilityFetchResult = CompatibilitySearchResult & {
   metadata?: Record<string, string | number | boolean | null>
 }
@@ -61,9 +65,13 @@ function jsonText(value: unknown) {
 function matchesQuery(query: string, ...fields: Array<string | number | null | undefined>) {
   const normalized = query.trim().toLowerCase()
   if (!normalized) return true
+  const tokens = normalized.split(/\s+/).filter((token) => token.length > 2)
   return fields
     .filter((field) => field !== null && field !== undefined)
-    .some((field) => String(field).toLowerCase().includes(normalized))
+    .some((field) => {
+      const text = String(field).toLowerCase()
+      return text.includes(normalized) || tokens.some((token) => text.includes(token))
+    })
 }
 
 function workUrl(id: number) {
@@ -78,16 +86,23 @@ function futureUrl(id?: string) {
   return id ? `${PUBLIC_ORIGIN}/futures?indicator=${encodeURIComponent(id)}` : `${PUBLIC_ORIGIN}/futures`
 }
 
-async function compatibilitySearch(query: string, limit: number): Promise<CompatibilitySearchResult[]> {
+async function compatibilitySearch(
+  query: string,
+  limit: number,
+  layer: CompatibilitySearchLayer = 'all',
+): Promise<{ results: CompatibilitySearchResult[]; counts: Record<'archive' | 'present' | 'future', number> }> {
   const max = Math.max(1, Math.min(limit, 20))
   const [workData, agendaIndicators, futureIndicators]: [Awaited<ReturnType<typeof api.searchWorks>>, AgendaIndicatorSummary[], FutureIndicatorSummary[]] =
     await Promise.all([
-      api.searchWorks(query, Math.min(max, 10)),
+      layer === 'all' || layer === 'archive'
+        ? api.searchWorks(query, Math.min(max, 10))
+        : Promise.resolve({ query, results: [], total: 0 }),
       api.listAgendaIndicators(),
       api.listFutureIndicators(),
     ])
 
-  const archiveResults: CompatibilitySearchResult[] = workData.results.map((work: WorkSummary) => ({
+  const archiveResults: CompatibilitySearchResult[] = layer === 'all' || layer === 'archive'
+    ? workData.results.map((work: WorkSummary) => ({
     id: `work:${work.id}`,
     title: `${work.title} — ${work.author}`,
     url: workUrl(work.id),
@@ -100,8 +115,29 @@ async function compatibilitySearch(query: string, limit: number): Promise<Compat
       work.contentStatus ? `Content status: ${work.contentStatus}.` : '',
     ].filter(Boolean).join(' '),
   }))
+    : []
 
-  const presentResults: CompatibilitySearchResult[] = agendaIndicators
+  const presentResults: CompatibilitySearchResult[] = layer === 'all' || layer === 'agenda'
+    ? ([
+      ...(matchesQuery(query, 'methodology', 'formula', 'scoring', 'calculated', 'data sources', 'coverage', 'missing data', 'indicators')
+        ? [{
+            id: 'agenda:methodology',
+            title: 'Agenda 2063 scoring methodology',
+            url: agendaUrl(),
+            layer: 'present' as const,
+            text: 'How Wisdom calculates independent Agenda 2063 scores: linear progress formula, goal and aspiration aggregation, population weighting, missing-data treatment, and coverage caveats.',
+          }]
+        : []),
+      ...(matchesQuery(query, 'overview', 'overall score', 'coverage', 'agenda 2063', 'aspirations', 'AU reported')
+        ? [{
+            id: 'agenda:overview',
+            title: 'Agenda 2063 overview and coverage',
+            url: agendaUrl(),
+            layer: 'present' as const,
+            text: 'Independent Agenda 2063 overview with headline score, live coverage, aspiration scores, AU self-reported comparison, and caveats.',
+          }]
+        : []),
+      ...agendaIndicators
     .filter((indicator: AgendaIndicatorSummary) =>
       matchesQuery(
         query,
@@ -118,16 +154,19 @@ async function compatibilitySearch(query: string, limit: number): Promise<Compat
       id: `agenda:${indicator.id}`,
       title: `${indicator.name} — Agenda 2063 indicator`,
       url: agendaUrl(indicator.id),
-      layer: 'present',
+      layer: 'present' as const,
       text: [
         `${indicator.name} is an Agenda 2063 indicator for aspiration ${indicator.aspirationId}, goal ${indicator.goalId}.`,
         `Latest population-weighted value: ${fmtNumber(indicator.populationWeightedValue, 2)} ${indicator.unit}.`,
         `Source: ${indicator.source} (${indicator.sourceCode}).`,
         `Coverage: ${fmtNumber(indicator.populationCoveragePct, 1)}% of Africa's population.`,
       ].join(' '),
-    }))
+    })),
+    ] satisfies CompatibilitySearchResult[])
+    : []
 
-  const futureResults: CompatibilitySearchResult[] = futureIndicators
+  const futureResults: CompatibilitySearchResult[] = layer === 'all' || layer === 'futures'
+    ? futureIndicators
     .filter((indicator: FutureIndicatorSummary) =>
       matchesQuery(query, indicator.id, indicator.name, indicator.description, indicator.categoryName, indicator.category),
     )
@@ -143,8 +182,17 @@ async function compatibilitySearch(query: string, limit: number): Promise<Compat
         `2043 Current Path: ${fmtNumber(indicator.scenarios2043.currentPath.value, 2)} ${indicator.unit}.`,
       ].join(' '),
     }))
+    : []
 
-  return [...archiveResults, ...presentResults, ...futureResults].slice(0, max)
+  const counts = {
+    archive: archiveResults.length,
+    present: presentResults.length,
+    future: futureResults.length,
+  }
+  return {
+    results: [...presentResults, ...futureResults, ...archiveResults].slice(0, max),
+    counts,
+  }
 }
 
 async function compatibilityFetch(id: string): Promise<CompatibilityFetchResult> {
@@ -179,6 +227,9 @@ async function compatibilityFetch(id: string): Promise<CompatibilityFetchResult>
           ].join('\n')
         : '',
       work.themes.length > 0 ? `\nThemes: ${work.themes.map((theme) => theme.name).join(', ')}` : '',
+      work.indicators && work.indicators.length > 0
+        ? `\nRelated present indicators:\n${work.indicators.map((indicator) => `- ${indicator.name} (${indicator.id}): ${indicator.reason}`).join('\n')}`
+        : '',
       work.accessLinks.length > 0
         ? `\nAccess links:\n${work.accessLinks.map((link) => `- ${link.type}: ${link.url}`).join('\n')}`
         : '',
@@ -201,6 +252,42 @@ async function compatibilityFetch(id: string): Promise<CompatibilityFetchResult>
   }
 
   if (kind === 'agenda') {
+    if (rawId === 'methodology') {
+      const methodology = await api.getAgendaMethodology()
+      return {
+        id: 'agenda:methodology',
+        title: 'Agenda 2063 scoring methodology',
+        url: agendaUrl(),
+        layer: 'present',
+        text: [
+          heading('Agenda 2063 methodology'),
+          '',
+          `Formula: ${methodology.formula}`,
+          `Goal aggregation: ${methodology.goalAggregation}`,
+          `Aspiration aggregation: ${methodology.aspirationAggregation}`,
+          `Overall aggregation: ${methodology.overallAggregation}`,
+          `Missing data treatment: ${methodology.missingDataTreatment}`,
+          `Default aggregate: ${methodology.defaultAggregate}`,
+        ].join('\n'),
+      }
+    }
+    if (rawId === 'overview') {
+      const overview = await api.getAgendaOverview()
+      return {
+        id: 'agenda:overview',
+        title: 'Agenda 2063 overview and coverage',
+        url: agendaUrl(),
+        layer: 'present',
+        text: [
+          heading('Agenda 2063 overview'),
+          '',
+          `Independent overall score: ${fmtNumber(overview.overallScore, 1)} / 100`,
+          overview.caveat ? `Caveat: ${overview.caveat}` : '',
+          `Coverage: ${overview.coverage.goalsWithData}/${overview.coverage.totalGoals} goals with indicators, ${overview.coverage.aspirationsWithData}/${overview.coverage.totalAspirations} aspirations with live scores.`,
+          `Freshness: ${overview.freshnessLabel}`,
+        ].filter(Boolean).join('\n'),
+      }
+    }
     const indicator: AgendaIndicatorDetail = await api.getAgendaIndicator(rawId)
     return {
       id: `agenda:${indicator.id}`,
@@ -246,6 +333,10 @@ async function compatibilityFetch(id: string): Promise<CompatibilityFetchResult>
         `2043 Failure: ${fmtNumber(indicator.scenarios2043.failure.value, 2)} ${indicator.unit}`,
         `2043 Current Path: ${fmtNumber(indicator.scenarios2043.currentPath.value, 2)} ${indicator.unit}`,
         `2043 Possible Africa: ${fmtNumber(indicator.scenarios2043.possibleAfrica.value, 2)} ${indicator.unit}`,
+        indicator.scenarios2063 ? `2063 Failure: ${fmtNumber(indicator.scenarios2063.failure.value, 2)} ${indicator.unit}` : '',
+        indicator.scenarios2063 ? `2063 Current Path: ${fmtNumber(indicator.scenarios2063.currentPath.value, 2)} ${indicator.unit}` : '',
+        indicator.scenarios2063 ? `2063 Possible Africa: ${fmtNumber(indicator.scenarios2063.possibleAfrica.value, 2)} ${indicator.unit}` : '',
+        indicator.scenarioHorizonNote ? `2063 note: ${indicator.scenarioHorizonNote}` : '',
         `Current source: ${indicator.current.source} (${indicator.current.sourceUrl})`,
         `Scenario source: ${indicator.scenarioSource} (${indicator.scenarioSourceUrl})`,
         `Failure basis: ${indicator.failureBasis}`,
@@ -406,7 +497,7 @@ export function createWisdomServer() {
         `Endpoint: ${about.endpoint}`,
         '',
         'Use Wisdom when you need:',
-        '- Archive retrieval across African and diaspora works',
+        '- Archive retrieval across African and diaspora works (mostly catalog context today, with stored excerpts/full text added progressively)',
         '- Independent Agenda 2063 progress data',
         '- Long-range futures scenarios for Africa',
         '',
@@ -429,9 +520,15 @@ export function createWisdomServer() {
         'Compatibility search tool for ChatGPT, OpenAI API, and generic MCP hosts. Searches Wisdom across the archive, Agenda 2063 present data, and Africa futures indicators.',
       inputSchema: {
         query: z.string().describe('Search query across Africa archive works, Agenda 2063 indicators, and futures indicators.'),
+        layer: z.enum(['all', 'archive', 'agenda', 'futures']).optional().default('all').describe('Optional layer filter. Use agenda for present data, futures for scenarios, archive for works.'),
         limit: z.number().int().min(1).max(20).optional().default(10).describe('Maximum number of search results.'),
       },
       outputSchema: {
+        counts: z.object({
+          archive: z.number(),
+          present: z.number(),
+          future: z.number(),
+        }),
         results: z.array(z.object({
           id: z.string(),
           title: z.string(),
@@ -441,14 +538,14 @@ export function createWisdomServer() {
         })),
       },
     },
-    async ({ query, limit }) => {
-      const results = await compatibilitySearch(query, limit)
+    async ({ query, layer, limit }) => {
+      const { results, counts } = await compatibilitySearch(query, limit, layer)
       return {
-        structuredContent: { results },
+        structuredContent: { counts, results },
         content: [
           {
             type: 'text',
-            text: jsonText({ results }),
+            text: jsonText({ counts, results }),
           },
         ],
       }
@@ -560,6 +657,12 @@ export function createWisdomServer() {
         }
       }
       if (work.themes.length > 0) lines.push('', `**Themes:** ${work.themes.map((theme: { name: string; slug: string }) => theme.name).join(', ')}`)
+      if (work.indicators && work.indicators.length > 0) {
+        lines.push('', '**Related present indicators:**')
+        for (const indicator of work.indicators) {
+          lines.push(`- ${indicator.name} (\`${indicator.id}\`): ${indicator.reason}`)
+        }
+      }
       if (work.relations.length > 0) {
         lines.push('', '**Related works:**')
         for (const relation of work.relations) {
@@ -692,6 +795,7 @@ export function createWisdomServer() {
         heading('Agenda 2063 overview'),
         '',
         `**Independent overall score:** ${fmtNumber(overview.overallScore, 1)} / 100`,
+        overview.caveat ? `**Caveat:** ${overview.caveat}` : '',
         `**Freshness:** ${overview.freshnessLabel}`,
         `**Coverage:** ${overview.coverage.goalsWithData}/${overview.coverage.totalGoals} goals with indicators, ${overview.coverage.aspirationsWithData}/${overview.coverage.totalAspirations} aspirations with live scores.`,
         `**Manifest:** ${overview.manifest.indicatorCount} indicators, ${overview.manifest.countriesCovered} countries covered.`,
@@ -701,7 +805,39 @@ export function createWisdomServer() {
         '',
         `**AU reporting context:** ${overview.auReported.reportingCountries}/${overview.auReported.totalCountries} member states reported in the February 2022 AUDA-NEPAD report.`,
         overview.auReported.notes,
-      ].join('\n')
+      ].filter(Boolean).join('\n')
+
+      return { content: [{ type: 'text', text }] }
+    },
+  )
+
+  server.registerTool(
+    'get_methodology',
+    {
+      title: 'Get Agenda Methodology',
+      description: 'Explain the Agenda 2063 scoring formula, aggregation rules, population weighting, and missing-data caveats.',
+      inputSchema: {},
+    },
+    async () => {
+      const methodology: AgendaMethodology & {
+        coverageCaveat?: string
+        indicatorsWithData?: number
+        indicatorsWithoutData?: number
+        aspirationsWithData?: number
+        totalAspirations?: number
+      } = await api.getAgendaMethodology()
+
+      const text = [
+        heading('Agenda 2063 methodology'),
+        '',
+        `**Formula:** ${methodology.formula}`,
+        `**Goal aggregation:** ${methodology.goalAggregation}`,
+        `**Aspiration aggregation:** ${methodology.aspirationAggregation}`,
+        `**Overall aggregation:** ${methodology.overallAggregation}`,
+        `**Missing data treatment:** ${methodology.missingDataTreatment}`,
+        `**Default aggregate:** ${methodology.defaultAggregate}`,
+        methodology.coverageCaveat ? `**Coverage caveat:** ${methodology.coverageCaveat}` : '',
+      ].filter(Boolean).join('\n')
 
       return { content: [{ type: 'text', text }] }
     },
@@ -778,6 +914,7 @@ export function createWisdomServer() {
       const text = [
         heading(indicator.name),
         '',
+        indicator.caveat ? `**Caveat:** ${indicator.caveat}` : '',
         `**ID:** \`${indicator.id}\``,
         `**Aspiration / Goal:** ${indicator.aspirationId} / ${indicator.goalId}`,
         `**Latest dashboard value:** ${fmtNumber(indicator.latestValue, 2)} ${indicator.unit} (${indicator.latestYear ?? 'n/a'})`,
@@ -791,6 +928,12 @@ export function createWisdomServer() {
         '',
         indicator.description,
         indicator.notes ? `\n**Notes:** ${indicator.notes}` : '',
+        indicator.crossLayerNotes && indicator.crossLayerNotes.length > 0
+          ? `\n**Cross-layer notes:**\n${indicator.crossLayerNotes.map((note) => `- ${note}`).join('\n')}`
+          : '',
+        indicator.relatedWorks && indicator.relatedWorks.length > 0
+          ? `\n**Related archive works:**\n${indicator.relatedWorks.map((work) => `- ${work.title} by ${work.author} (${work.yearPublished}) [ID: ${work.id}] — ${work.reason}`).join('\n')}`
+          : '',
         '',
         '**Regional averages:**',
         ...regionalLines,
@@ -801,6 +944,37 @@ export function createWisdomServer() {
         '**Bottom countries:**',
         ...bottomCountries,
       ].filter(Boolean).join('\n')
+
+      return { content: [{ type: 'text', text }] }
+    },
+  )
+
+  server.registerTool(
+    'get_country_profile',
+    {
+      title: 'Get Country Profile',
+      description: 'Retrieve all currently loaded Agenda 2063 indicator values for one AU member state, with rank and missing-data caveats.',
+      inputSchema: {
+        country: z.string().describe('Country name, ISO2, or ISO3 code, for example Kenya, KE, KEN, Nigeria, or NGA.'),
+      },
+    },
+    async ({ country }) => {
+      const profile: AgendaCountryProfile = await api.getAgendaCountryProfile(country)
+      const rows = profile.indicators.map((indicator) =>
+        `- **${indicator.name}** (\`${indicator.id}\`): ${fmtNumber(indicator.latestValue, 2)} ${indicator.unit}` +
+        ` (${indicator.latestYear ?? 'n/a'}), progress ${fmtNumber(indicator.progressScore, 1)}/100` +
+        (indicator.rank ? `, rank ${indicator.rank}/${indicator.rankTotal} (${indicator.rankDirection})` : ', no rank'),
+      )
+
+      const text = [
+        heading(`${profile.country.name} Agenda 2063 profile`),
+        '',
+        `**Region:** ${profile.country.region}`,
+        `**Coverage:** ${profile.coverage.indicatorsAvailable}/${profile.coverage.totalIndicators} indicators available; ${profile.coverage.indicatorsMissing} missing.`,
+        `**Caveat:** ${profile.caveat}`,
+        '',
+        ...rows,
+      ].join('\n')
 
       return { content: [{ type: 'text', text }] }
     },
@@ -861,8 +1035,15 @@ export function createWisdomServer() {
         `**2043 Current Path:** ${fmtNumber(indicator.scenarios2043.currentPath.value, 2)} ${indicator.unit} (${fmtSigned(deltaCurrentPath, 2)} vs current)`,
         `**2043 Possible Africa:** ${fmtNumber(indicator.scenarios2043.possibleAfrica.value, 2)} ${indicator.unit} (${fmtSigned(deltaPossible, 2)} vs current)`,
         indicator.scenarios2063
+          ? `**2063 Failure:** ${fmtNumber(indicator.scenarios2063.failure.value, 2)} ${indicator.unit}`
+          : '',
+        indicator.scenarios2063
           ? `**2063 Current Path:** ${fmtNumber(indicator.scenarios2063.currentPath.value, 2)} ${indicator.unit}`
           : '',
+        indicator.scenarios2063
+          ? `**2063 Possible Africa:** ${fmtNumber(indicator.scenarios2063.possibleAfrica.value, 2)} ${indicator.unit}`
+          : '',
+        indicator.scenarioHorizonNote ? `**2063 note:** ${indicator.scenarioHorizonNote}` : '',
         '',
         indicator.description,
         '',

@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
-import { getEnrichedWorkData, getWorkById } from '@/lib/literature-data'
+import { getEnrichedWorkData, getRelatedIndicatorsForWork, getWorkById } from '@/lib/literature-data'
 import { getWorkContentData } from '@/lib/work-content'
 
 export async function GET(
@@ -105,6 +105,7 @@ export async function GET(
       coverImageUrl:    work.coverImageUrl,
       accessLinks:      work.accessLinks.map(l => ({ url: l.url, type: l.type })),
       themes:           work.themes.map(wt => ({ name: wt.theme.name, slug: wt.theme.slug })),
+      indicators:       getRelatedIndicatorsForWork(work.id),
       relations: [
         ...work.relatedFrom.map(r => ({
           type:      r.type,
@@ -153,6 +154,7 @@ export async function GET(
         type: url.includes("archive.org") ? "archive" : url.includes(".pdf") ? "pdf" : "web",
       })),
       themes: enriched.themes,
+      indicators: enriched.indicators,
       relations: enriched.relations,
       readingLists: [],
       content,

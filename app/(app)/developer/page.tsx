@@ -71,7 +71,7 @@ const TOOL_GROUPS = [
     tools: [
       {
         name: "search",
-        summary: "Compatibility search across archive, present data, and futures for ChatGPT, OpenAI API, and generic MCP hosts.",
+        summary: "Compatibility search across archive, present data, and futures, with an optional layer filter for archive, agenda, or futures.",
       },
       {
         name: "fetch",
@@ -93,7 +93,7 @@ const TOOL_GROUPS = [
     title: "Archive",
     badge: "Past",
     tools: [
-      { name: "search_works", summary: "Full-text search across 561 archive works." },
+      { name: "search_works", summary: "Search across the archive catalog and stored context blocks where available." },
       { name: "get_work", summary: "Full work record with themes, relations, access links, and internal text status when available." },
       { name: "list_works", summary: "Structured browse by region, era, genre, theme, or query." },
       { name: "list_themes", summary: "Theme catalog with counts and slugs." },
@@ -105,8 +105,10 @@ const TOOL_GROUPS = [
     badge: "Present",
     tools: [
       { name: "get_agenda_overview", summary: "Independent overall score, coverage, freshness, and AU comparison context." },
+      { name: "get_methodology", summary: "Explains the scoring formula, aggregation method, population weighting, and missing-data treatment." },
       { name: "list_agenda_indicators", summary: "Browse the 22 live Agenda 2063 indicators." },
       { name: "get_agenda_indicator", summary: "Detailed indicator view with progress, weighting, regional averages, and country leaders/laggards." },
+      { name: "get_country_profile", summary: "Country-level Agenda 2063 profile for an AU member state, including ranks and missing indicators." },
     ],
   },
   {
@@ -342,7 +344,7 @@ export default function DeveloperPage() {
         <div>
           <h2 className="text-xl font-semibold">Tool reference</h2>
           <p className="text-sm text-muted-foreground mt-1">
-            The current server exposes 13 tools across universal retrieval, orientation, archive, Agenda 2063, and futures.
+            The current server exposes 15 tools across universal retrieval, orientation, archive, Agenda 2063, and futures.
           </p>
         </div>
 

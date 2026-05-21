@@ -36,7 +36,9 @@ async function verifyClient(label, client) {
     "search_works",
     "get_work",
     "get_agenda_overview",
+    "get_methodology",
     "get_agenda_indicator",
+    "get_country_profile",
     "get_future_indicator",
   ]) {
     assert(toolNames.includes(required), `[${label}] missing tool: ${required}`);
@@ -86,10 +88,19 @@ async function verifyClient(label, client) {
   const agenda = await client.callTool({ name: "get_agenda_overview", arguments: {} });
   const agendaText = agenda.content?.[0]?.type === "text" ? agenda.content[0].text : "";
   assert(agendaText.includes("Agenda 2063"), `[${label}] get_agenda_overview returned unexpected content`);
+  assert(agendaText.includes("Partial composite"), `[${label}] get_agenda_overview did not disclose partial coverage`);
+
+  const methodology = await client.callTool({ name: "get_methodology", arguments: {} });
+  const methodologyText = methodology.content?.[0]?.type === "text" ? methodology.content[0].text : "";
+  assert(methodologyText.includes("linear interpolation"), `[${label}] get_methodology returned unexpected content`);
 
   const indicator = await client.callTool({ name: "get_agenda_indicator", arguments: { id: "life-expectancy" } });
   const indicatorText = indicator.content?.[0]?.type === "text" ? indicator.content[0].text : "";
   assert(indicatorText.toLowerCase().includes("life expectancy"), `[${label}] get_agenda_indicator failed for life-expectancy`);
+
+  const country = await client.callTool({ name: "get_country_profile", arguments: { country: "Kenya" } });
+  const countryText = country.content?.[0]?.type === "text" ? country.content[0].text : "";
+  assert(countryText.includes("Kenya Agenda 2063 profile"), `[${label}] get_country_profile failed for Kenya`);
 
   const future = await client.callTool({ name: "get_future_indicator", arguments: { id: "gdp-per-capita" } });
   const futureText = future.content?.[0]?.type === "text" ? future.content[0].text : "";
