@@ -208,7 +208,6 @@ const DUPLICATE_WORK_IDS = new Set<number>([
   478, // Camara Laye, The African Child duplicate/translation variant.
   502, // Camara Laye, Dark Child duplicate/translation variant.
   539, // George Padmore, Pan-Africanism or Communism duplicate.
-  581, // Nnedi Okorafor, Lagoon duplicate; keep existing canonical record 495.
 ])
 
 const WORK_OVERRIDES: Record<number, Partial<LiteratureWork>> = {
@@ -221,7 +220,7 @@ const WORK_OVERRIDES: Record<number, Partial<LiteratureWork>> = {
 
 const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
   {
-    id: 563,
+    id: 9001,
     title: "The Tale of Sinuhe",
     author: "Ancient Egyptian scribal tradition",
     yearPublished: -1900,
@@ -237,7 +236,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "One of the oldest surviving works of African narrative literature and a foundation text for exile-and-return motifs.",
   },
   {
-    id: 564,
+    id: 9002,
     title: "The Eloquent Peasant",
     author: "Ancient Egyptian scribal tradition",
     yearPublished: -1850,
@@ -253,7 +252,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Early African political and ethical literature centered on justice, eloquence, and accountability.",
   },
   {
-    id: 565,
+    id: 9003,
     title: "The Maxims of Ptahhotep",
     author: "Ptahhotep",
     yearPublished: -2350,
@@ -269,7 +268,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Among the world's earliest surviving works of moral and political instruction.",
   },
   {
-    id: 566,
+    id: 9004,
     title: "The Book of Coming Forth by Day",
     author: "Ancient Egyptian funerary tradition",
     yearPublished: -1550,
@@ -285,7 +284,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "A major archive of ancient African cosmology, ethics, ritual, and ideas of judgment.",
   },
   {
-    id: 567,
+    id: 9005,
     title: "The Kebra Nagast",
     author: "Ethiopian ecclesiastical tradition",
     yearPublished: 1322,
@@ -301,7 +300,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Foundational text for Ethiopian political theology, dynastic legitimacy, and Christian literary tradition.",
   },
   {
-    id: 568,
+    id: 9006,
     title: "The Epic of Askia Mohammed",
     author: "Songhay oral tradition",
     yearPublished: 1500,
@@ -317,7 +316,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Anchors Songhay political memory and West African traditions of kingship, scholarship, and empire.",
   },
   {
-    id: 569,
+    id: 9007,
     title: "Tarikh al-Sudan",
     author: "Abd al-Rahman al-Sa'di",
     yearPublished: 1655,
@@ -333,7 +332,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Core source for the written historical tradition of Timbuktu and the western Sahel.",
   },
   {
-    id: 570,
+    id: 9008,
     title: "Tarikh al-Fattash",
     author: "Mahmud Kati and later compilers",
     yearPublished: 1665,
@@ -349,7 +348,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "One of the major Arabic manuscript traditions for precolonial West African history.",
   },
   {
-    id: 571,
+    id: 9009,
     title: "Utendi wa Tambuka",
     author: "Bwana Mwengo",
     yearPublished: 1728,
@@ -365,7 +364,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Among the earliest known extended works of Swahili literature.",
   },
   {
-    id: 572,
+    id: 9010,
     title: "The Chronicle of Kilwa",
     author: "Swahili coastal chronicle tradition",
     yearPublished: 1520,
@@ -381,7 +380,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Key source for Indian Ocean African urban history and coastal political memory.",
   },
   {
-    id: 573,
+    id: 9011,
     title: "Dahomean Historical Traditions",
     author: "Dahomean oral historians",
     yearPublished: 1750,
@@ -397,7 +396,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Important archive for understanding West African state formation beyond colonial records.",
   },
   {
-    id: 574,
+    id: 9012,
     title: "Pumzi",
     author: "Wanuri Kahiu",
     yearPublished: 2009,
@@ -413,7 +412,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "A landmark work of continental African science fiction and ecofuturism.",
   },
   {
-    id: 575,
+    id: 9013,
     title: "A Killing in the Sun",
     author: "Dilman Dila",
     yearPublished: 2014,
@@ -429,7 +428,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Important work in the rise of twenty-first-century continental African speculative fiction.",
   },
   {
-    id: 576,
+    id: 9014,
     title: "The Silence of the Wilting Skin",
     author: "Tlotlo Tsamaase",
     yearPublished: 2020,
@@ -445,7 +444,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "A major contemporary Botswanan voice in African speculative fiction.",
   },
   {
-    id: 577,
+    id: 9015,
     title: "David Mogo, Godhunter",
     author: "Suyi Davies Okungbowa",
     yearPublished: 2019,
@@ -461,7 +460,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Continental urban fantasy that puts Lagos, Yoruba cosmology, and contemporary Nigerian city life at the center of the genre.",
   },
   {
-    id: 578,
+    id: 9016,
     title: "The Lies of the Ajungo",
     author: "Moses Ose Utomi",
     yearPublished: 2023,
@@ -477,7 +476,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "Part of a new wave of African fantasy centered on political mythmaking and ecological scarcity.",
   },
   {
-    id: 579,
+    id: 9017,
     title: "Jalada 02: Afrofuture(s)",
     author: "Jalada Africa collective",
     yearPublished: 2015,
@@ -493,7 +492,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "A key collective intervention in African futures writing and literary-network building.",
   },
   {
-    id: 580,
+    id: 9018,
     title: "Freshwater",
     author: "Akwaeke Emezi",
     yearPublished: 2018,
@@ -509,23 +508,7 @@ const ARCHIVE_EXPANSION_WORKS: LiteratureWork[] = [
       "A major contemporary work connecting African cosmology, gender, body, and experimental narrative form.",
   },
   {
-    id: 581,
-    title: "Lagoon",
-    author: "Nnedi Okorafor",
-    yearPublished: 2014,
-    language: "English",
-    region: "West Africa",
-    country: "Nigeria",
-    genre: "Speculative Fiction",
-    era: "Contemporary",
-    description:
-      "A first-contact novel set in Lagos, combining alien arrival, marine life, Nigerian urban systems, pidgin, and local spiritual ecologies.",
-    accessLinks: ["https://nnedi.com/books/lagoon/"],
-    significance:
-      "One of the clearest bridges between diaspora Afrofuturism and Africanfuturism rooted in a specific African city.",
-  },
-  {
-    id: 582,
+    id: 9019,
     title: "After the Flare",
     author: "Deji Bryce Olukotun",
     yearPublished: 2017,

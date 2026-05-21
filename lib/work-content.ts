@@ -35,7 +35,7 @@ const STATUS_LABELS: Record<WorkContentStatus, string> = {
 };
 
 const WORK_CONTENT: Record<number, WorkContentSeed> = {
-  563: {
+  9001: {
     status: "excerpt-available",
     summary:
       "Wisdom stores an editorial research note and a short public-domain excerpt anchor for this ancient Egyptian exile-and-return narrative.",
@@ -65,7 +65,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  564: {
+  9002: {
     status: "excerpt-available",
     summary:
       "Wisdom stores context for The Eloquent Peasant as an early African text of justice, rhetoric, and accountability.",
@@ -85,7 +85,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  565: {
+  9003: {
     status: "excerpt-available",
     summary:
       "Wisdom stores a research-oriented entry for the Maxims of Ptahhotep, one of the earliest known wisdom-instruction corpora.",
@@ -105,7 +105,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  566: {
+  9004: {
     status: "excerpt-available",
     summary:
       "Wisdom stores context for the Egyptian Book of the Dead as an African religious, ethical, and cosmological archive.",
@@ -125,7 +125,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  567: {
+  9005: {
     status: "excerpt-available",
     summary:
       "Wisdom stores a research note for the Kebra Nagast, linking Ethiopian literary tradition, political theology, and sacred kingship.",
@@ -145,7 +145,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  569: {
+  9007: {
     status: "research-queued",
     summary:
       "Wisdom identifies Tarikh al-Sudan as a priority Timbuktu chronicle for future excerpting and manuscript-context enrichment.",
@@ -165,7 +165,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  574: {
+  9012: {
     status: "research-queued",
     summary:
       "Wisdom stores catalog context for Pumzi as a priority continental African speculative film record.",
@@ -185,7 +185,7 @@ const WORK_CONTENT: Record<number, WorkContentSeed> = {
     ],
     lastUpdated: "2026-05-21",
   },
-  579: {
+  9017: {
     status: "research-queued",
     summary:
       "Wisdom stores catalog context for Jalada's Afrofuture(s) as a collective African futures anthology.",
