@@ -2,10 +2,21 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 import { getAllWorks } from "@/lib/literature-data";
-import { Github, ArrowRight, Library, MessageSquare, Code2, Database, ShieldCheck, RefreshCw, ExternalLink } from "lucide-react";
+import { Github, ArrowRight, Library, Code2, Database, ShieldCheck, RefreshCw, ExternalLink, Sparkles } from "lucide-react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { WisdomLogo } from "@/components/wisdom-logo";
+import { RotatingWord } from "@/components/rotating-word";
+import { CodeSnippet } from "@/components/code-snippet";
+
+const navLinkClassName =
+  "group inline-flex h-9 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-background hover:text-foreground focus:bg-background focus:text-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
 
 export default function LandingPage() {
   const allWorks = getAllWorks();
@@ -27,14 +38,45 @@ export default function LandingPage() {
             <span className="font-semibold text-lg">Wisdom</span>
           </div>
           <div className="flex items-center gap-2">
-            <nav className="hidden md:inline-flex items-center rounded-lg bg-muted p-1 gap-0.5">
-              <Link href="/africa-2050" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Future</Link>
-              <Link href="/africa-2050" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Present</Link>
-              <Link href="/browse" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Past</Link>
-              <Link href="/ask" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Get Wisdom</Link>
-              <Link href="/developer" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Developer</Link>
-              <Link href="/manifesto" className="inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium rounded-md text-muted-foreground hover:bg-background hover:text-foreground transition-all">Manifesto</Link>
-            </nav>
+            <NavigationMenu className="hidden xl:flex">
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild className={navLinkClassName}>
+                    <Link href="/manifesto" className="flex items-center gap-2">
+                      <span>Manifesto</span>
+                      <Badge variant="secondary" className="px-1.5 py-0 text-[10px] uppercase tracking-wide">
+                        New
+                      </Badge>
+                    </Link>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <NavigationMenuLink asChild className={navLinkClassName}>
+                    <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer">
+                      White paper
+                    </a>
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            <div className="hidden lg:flex items-center gap-2 ml-2">
+              <Link href="/browse">
+                <Button size="sm" className="gap-2">
+                  <Library className="h-4 w-4" />
+                  Open app
+                </Button>
+              </Link>
+              <Link href="/developer">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="gap-2 border-transparent bg-foreground text-background hover:bg-foreground/90 hover:text-background dark:border dark:border-border dark:bg-foreground dark:text-background"
+                >
+                  <Code2 className="h-4 w-4" />
+                  Integrate Wisdom
+                </Button>
+              </Link>
+            </div>
             <ThemeToggle />
             <a
               href="https://github.com/seathemc/pan-african-library"
@@ -53,30 +95,38 @@ export default function LandingPage() {
         {/* Hero */}
         <div className="max-w-5xl mx-auto px-6 pt-24 pb-16">
           <div className="flex flex-col gap-6">
+            <div>
+              <Link href="/manifesto">
+                <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-muted/70 px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm transition-all hover:border-primary/40 hover:bg-background hover:text-foreground">
+                  <Sparkles className="h-3.5 w-3.5 text-primary" />
+                  <span>Read the manifesto behind the system</span>
+                  <span className="text-foreground/50">→</span>
+                </div>
+              </Link>
+            </div>
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight leading-tight">
-              5,000 years of African wisdom<br className="hidden md:block" /> in one MCP.
+              5,000 years of African wisdom<br className="hidden md:block" /> in one{" "}
+              <RotatingWord words={["MCP", "integration"]} className="align-baseline" />.
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
               Thinkers, writers, fighters, artists — from ancient oral traditions to contemporary theory.
               Embeddable in any tool or workflow.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 mt-2">
-              <Link href="/developer">
-                <Button size="lg" className="gap-2 text-base">
-                  <Code2 className="h-5 w-5" />
-                  View the MCP
-                </Button>
-              </Link>
               <Link href="/browse">
-                <Button size="lg" variant="outline" className="gap-2 text-base">
+                <Button size="lg" className="gap-2 text-base">
                   <Library className="h-5 w-5" />
-                  Explore the Archive
+                  Open app
                 </Button>
               </Link>
-              <Link href="/ask">
-                <Button size="lg" variant="outline" className="gap-2 text-base">
-                  <MessageSquare className="h-5 w-5" />
-                  Get Wisdom
+              <Link href="/developer">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="gap-2 text-base border-transparent bg-foreground text-background hover:bg-foreground/90 hover:text-background dark:border dark:border-border dark:bg-foreground dark:text-background"
+                >
+                  <Code2 className="h-5 w-5" />
+                  Integrate Wisdom
                 </Button>
               </Link>
             </div>
@@ -88,18 +138,11 @@ export default function LandingPage() {
           <div className="border rounded-xl bg-muted/30 p-6 space-y-4">
             <p className="text-sm font-medium flex items-center gap-2">
               <Code2 className="h-4 w-4 text-primary" />
-              Add Wisdom to Claude Desktop in one step
+              Connect Wisdom from any MCP-compatible host
             </p>
-            <pre className="bg-background border rounded-lg p-5 text-sm font-mono overflow-x-auto">{`{
-  "mcpServers": {
-    "wisdom": {
-      "command": "npx",
-      "args": ["-y", "wisdom-mcp"]
-    }
-  }
-}`}</pre>
+            <CodeSnippet code={`claude mcp add --transport http wisdom https://wisdom.family/api/mcp`} />
             <p className="text-sm text-muted-foreground">
-              Works with Claude Desktop, Claude Code, Cursor, and any MCP-compatible tool.
+              Remote endpoint: <code className="rounded bg-muted px-1.5 py-0.5 font-mono text-xs">https://wisdom.family/api/mcp</code>. Works with ChatGPT, Codex, Claude, Cursor, VS Code, and any host that supports remote MCP.
             </p>
             <Link href="/developer">
               <Button variant="outline" size="sm" className="gap-2 mt-1">
@@ -114,12 +157,10 @@ export default function LandingPage() {
           <div className="flex flex-col gap-5 mb-14 max-w-2xl">
             <p className="text-sm text-muted-foreground uppercase tracking-widest font-medium">Past · Present · Future</p>
             <h2 className="text-3xl md:text-4xl font-bold leading-snug">
-              Intelligence without time is just data.<br />Wisdom knows where something came from, where it stands, and where it's going.
+              One readable system for Africa&apos;s past, present, and future.
             </h2>
             <p className="text-muted-foreground leading-relaxed text-lg">
-              The three tools aren't separate features — they're a single temporal system.
-              The past gives you the foundation. The present gives you the reality. The future gives you the direction.
-              Put them together, and you don't have information about Africa. You have wisdom about it.
+              Browse the past through the archive, verify the present through independent data, and explore the future through the forecast. Together they form one continuous story any AI tool can read across time.
             </p>
           </div>
 
@@ -374,48 +415,6 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* Get Wisdom */}
-        <div className="border-t bg-muted/10 py-20">
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              <div className="flex flex-col gap-5">
-                <Badge variant="outline" className="w-fit">Get Wisdom</Badge>
-                <h2 className="text-3xl font-bold">One conversation across all three</h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  Ask the AI librarian anything — reading recommendations, context on an author,
-                  what the archive says about a moment in African history, or how a literary theme
-                  connects to what the development data shows today.
-                </p>
-                <Link href="/ask">
-                  <Button className="w-fit gap-2">
-                    Start a conversation <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-              <Card className="bg-background border-primary/20">
-                <CardHeader>
-                  <CardTitle className="text-base flex items-center gap-2">
-                    <MessageSquare className="h-4 w-4" />
-                    Wisdom
-                  </CardTitle>
-                  <CardDescription>Powered by Claude</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="bg-muted/50 rounded-lg px-4 py-3 text-sm max-w-xs ml-auto text-right">
-                    Recommend 3 works on decolonization from East Africa
-                  </div>
-                  <div className="bg-primary/5 border border-primary/20 rounded-lg px-4 py-3 text-sm space-y-2">
-                    <p>Here are three essential works:</p>
-                    <p>1. <strong>Ngũgĩ wa Thiong&apos;o</strong> — <em>Decolonising the Mind</em> (1986)</p>
-                    <p>2. <strong>Frantz Fanon</strong> — <em>The Wretched of the Earth</em> (1961)</p>
-                    <p>3. <strong>Okot p&apos;Bitek</strong> — <em>Song of Lawino</em> (1966)</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-
       </main>
 
       <footer className="border-t py-8">
@@ -429,9 +428,10 @@ export default function LandingPage() {
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <Link href="/browse" className="hover:text-foreground transition-colors">Archive</Link>
               <Link href="/africa-2050" className="hover:text-foreground transition-colors">Agenda 2063</Link>
-              <Link href="/ask" className="hover:text-foreground transition-colors">Get Wisdom</Link>
               <a href="https://github.com/seathemc/pan-african-library" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">GitHub</a>
               <Link href="/developer" className="hover:text-foreground transition-colors">Developer</Link>
+              <Link href="/manifesto" className="hover:text-foreground transition-colors">Manifesto</Link>
+              <a href="/whitepaper.pdf" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">White paper</a>
             </div>
           </div>
         </div>

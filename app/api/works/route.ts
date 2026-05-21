@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getAllWorks } from '@/lib/literature-data'
+import { getWorkContentStatus } from '@/lib/work-content'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
@@ -80,6 +81,7 @@ export async function GET(req: NextRequest) {
         country: w.country, genre: w.genre, era: w.era,
         description: w.description, significance: w.significance ?? null,
         coverImageUrl: null, accessLinks: [], themes: [],
+        contentStatus: getWorkContentStatus(w),
       })),
       total, limit, offset,
     })
@@ -106,5 +108,13 @@ function normalizeWork(w: any) {
     coverImageUrl:    w.coverImageUrl,
     accessLinks:      w.accessLinks?.map((l: { url: string; type: string }) => ({ url: l.url, type: l.type })) ?? [],
     themes:           w.themes?.map((wt: { theme: { name: string; slug: string } }) => ({ name: wt.theme.name, slug: wt.theme.slug })) ?? [],
+    contentStatus:    getWorkContentStatus({
+      id: w.id,
+      title: w.title,
+      author: w.author,
+      description: w.description,
+      significance: w.significance ?? '',
+      accessLinks: w.accessLinks?.map((l: { url: string }) => l.url) ?? [],
+    }),
   }
 }

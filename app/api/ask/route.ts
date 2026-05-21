@@ -1,24 +1,27 @@
 import { NextRequest } from 'next/server'
 import OpenAI from 'openai'
-
-const client = new OpenAI({
-  baseURL: 'https://openrouter.ai/api/v1',
-  apiKey: process.env.OPENROUTER_API_KEY,
-  defaultHeaders: {
-    'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://pan-african-library.vercel.app',
-    'X-Title': 'Wisdom — Pan-African Library',
-  },
-})
+import { getAllWorks, getEnrichedWorkData, getThemeBySlug, getThemeCatalog, getWorkById } from '@/lib/literature-data'
 
 // Default to Claude Sonnet via OpenRouter; override with OPENROUTER_MODEL env var
 // e.g. "anthropic/claude-haiku-4-5" for cheaper usage
 const MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-sonnet-4-6'
 
-const BASE_URL = process.env.NEXTJS_BASE_URL || 'http://localhost:3000'
+function getClient() {
+  if (!process.env.OPENROUTER_API_KEY) return null
+
+  return new OpenAI({
+    baseURL: 'https://openrouter.ai/api/v1',
+    apiKey: process.env.OPENROUTER_API_KEY,
+    defaultHeaders: {
+      'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'https://wisdom.family',
+      'X-Title': 'Wisdom — Pan-African Library',
+    },
+  })
+}
 
 // Audit pass XII (2026-05-15): system prompt said "370+ works" but DB is now
 // at 561. Switched to "500+" as a rounded floor that won't go stale immediately.
-const SYSTEM_PROMPT = `You are the Wisdom librarian — an expert guide to pan-African and diaspora literature. You have access to a curated library of 500+ works spanning African literature (West, East, Central, Southern, and North Africa), Swahili and Arabic literature, Lusophone Africa (Angola, Mozambique), the Harlem Renaissance, Caribbean thought, Black feminist theory, pan-Africanism, and more. The library includes works in English, French, Arabic, Portuguese, Swahili, Gikuyu, and other languages. Answer questions warmly and with depth. Use your tools to find specific works, explore themes, and suggest reading lists. When recommending works, always mention the work ID so users can explore further. When you recommend a reading list, give the works in a numbered sequence with brief notes on why each matters.`
+const SYSTEM_PROMPT = `You are the Wisdom librarian — an expert guide to pan-African and diaspora literature. You have access to a curated library of 500+ works spanning African literature (West, East, Central, Southern, and North Africa), Swahili and Arabic literature, Lusophone Africa (Angola, Mozambique), the Harlem Renaissance, Caribbean thought, Black feminist theory, pan-Africanism, and more. The library includes works in English, French, Arabic, Portuguese, Swahili, Gikuyu, and other languages. Answer questions warmly and with depth. Use your tools to find specific works and explore themes. When recommending works, always mention the work ID so users can explore further.`
 
 const tools: OpenAI.Chat.ChatCompletionTool[] = [
   {
@@ -90,79 +93,100 @@ const tools: OpenAI.Chat.ChatCompletionTool[] = [
       },
     },
   },
-  {
-    type: 'function',
-    function: {
-      name: 'list_reading_lists',
-      description: 'List all curated reading lists in the library.',
-      parameters: { type: 'object', properties: {}, required: [] },
-    },
-  },
-  {
-    type: 'function',
-    function: {
-      name: 'get_reading_list',
-      description: 'Get the full contents of a curated reading list in order.',
-      parameters: {
-        type: 'object',
-        properties: {
-          slug: { type: 'string', description: 'Reading list slug' },
-        },
-        required: ['slug'],
-      },
-    },
-  },
 ]
 
 async function executeTool(name: string, input: Record<string, unknown>): Promise<string> {
   try {
-    let url: string
-
     switch (name) {
       case 'search_works': {
-        const params = new URLSearchParams({ q: String(input.query) })
-        if (input.limit) params.set('limit', String(input.limit))
-        url = `${BASE_URL}/api/search?${params}`
-        break
+        const query = String(input.query ?? '').toLowerCase().trim()
+        const limit = Math.min(Number(input.limit ?? 10), 50)
+        const works = getAllWorks()
+          .filter((work) =>
+            [
+              work.title,
+              work.author,
+              work.description,
+              work.significance ?? '',
+              work.region,
+              work.country,
+              work.genre,
+              work.era,
+            ].join(' ').toLowerCase().includes(query)
+          )
+          .slice(0, limit)
+          .map((work) => ({
+            id: work.id,
+            title: work.title,
+            author: work.author,
+            yearPublished: work.yearPublished,
+            region: work.region,
+            genre: work.genre,
+            era: work.era,
+            description: work.description,
+          }))
+        return JSON.stringify(works)
       }
-      case 'get_work':
-        url = `${BASE_URL}/api/works/${input.id}`
-        break
+      case 'get_work': {
+        const work = getWorkById(Number(input.id))
+        if (!work) return JSON.stringify({ error: 'Work not found' })
+        return JSON.stringify({
+          ...work,
+          themes: getEnrichedWorkData(work.id).themes,
+        })
+      }
       case 'list_works': {
-        const params = new URLSearchParams()
-        if (input.region) params.set('region', String(input.region))
-        if (input.era)    params.set('era',    String(input.era))
-        if (input.genre)  params.set('genre',  String(input.genre))
-        if (input.theme)  params.set('theme',  String(input.theme))
-        if (input.limit)  params.set('limit',  String(input.limit))
-        url = `${BASE_URL}/api/works?${params}`
-        break
+        const region = String(input.region ?? '').toLowerCase()
+        const era = String(input.era ?? '').toLowerCase()
+        const genre = String(input.genre ?? '').toLowerCase()
+        const theme = String(input.theme ?? '').toLowerCase()
+        const limit = Math.min(Number(input.limit ?? 20), 100)
+        const works = getAllWorks()
+          .filter((work) => !region || work.region.toLowerCase() === region)
+          .filter((work) => !era || work.era.toLowerCase() === era)
+          .filter((work) => !genre || work.genre.toLowerCase() === genre)
+          .filter((work) => !theme || getEnrichedWorkData(work.id).themes.some((item) => item.slug === theme))
+          .slice(0, limit)
+          .map((work) => ({
+            id: work.id,
+            title: work.title,
+            author: work.author,
+            yearPublished: work.yearPublished,
+            region: work.region,
+            genre: work.genre,
+            era: work.era,
+            description: work.description,
+          }))
+        return JSON.stringify(works)
       }
       case 'list_themes':
-        url = `${BASE_URL}/api/themes`
-        break
-      case 'get_theme':
-        url = `${BASE_URL}/api/themes/${input.slug}`
-        break
-      case 'list_reading_lists':
-        url = `${BASE_URL}/api/reading-lists`
-        break
-      case 'get_reading_list':
-        url = `${BASE_URL}/api/reading-lists/${input.slug}`
-        break
+        return JSON.stringify(getThemeCatalog())
+      case 'get_theme': {
+        const theme = getThemeBySlug(String(input.slug ?? ''))
+        return JSON.stringify(theme ?? { error: 'Theme not found' })
+      }
       default:
         return JSON.stringify({ error: `Unknown tool: ${name}` })
     }
-
-    const res = await fetch(url)
-    if (!res.ok) return JSON.stringify({ error: `API error ${res.status}: ${res.statusText}` })
-    return JSON.stringify(await res.json())
   } catch (err) {
     return JSON.stringify({ error: String(err) })
   }
 }
 
 export async function POST(req: NextRequest) {
+  const client = getClient()
+  if (!client) {
+    return new Response(
+      'Wisdom chat is not configured yet. Set OPENROUTER_API_KEY in Vercel project settings to enable /ask.',
+      {
+        status: 503,
+        headers: {
+          'Content-Type': 'text/plain; charset=utf-8',
+        },
+      }
+    )
+  }
+
   const { message, history = [] } = await req.json() as {
     message: string
     history: Array<{ role: 'user' | 'assistant'; content: string }>

@@ -2,11 +2,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { getWorkById, getAllWorks } from "@/lib/literature-data";
+import { getAllWorks, getWorkById, getEnrichedWorkData } from "@/lib/literature-data";
+import { getWorkContentData } from "@/lib/work-content";
 import { notFound } from "next/navigation";
-import { BookOpen, ExternalLink, Calendar, Globe, Languages, Award, Tag, ListOrdered, BookMarked } from "lucide-react";
+import { BookOpen, ExternalLink, Calendar, Globe, Languages, Award, Tag, BookMarked, FileText } from "lucide-react";
 import Link from "next/link";
-import { AddToCollection } from "@/components/add-to-collection";
 import { authorNameToSlug } from "@/lib/author-utils";
 
 interface ApiTheme {
@@ -33,21 +33,9 @@ interface EnrichedData {
 }
 
 async function getEnrichedData(id: string): Promise<EnrichedData | null> {
-  try {
-    const baseUrl = process.env.NEXTJS_BASE_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/works/${id}`, {
-      next: { revalidate: 3600 },
-    });
-    if (!res.ok) return null;
-    const data = await res.json();
-    return {
-      themes: Array.isArray(data.themes) ? data.themes : [],
-      relations: Array.isArray(data.relations) ? data.relations : [],
-      readingLists: Array.isArray(data.readingLists) ? data.readingLists : [],
-    };
-  } catch {
-    return null;
-  }
+  const workId = Number(id);
+  if (Number.isNaN(workId)) return null;
+  return getEnrichedWorkData(workId);
 }
 
 // Group relations by type, de-duplicating work ids across directions
@@ -88,9 +76,9 @@ export default async function WorkPage({
   const enriched = await getEnrichedData(id);
   const themes = enriched?.themes ?? [];
   const relations = enriched?.relations ?? [];
-  const readingLists = enriched?.readingLists ?? [];
   const groupedRelations = groupRelationsByType(relations);
   const firstTheme = themes.length > 0 ? themes[0] : null;
+  const content = getWorkContentData(work);
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl mx-auto">
@@ -99,6 +87,7 @@ export default async function WorkPage({
         <div className="flex items-center gap-2 flex-wrap">
           <Badge variant="outline">{work.genre}</Badge>
           <Badge variant="outline">{work.yearPublished}</Badge>
+          <Badge variant="secondary">{content.statusLabel}</Badge>
         </div>
         <h1 className="text-4xl font-bold tracking-tight">{work.title}</h1>
         <Link
@@ -130,30 +119,6 @@ export default async function WorkPage({
           </div>
         )}
       </div>
-
-      {/* Reading Lists section */}
-      {readingLists.length > 0 && (
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="flex items-center gap-2 text-base">
-              <ListOrdered className="h-4 w-4 text-primary" />
-              Part of Reading Lists
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-wrap gap-2">
-            {readingLists.map((list) => (
-              <Link key={list.slug} href={`/reading-lists/${list.slug}`}>
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer hover:border-primary/60 transition-colors text-sm py-1 px-3"
-                >
-                  {list.title}
-                </Badge>
-              </Link>
-            ))}
-          </CardContent>
-        </Card>
-      )}
 
       {/* Quick Info */}
       <Card>
@@ -215,6 +180,48 @@ export default async function WorkPage({
               </div>
             </>
           )}
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <FileText className="h-5 w-5 text-primary" />
+            Text in Wisdom
+          </CardTitle>
+          <CardDescription>
+            What Wisdom currently stores internally for this work, separate from external links.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center gap-2 flex-wrap">
+            <Badge variant="outline">{content.statusLabel}</Badge>
+            <p className="text-sm text-muted-foreground">{content.summary}</p>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {content.availabilityNote}
+          </p>
+
+          {content.blocks.map((block) => (
+            <div key={block.id} className="rounded-lg border bg-muted/30 p-4 space-y-2">
+              <div className="flex items-center gap-2 flex-wrap">
+                <p className="font-medium">{block.title}</p>
+                <Badge variant="secondary" className="text-[11px]">
+                  {block.kind}
+                </Badge>
+                {!block.isVerbatim && (
+                  <Badge variant="outline" className="text-[11px]">
+                    not primary text
+                  </Badge>
+                )}
+              </div>
+              <p className="text-sm leading-relaxed text-foreground/90">{block.text}</p>
+              <p className="text-xs text-muted-foreground">
+                {block.sourceLabel}
+                {block.sourceUrl ? ` · ${block.sourceUrl}` : ""}
+              </p>
+            </div>
+          ))}
         </CardContent>
       </Card>
 
@@ -347,20 +354,6 @@ export default async function WorkPage({
           </CardContent>
         </Card>
       )}
-
-      {/* Save to Collection */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-base">
-            <BookMarked className="h-5 w-5 text-primary" />
-            Save to Collection
-          </CardTitle>
-          <CardDescription>Add this work to one of your personal collections.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <AddToCollection workId={work.id} />
-        </CardContent>
-      </Card>
 
       {/* Explore More */}
       <Card className="bg-muted/50">

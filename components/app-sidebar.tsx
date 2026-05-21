@@ -10,14 +10,10 @@ import {
   Calendar,
   ChevronRight,
   Code2,
-  Bookmark,
-  MessageSquare,
   Tag,
-  ListOrdered,
   TrendingUp,
   Telescope,
   Target,
-  Zap,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -37,19 +33,12 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { Badge } from "@/components/ui/badge"
 import { getRegions, getEras, getGenres } from "@/lib/literature-data"
-import { UserMenu } from "./user-menu"
 import { Separator } from "@/components/ui/separator"
 import { ThemeToggle } from "./theme-toggle"
 
-interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
-  user?: {
-    email: string
-    name?: string | null
-  } | null
-}
-
-export function AppSidebar({ user, ...props }: AppSidebarProps) {
+export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname()
   const regions = getRegions()
   const eras = getEras()
@@ -85,19 +74,9 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
       </SidebarHeader>
 
       <SidebarContent>
-
-        {/* Get Wisdom — the synthesis layer across all three */}
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/ask")}>
-                  <Link href="/ask">
-                    <MessageSquare />
-                    <span>Get Wisdom</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild isActive={pathname === "/"}>
                   <Link href="/">
@@ -124,6 +103,17 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   <Link href="/developer">
                     <Code2 />
                     <span>Integrate the Wisdom</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/manifesto")}>
+                  <Link href="/manifesto" className="flex items-center gap-2">
+                    <Tag />
+                    <span>Manifesto</span>
+                    <Badge variant="secondary" className="ml-auto px-1.5 py-0 text-[10px] uppercase tracking-wide">
+                      New
+                    </Badge>
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -218,14 +208,6 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/reading-lists")}>
-                  <Link href="/reading-lists">
-                    <ListOrdered />
-                    <span>Reading Lists</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -304,35 +286,11 @@ export function AppSidebar({ user, ...props }: AppSidebarProps) {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
-
-        <Separator className="mx-2" />
-
-        {/* My Library */}
-        <SidebarGroup>
-          <SidebarGroupLabel>My Library</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/collections")}>
-                  <Link href="/collections">
-                    <Bookmark />
-                    <span>Collections</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-
       </SidebarContent>
 
       <SidebarFooter>
         <Separator />
-        <div className="p-2 flex items-center justify-between gap-2">
-          <div className="flex-1 min-w-0">
-            <UserMenu user={user || null} />
-          </div>
+        <div className="p-2 flex items-center justify-end gap-2">
           <ThemeToggle />
         </div>
       </SidebarFooter>

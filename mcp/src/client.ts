@@ -1,10 +1,17 @@
 // Thin HTTP client for the Wisdom API.
-// Configure ALEXANDRIA_API_URL in the environment (defaults to production).
+// `WISDOM_API_URL` is the canonical environment variable. Keep the older
+// `ALEXANDRIA_API_URL` alias for backward compatibility with early local setups.
 
-const BASE_URL = (process.env.ALEXANDRIA_API_URL ?? 'https://pan-african-library.vercel.app').replace(/\/$/, '')
+function getBaseUrl() {
+  return (
+    process.env.WISDOM_API_URL ??
+    process.env.ALEXANDRIA_API_URL ??
+    'https://wisdom.family'
+  ).replace(/\/$/, '')
+}
 
 async function get<T>(path: string, params?: Record<string, string | number | undefined>): Promise<T> {
-  const url = new URL(`${BASE_URL}${path}`)
+  const url = new URL(`${getBaseUrl()}${path}`)
   if (params) {
     for (const [k, v] of Object.entries(params)) {
       if (v !== undefined) url.searchParams.set(k, String(v))
@@ -30,6 +37,7 @@ export interface WorkSummary {
   era: string
   description: string
   significance: string | null
+  contentStatus?: 'metadata-only' | 'excerpt-available' | 'full-text-available' | 'research-queued'
 }
 
 export interface Work extends WorkSummary {
@@ -47,6 +55,22 @@ export interface Work extends WorkSummary {
     work: { id: number; title: string; author: string }
   }>
   readingLists: Array<{ id: number; title: string; slug: string }>
+  content?: {
+    status: 'metadata-only' | 'excerpt-available' | 'full-text-available' | 'research-queued'
+    statusLabel: string
+    summary: string
+    availabilityNote: string
+    lastUpdated: string
+    blocks: Array<{
+      id: string
+      title: string
+      kind: 'editorial-summary' | 'excerpt' | 'full-text' | 'research-note'
+      text: string
+      sourceLabel: string
+      sourceUrl: string | null
+      isVerbatim: boolean
+    }>
+  }
 }
 
 export interface Theme {
@@ -72,6 +96,138 @@ export interface ReadingList {
   }>
 }
 
+export interface WisdomAbout {
+  name: string
+  tagline: string
+  endpoint: string
+  whatItIs: string
+  howToUse: string
+  supports: string[]
+  clarifyingQuestions: string[]
+  capabilities: Record<string, string[]>
+}
+
+export interface AgendaOverview {
+  overallScore: number | null
+  freshnessLabel: string
+  manifest: {
+    fetchedAt: string
+    isSeed?: boolean
+    indicatorCount: number
+    countriesCovered: number
+    nextRefresh?: string
+    seedSource?: string
+  }
+  coverage: {
+    totalAspirations: number
+    aspirationsWithData: number
+    totalGoals: number
+    goalsWithData: number
+    indicatorCount: number
+    aspirationCoverage: Array<{
+      aspirationId: number
+      goalsTotal: number
+      goalsWithIndicators: number
+      goalIdsCovered: number[]
+      goalIdsMissing: number[]
+      score: number | null
+    }>
+  }
+  aspirations: Array<{
+    aspirationId: number
+    score: number | null
+    auReported: {
+      score2019: number
+      score2021: number
+      trend: 'up' | 'flat' | 'down'
+    } | null
+  }>
+  auReported: {
+    publishedAt: string
+    reportUrl: string
+    reportingCountries: number
+    totalCountries: number
+    notes: string
+  }
+}
+
+export interface AgendaIndicatorSummary {
+  id: string
+  name: string
+  aspirationId: number
+  goalId: number
+  unit: string
+  source: string
+  sourceCode: string
+  sourceUrl: string
+  higherIsBetter: boolean
+  baseline2013: number | null
+  target2063: number
+  latestYear: number | null
+  latestValue: number | null
+  populationWeightedValue: number | null
+  simpleMeanValue: number | null
+  countriesReporting: number
+  populationCoveragePct: number
+}
+
+export interface AgendaIndicatorDetail extends AgendaIndicatorSummary {
+  description: string
+  notes: string | null
+  targetSource: string
+  progressScore: number | null
+  aggregates: {
+    simpleMean: number | null
+    populationWeighted: number | null
+    countriesReporting: number
+    totalCountries: number
+    populationCovered: number
+    populationCoveragePct: number
+  }
+  regionalAverages: Record<string, { mean: number | null; n: number }> | null
+  topCountries: Array<{
+    iso3: string
+    countryName: string
+    region: string
+    latestYear: number | null
+    latestValue: number | null
+  }>
+  bottomCountries: Array<{
+    iso3: string
+    countryName: string
+    region: string
+    latestYear: number | null
+    latestValue: number | null
+  }>
+}
+
+export interface FutureIndicatorSummary {
+  id: string
+  name: string
+  category: string
+  categoryName: string
+  unit: string
+  description: string
+  higherIsBetter: boolean
+  current: { value: number; year: number; source: string; sourceUrl: string }
+  scenarios2043: {
+    failure: { value: number; year: number }
+    currentPath: { value: number; year: number }
+    possibleAfrica: { value: number; year: number }
+  }
+}
+
+export interface FutureIndicatorDetail extends FutureIndicatorSummary {
+  scenarios2063?: {
+    failure: { value: number; year: number }
+    currentPath: { value: number; year: number }
+    possibleAfrica: { value: number; year: number }
+  }
+  scenarioSource: string
+  scenarioSourceUrl: string
+  failureBasis: string
+}
+
 export interface SearchResult {
   query: string
   results: WorkSummary[]
@@ -88,6 +244,9 @@ export interface WorksResult {
 // ─── API calls ────────────────────────────────────────────────────────────────
 
 export const api = {
+  getWisdomAbout: () =>
+    get<WisdomAbout>('/api/mcp/about'),
+
   searchWorks: (q: string, limit = 10) =>
     get<SearchResult>('/api/search', { q, limit }),
 
@@ -116,4 +275,19 @@ export const api = {
 
   getReadingList: (slug: string) =>
     get<ReadingList>(`/api/reading-lists/${slug}`),
+
+  getAgendaOverview: () =>
+    get<AgendaOverview>('/api/agenda/overview'),
+
+  listAgendaIndicators: () =>
+    get<AgendaIndicatorSummary[]>('/api/agenda/indicators'),
+
+  getAgendaIndicator: (id: string) =>
+    get<AgendaIndicatorDetail>(`/api/agenda/indicators/${id}`),
+
+  listFutureIndicators: () =>
+    get<FutureIndicatorSummary[]>('/api/futures/indicators'),
+
+  getFutureIndicator: (id: string) =>
+    get<FutureIndicatorDetail>(`/api/futures/indicators/${id}`),
 }

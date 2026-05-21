@@ -2,24 +2,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeft, Tag } from "lucide-react";
-
-interface Work {
-  id: number;
-  title: string;
-  author: string;
-  yearPublished: number;
-  region: string;
-  genre: string;
-  era: string;
-  description: string;
-}
-
-interface ThemeDetail {
-  id: number;
-  name: string;
-  slug: string;
-  works: Work[];
-}
+import { getThemeBySlug, type ThemeDetail } from "@/lib/literature-data";
 
 const THEME_SLUGS = [
   "colonialism",
@@ -46,14 +29,7 @@ const THEME_SLUGS = [
 ];
 
 async function getTheme(slug: string): Promise<ThemeDetail | null> {
-  try {
-    const base = process.env.NEXTJS_BASE_URL || "http://localhost:3000";
-    const res = await fetch(`${base}/api/themes/${slug}`, { cache: "no-store" });
-    if (!res.ok) return null;
-    return res.json();
-  } catch {
-    return null;
-  }
+  return getThemeBySlug(slug);
 }
 
 export async function generateStaticParams() {
@@ -81,7 +57,7 @@ export default async function ThemeDetailPage({
         <div className="flex flex-col gap-3 py-12 items-center text-center">
           <Tag className="h-8 w-8 text-muted-foreground" />
           <p className="text-muted-foreground">
-            Theme data unavailable — database may not be seeded.
+            Theme not found.
           </p>
           <Link href="/themes" className="text-sm text-primary hover:underline">
             Return to Themes

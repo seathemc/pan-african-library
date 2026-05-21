@@ -1,118 +1,226 @@
 # Wisdom MCP Server
 
-An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that gives any AI assistant access to the Wisdom pan-African literature library — 370+ curated works spanning African literature, the diaspora, the Harlem Renaissance, Caribbean thought, Black feminist theory, Arabic and Swahili literature, and more.
+Wisdom is a model-agnostic [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server for Africa's past, present, and future.
 
-## Tools
+It gives any MCP-compatible host access to:
 
-| Tool | Description |
-|---|---|
-| `search_works` | Full-text search across 370+ works by keyword, author, title, or topic |
-| `get_work` | Full record for any work by ID (themes, related works, reading lists, access links) |
-| `list_works` | Browse with filters by region, era, genre, or theme |
-| `list_themes` | All 21 thematic categories with work counts |
-| `get_theme` | All works tagged with a given theme |
-| `list_reading_lists` | 6 curated reading paths |
-| `get_reading_list` | Full ordered reading list with per-work context notes |
+- **The archive**: 561 African and diaspora works across 1773-2023
+- **The present**: independent Agenda 2063 scoring and indicator data
+- **The future**: 16 Africa 2043 scenario indicators
 
-## What's in the library
+Work records can also report whether Wisdom stores only catalog context, a vetted excerpt, or richer internal text.
 
-**370+ works** across:
-- **Geography**: West, East, Central, Southern & North Africa · Caribbean · African diaspora
-- **Languages**: English, French, Arabic, Portuguese, Swahili, Gikuyu, and more
-- **Eras**: Pre-colonial oral traditions → Colonial → Post-colonial → Harlem Renaissance → Contemporary
-- **Genres**: Fiction, Poetry, Drama, Non-fiction, Autobiography, Folklore
-- **Themes**: Decolonization, Pan-Africanism, Feminism, Afrofuturism, Slavery, Resistance, Identity, and 14 more
+The public remote endpoint is:
 
-## Installation
+```text
+https://wisdom.family/api/mcp
+```
 
-### Claude Desktop
+## What it exposes
 
-Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS) or `%APPDATA%\Claude\claude_desktop_config.json` (Windows):
+### Universal connector tools
+
+These are the compatibility tools for ChatGPT, OpenAI API integrations, deep research-style hosts, and generic MCP clients that expect retrieval tools:
+
+- `search`
+- `fetch`
+
+### Archive tools
+
+- `search_works`
+- `get_work` (including internal text status and stored content blocks when available)
+- `list_works`
+- `list_themes`
+- `get_theme`
+
+### Agenda 2063 tools
+
+- `get_agenda_overview`
+- `list_agenda_indicators`
+- `get_agenda_indicator`
+
+### Futures tools
+
+- `list_future_indicators`
+- `get_future_indicator`
+
+### Orientation tools
+
+- `about_wisdom`
+
+### Prompts and resources
+
+- Prompts: `wisdom-start-here`, `wisdom-research-brief`
+- Resources: `wisdom://about`, `wisdom://tool-map`
+
+## Recommended setup
+
+Use the remote MCP endpoint when your host supports Streamable HTTP. This avoids local install friction and works across more tools.
+
+### ChatGPT
+
+In ChatGPT, enable connector developer mode if your plan or workspace requires it, then create a custom MCP connector.
+
+- Name: `Wisdom`
+- Server URL: `https://wisdom.family/api/mcp`
+
+Wisdom exposes the `search` and `fetch` tools required by ChatGPT/OpenAI retrieval-style MCP integrations, so users can query the archive, Agenda 2063 indicators, and futures scenarios without learning the domain-specific tool names.
+
+### OpenAI API / Responses API
+
+Use Wisdom as a remote MCP tool and allow the universal retrieval tools:
 
 ```json
 {
-  "mcpServers": {
-    "wisdom": {
-      "command": "npx",
-      "args": ["wisdom-mcp"],
-      "env": {
-        "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
-      }
+  "model": "o4-mini-deep-research",
+  "input": "Use Wisdom to explain how African political thought connects past archive material, present Agenda 2063 evidence, and future scenarios.",
+  "tools": [
+    {
+      "type": "mcp",
+      "server_label": "wisdom",
+      "server_url": "https://wisdom.family/api/mcp",
+      "allowed_tools": ["search", "fetch"],
+      "require_approval": "never"
     }
-  }
+  ]
 }
 ```
 
-### Claude Code (CLI)
+### Codex
+
+Add Wisdom in Codex config:
+
+```toml
+[mcp_servers.wisdom]
+url = "https://wisdom.family/api/mcp"
+```
+
+CLI alternative:
 
 ```bash
-claude mcp add wisdom -- npx wisdom-mcp
+codex mcp add wisdom --url https://wisdom.family/api/mcp
 ```
 
-Or add to your project's `.claude/settings.json`:
+### Claude custom connector / Claude Desktop / Claude workspaces
+
+Add a custom connector in Claude and use:
+
+```text
+https://wisdom.family/api/mcp
+```
+
+Claude's current remote connector flow is configured from the app UI rather than a local JSON file.
+
+### Claude Code
+
+```bash
+claude mcp add --transport http wisdom https://wisdom.family/api/mcp
+```
+
+For project config in `.mcp.json`:
 
 ```json
 {
   "mcpServers": {
     "wisdom": {
-      "command": "npx",
-      "args": ["wisdom-mcp"],
-      "env": {
-        "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
-      }
+      "type": "http",
+      "url": "https://wisdom.family/api/mcp"
     }
   }
 }
 ```
 
-### Cursor / VS Code
+### Cursor
 
-Add to your MCP settings file (`.cursor/mcp.json` or `.vscode/mcp.json`):
+Add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "wisdom": {
+      "url": "https://wisdom.family/api/mcp"
+    }
+  }
+}
+```
+
+### VS Code
+
+Add to `.vscode/mcp.json`:
 
 ```json
 {
   "servers": {
     "wisdom": {
-      "command": "npx",
-      "args": ["wisdom-mcp"],
+      "type": "http",
+      "url": "https://wisdom.family/api/mcp"
+    }
+  }
+}
+```
+
+## Local stdio mode
+
+Use local stdio mode if you are contributing to the server itself or want to point the tools at a local Wisdom deployment.
+
+```bash
+cd mcp
+npm install
+npm run build
+WISDOM_API_URL=http://127.0.0.1:3000 node dist/index.js
+```
+
+If your MCP host wants a stdio config object:
+
+```json
+{
+  "mcpServers": {
+    "wisdom": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/absolute/path/to/mcp/dist/index.js"],
       "env": {
-        "ALEXANDRIA_API_URL": "https://pan-african-library.vercel.app"
+        "WISDOM_API_URL": "http://127.0.0.1:3000"
       }
     }
   }
 }
 ```
 
-### Run locally (point at local dev server)
+The legacy `ALEXANDRIA_API_URL` env var still works, but `WISDOM_API_URL` is the canonical name now.
 
-```bash
-cd mcp
-npm install
-npm run build
-ALEXANDRIA_API_URL=http://localhost:3000 node dist/index.js
-```
+## What makes this useful
 
-## Environment
+Wisdom is not just a literature retriever.
 
-| Variable | Default | Description |
-|---|---|---|
-| `ALEXANDRIA_API_URL` | `https://pan-african-library.vercel.app` | Base URL of the Wisdom API |
+- It exposes generic `search` and `fetch` tools for ChatGPT/OpenAI-style connectors.
+- It can search the archive for canon, movements, authors, and themes.
+- It can explain what Wisdom is and how to use it well from inside a host.
+- It can distinguish between internal archive content and external-only records.
+- It can query independent Agenda 2063 data instead of relying on PDF summaries.
+- It can compare Africa's futures through Failure, Current Path, and Possible Africa scenarios.
+
+When a request is broad, the best pattern is:
+
+1. Clarify whether the user wants archive, present, or future.
+2. Clarify geography if it materially changes the answer.
+3. Use the narrowest tool that answers the question directly.
 
 ## Example prompts
 
-Once installed, you can ask your AI assistant:
+- `What is Wisdom and what can you do with it here?`
+- `Find political philosophy from West Africa after 1960.`
+- `Give me the independent Agenda 2063 overview and tell me how much of the framework is actually covered.`
+- `Show me the life expectancy indicator and the top and bottom countries.`
+- `List the futures indicators in governance and explain the failure scenario logic.`
+- `Compare the archive, present data, and future scenario layers for education in Africa.`
 
-- *"What are the key works of the Harlem Renaissance?"*
-- *"Find me novels about decolonization from East Africa"*
-- *"Suggest a reading list on African feminism"*
-- *"Tell me about Tayeb Salih's Season of Migration to the North"*
-- *"Which pan-African works explore Afrofuturism?"*
-- *"Who are the major Swahili-language writers in the library?"*
-- *"List all North African authors — Arabic and French"*
-- *"What connects Frantz Fanon, Amilcar Cabral, and Steve Biko?"*
+## API dependency
 
-## Self-hosting
+The MCP server talks to Wisdom's public REST API. The default base URL is:
 
-The MCP server talks to the Wisdom REST API. If you're running your own Wisdom instance, set `ALEXANDRIA_API_URL` to your deployment URL.
+```text
+https://wisdom.family
+```
 
-The API is open — no authentication required for read operations.
+Override with `WISDOM_API_URL` if you are running your own deployment.

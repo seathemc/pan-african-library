@@ -31,6 +31,7 @@ model Work {
 
   accessLinks  AccessLink[]
   collections  CollectionWork[]
+  content      WorkContent?
   themes       WorkTheme[]
   relatedFrom  WorkRelation[]   @relation("WorkRelationFrom")
   relatedTo    WorkRelation[]   @relation("WorkRelationTo")
@@ -44,6 +45,35 @@ model AccessLink {
   type   String @default("web")
   workId Int
   work   Work   @relation(fields: [workId], references: [id], onDelete: Cascade)
+}
+
+model WorkContent {
+  id               Int                @id @default(autoincrement())
+  workId           Int                @unique
+  status           String             @default("metadata-only")
+  summary          String?
+  availabilityNote String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  work             Work               @relation(fields: [workId], references: [id], onDelete: Cascade)
+  blocks           WorkContentBlock[]
+}
+
+model WorkContentBlock {
+  id            Int         @id @default(autoincrement())
+  workContentId Int
+  sortOrder     Int         @default(0)
+  title         String?
+  kind          String      @default("editorial-summary")
+  text          String
+  sourceLabel   String?
+  sourceUrl     String?
+  isVerbatim    Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  workContent   WorkContent @relation(fields: [workContentId], references: [id], onDelete: Cascade)
+
+  @@index([workContentId, sortOrder])
 }
 
 // Themes are cross-cutting concepts (e.g. "decolonization", "feminism", "identity")

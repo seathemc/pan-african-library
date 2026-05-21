@@ -1,7 +1,7 @@
 {
   "name": "wisdom-mcp",
-  "version": "0.1.0",
-  "description": "MCP server for Wisdom — a pan-African knowledge library. Gives AI assistants access to 370+ works of African and diaspora literature, curated reading lists, and thematic indexes.",
+  "version": "0.2.0",
+  "description": "MCP server for Wisdom — a model-agnostic pan-African knowledge system spanning the archive, Agenda 2063 data, and futures scenarios.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -30,7 +30,7 @@
     "type": "git",
     "url": "https://github.com/seathemc/pan-african-library"
   },
-  "homepage": "https://pan-african-library.vercel.app",
+  "homepage": "https://wisdom.family",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
